@@ -1,0 +1,351 @@
+<!DOCTYPE html><html class="dark" lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>FUTSAL PRO - Registro de Hinchada</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:ital,wght@0,400..700;1,400..700&amp;family=Hanken+Grotesk:wght@300;400;600;800&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Tailwind Theme Config -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary": "#ecb2ff",
+                    "on-primary-fixed": "#320047",
+                    "tertiary": "#00dbe9",
+                    "on-error": "#690005",
+                    "on-tertiary-fixed": "#002022",
+                    "on-tertiary": "#00363a",
+                    "on-secondary": "#283500",
+                    "error-container": "#93000a",
+                    "on-error-container": "#ffdad6",
+                    "error": "#ffb4ab",
+                    "surface-dim": "#111316",
+                    "on-background": "#e2e2e6",
+                    "on-secondary-fixed": "#161e00",
+                    "primary-fixed": "#f8d8ff",
+                    "surface-container-high": "#282a2d",
+                    "surface-container-highest": "#333538",
+                    "primary-fixed-dim": "#ecb2ff",
+                    "surface-container-lowest": "#0c0e11",
+                    "secondary-container": "#c3f400",
+                    "surface-container-low": "#1a1c1f",
+                    "outline-variant": "#514255",
+                    "on-primary-container": "#ffffff",
+                    "on-tertiary-fixed-variant": "#004f54",
+                    "tertiary-container": "#00838b",
+                    "on-secondary-fixed-variant": "#3c4d00",
+                    "outline": "#9d8ba0",
+                    "primary-container": "#bd00ff",
+                    "on-surface": "#e2e2e6",
+                    "surface-variant": "#333538",
+                    "surface": "#111316",
+                    "secondary": "#ffffff",
+                    "background": "#111316",
+                    "secondary-fixed-dim": "#abd600",
+                    "surface-bright": "#37393d",
+                    "on-primary": "#520071",
+                    "tertiary-fixed-dim": "#00dbe9",
+                    "inverse-on-surface": "#2f3034",
+                    "surface-container": "#1e2023",
+                    "on-primary-fixed-variant": "#74009f",
+                    "tertiary-fixed": "#7df4ff",
+                    "on-secondary-container": "#556d00",
+                    "secondary-fixed": "#c3f400",
+                    "inverse-surface": "#e2e2e6",
+                    "on-tertiary-container": "#ffffff",
+                    "inverse-primary": "#9900cf",
+                    "on-surface-variant": "#d4c0d7",
+                    "surface-tint": "#ecb2ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "stack-sm": "4px",
+                    "stack-md": "12px",
+                    "stack-lg": "24px",
+                    "margin-desktop": "40px",
+                    "margin-mobile": "20px",
+                    "gutter": "16px",
+                    "base": "8px"
+            },
+            "fontFamily": {
+                    "display-lg": ["Archivo Narrow"],
+                    "body-md": ["Hanken Grotesk"],
+                    "label-caps": ["JetBrains Mono"],
+                    "headline-md": ["Archivo Narrow"],
+                    "body-sm": ["Hanken Grotesk"],
+                    "display-lg-mobile": ["Archivo Narrow"]
+            },
+            "fontSize": {
+                    "display-lg": ["48px", {"lineHeight": "52px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "headline-md": ["24px", {"lineHeight": "28px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "display-lg-mobile": ["36px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #111316;
+            color: #e2e2e6;
+            -webkit-font-smoothing: antialiased;
+        }
+        .pitch-grid {
+            background-image: radial-gradient(circle at 2px 2px, rgba(236, 178, 255, 0.05) 1px, transparent 0);
+            background-size: 24px 24px;
+        }
+        .rare-glow {
+            box-shadow: 0 0 30px rgba(189, 0, 255, 0.2);
+        }
+        .tactical-line {
+            background: linear-gradient(90deg, transparent, #bd00ff, transparent);
+            height: 1px;
+            width: 100%;
+        }
+        .club-card-selected {
+            border-color: #ecb2ff;
+            background: rgba(189, 0, 255, 0.1);
+            transform: scale(1.02);
+        }
+        input:focus, select:focus {
+            outline: none;
+            border-color: #ecb2ff !important;
+            box-shadow: 0 0 0 2px rgba(236, 178, 255, 0.2);
+        }
+    </style>
+</head>
+<body class="pitch-grid min-h-screen flex flex-col font-body-md overflow-x-hidden">
+<!-- Top Navigation (Shell Implementation) -->
+<header class="w-full top-0 sticky z-50 bg-surface dark:bg-surface">
+<div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop py-stack-md w-full">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary text-2xl">arrow_back</span>
+<h1 class="font-display-lg-mobile text-display-lg-mobile md:font-display-lg md:text-display-lg italic uppercase tracking-tighter text-primary dark:text-primary">FUTSAL PRO</h1>
+</div>
+<div class="hidden md:flex gap-8 items-center">
+<span class="font-label-caps text-label-caps text-primary dark:text-primary font-bold">UNIRSE</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant dark:text-on-surface-variant hover:opacity-80 transition-opacity cursor-pointer">CLUBES</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant dark:text-on-surface-variant hover:opacity-80 transition-opacity cursor-pointer">SEGURIDAD</span>
+</div>
+<div class="flex items-center">
+<span class="material-symbols-outlined text-primary" data-weight="fill">security</span>
+</div>
+</div>
+<div class="tactical-line opacity-30"></div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow flex items-center justify-center px-margin-mobile py-stack-lg relative">
+<!-- Background Atmospheric Element -->
+<div class="absolute inset-0 pointer-events-none overflow-hidden">
+<div class="absolute -top-24 -right-24 w-96 h-96 bg-primary opacity-5 blur-[120px] rounded-full"></div>
+<div class="absolute -bottom-24 -left-24 w-96 h-96 bg-tertiary opacity-5 blur-[120px] rounded-full"></div>
+</div>
+<div class="w-full max-w-4xl grid grid-cols-1 lg:grid-cols-12 gap-stack-lg items-center relative z-10">
+<!-- Left Side: Narrative & Visual -->
+<div class="lg:col-span-5 flex flex-col gap-stack-md">
+<div class="inline-flex bg-primary-container/20 border border-primary/30 px-3 py-1 rounded-full self-start">
+<span class="font-label-caps text-label-caps text-primary uppercase tracking-widest">TEMPORADA 2024</span>
+</div>
+<h2 class="font-display-lg-mobile text-display-lg-mobile md:font-display-lg md:text-display-lg text-white uppercase italic leading-none">
+                    Elegí tu Escudo.<br><span class="text-primary">Llená tu Álbum.</span>
+</h2>
+<p class="font-body-md text-on-surface-variant max-w-md">
+                    Registrate para recibir tu sobre de bienvenida y asignarle el álbum oficial de la Primera C a tu equipo. La pasión del futsal femenino se vive en cada figurita.
+                </p>
+<div class="mt-stack-md hidden md:block">
+<div class="relative w-48 h-64 rotate-[-6deg] rare-glow rounded-xl overflow-hidden border-2 border-primary group hover:rotate-0 transition-transform duration-500 cursor-pointer">
+<div class="absolute inset-0 bg-cover bg-center" data-alt="A cinematic, high-contrast photograph of a female futsal player in a vibrant purple and white jersey, captured in mid-action on a dark urban court. The lighting is dramatic, with neon purple glows highlighting the athlete's intense expression. The style is modern, energetic, and professional, echoing the gritty stadium aesthetic of Argentinian sport." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDXIyDK2TNS-CQQTvFZ0rggn5rdEvzjBcOKWUalY0AbT3pfN7P0gAZf1uKarqdItgPNt_YBwRIM8PavJCY-U7C03002kqshZ0GozholVwJ7Z8FNU-T9qcUylIn4X16hPzIq1AjC3XJTYXDlV-KerrHrvrbd4eImNnKNGXkARXrqmG9PGGYlmqXVllyB4rEsxI5Uo7GKBchILjQwAiULHaTO8bYD8MTn5kIcfKtUJPXEIJrAI8UcdIQT_OI2m-WGVSiEe5y5m7kfS8V1')"></div>
+<div class="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-surface to-transparent">
+<span class="font-label-caps text-[10px] text-primary">EDICIÓN LIMITADA</span>
+<div class="font-headline-md text-headline-md-mobile text-white uppercase italic">PISTA PRO</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Side: The Form Card -->
+<div class="lg:col-span-7">
+<div class="bg-surface-container-low border border-outline-variant p-stack-lg md:p-10 rounded-xl rare-glow relative overflow-hidden">
+<!-- Subtle Mesh Texture Overlay -->
+<div class="absolute inset-0 opacity-[0.03] pointer-events-none" style="background-image: url('https://www.transparenttextures.com/patterns/carbon-fibre.png');"></div>
+<form class="flex flex-col gap-stack-lg relative z-10" id="registrationForm">
+<!-- Step 1: Identity -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-stack-md">
+<div class="flex flex-col gap-2">
+<label class="font-label-caps text-label-caps text-on-surface-variant uppercase">Nombre del Hincha</label>
+<input class="bg-surface-container-high border border-outline-variant rounded-lg px-4 py-3 text-white font-body-md focus:ring-0 transition-all" placeholder="Ej. Martina Pérez" type="text">
+</div>
+<div class="flex flex-col gap-2">
+<label class="font-label-caps text-label-caps text-on-surface-variant uppercase">Correo Electrónico</label>
+<input class="bg-surface-container-high border border-outline-variant rounded-lg px-4 py-3 text-white font-body-md focus:ring-0 transition-all" placeholder="amor@futsafem.com" type="email">
+</div>
+</div>
+<!-- Step 2: The Core Choice -->
+<div class="flex flex-col gap-4">
+<div class="flex items-center justify-between">
+<label class="font-label-caps text-label-caps text-primary uppercase font-bold tracking-wider">Club de tus Amores</label>
+<span class="material-symbols-outlined text-primary text-sm">favorite</span>
+</div>
+<!-- Custom Club Selector (Bento Style) -->
+<div class="grid grid-cols-2 sm:grid-cols-3 gap-stack-sm" id="clubSelector"><!-- Club Item 1: MAVIA F.C. -->
+<div class="club-option cursor-pointer group flex flex-col items-center justify-center p-stack-md border border-outline-variant bg-surface-container rounded-lg hover:border-primary transition-all duration-300" onclick="selectClub(this, 'MAVIA F.C.')">
+  <div class="w-12 h-12 bg-surface-container-highest rounded-full flex items-center justify-center mb-2 group-hover:scale-110 transition-transform overflow-hidden">
+    <img src="https://lh3.googleusercontent.com/aida/AP1WRLukkEZBg7dUmsJfx7ECLGEmaemJE--vPxeai8D9Q-K6pPDGa7M3RutgP1_dkganADw6Nu3P8orZ805RjPygiUtberAc7B77L5ElLFS-SWO9wCkoPWwx2ydwtxuqQDsUb7G7X1HeuBAC26f8DLxKUTW23Xx6chKQyOIja5zGyBfXrlbdZxwU5smQ_-eLqNYUVV-NMhxdOwzzHaccYpN5dOAV_d-6a8oSvAvGMzSDr9sUe5fXIuTsQmx6jgs" alt="MAVIA F.C." class="w-full h-full object-cover">
+  </div>
+  <span class="font-label-caps text-[10px] text-center text-on-surface-variant uppercase">MAVIA F.C.</span>
+</div>
+<!-- Club Item 2: Unión y Fortaleza -->
+<div class="club-option cursor-pointer group flex flex-col items-center justify-center p-stack-md border border-outline-variant bg-surface-container rounded-lg hover:border-primary transition-all duration-300" onclick="selectClub(this, 'Unión y Fortaleza')">
+  <div class="w-12 h-12 bg-surface-container-highest rounded-full flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
+    <span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary">shield</span>
+  </div>
+  <span class="font-label-caps text-[10px] text-center text-on-surface-variant uppercase">U. y Fortaleza</span>
+</div>
+<!-- Club Item 3: Franja de Oro -->
+<div class="club-option cursor-pointer group flex flex-col items-center justify-center p-stack-md border border-outline-variant bg-surface-container rounded-lg hover:border-primary transition-all duration-300" onclick="selectClub(this, 'Franja de Oro')">
+  <div class="w-12 h-12 bg-surface-container-highest rounded-full flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
+    <span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary">military_tech</span>
+  </div>
+  <span class="font-label-caps text-[10px] text-center text-on-surface-variant uppercase">Franja de Oro</span>
+</div>
+<!-- Club Item 4: Vélez Sarsfield -->
+<div class="club-option cursor-pointer group flex flex-col items-center justify-center p-stack-md border border-outline-variant bg-surface-container rounded-lg hover:border-primary transition-all duration-300" onclick="selectClub(this, 'Vélez Sarsfield')">
+  <div class="w-12 h-12 bg-surface-container-highest rounded-full flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
+    <span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary">star</span>
+  </div>
+  <span class="font-label-caps text-[10px] text-center text-on-surface-variant uppercase">Vélez</span>
+</div>
+<!-- Club Item 5: Defensores de Olivos -->
+<div class="club-option cursor-pointer group flex flex-col items-center justify-center p-stack-md border border-outline-variant bg-surface-container rounded-lg hover:border-primary transition-all duration-300" onclick="selectClub(this, 'Defensores de Olivos')">
+  <div class="w-12 h-12 bg-surface-container-highest rounded-full flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
+    <span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary">workspace_premium</span>
+  </div>
+  <span class="font-label-caps text-[10px] text-center text-on-surface-variant uppercase">Def. Olivos</span>
+</div>
+<!-- More / Selector -->
+<div class="cursor-pointer group flex flex-col items-center justify-center p-stack-md border border-dashed border-outline-variant bg-transparent rounded-lg hover:border-tertiary transition-all relative">
+  <select class="absolute inset-0 opacity-0 cursor-pointer w-full h-full" id="clubSelectNative">
+    <option value="">Otros...</option>
+    <option value="Almagro">Almagro</option>
+    <option value="Atlanta">Atlanta</option>
+    <option value="Platense">Platense</option>
+    <option value="Nueva Chicago">Nueva Chicago</option>
+  </select>
+  <span class="material-symbols-outlined text-on-surface-variant group-hover:text-tertiary">add_circle</span>
+  <span class="font-label-caps text-[10px] text-on-surface-variant uppercase">Ver Más</span>
+</div></div>
+<input id="selectedClubInput" name="selected_club" required="" type="hidden">
+</div>
+<!-- Action Button -->
+<button class="w-full bg-primary-container text-on-primary-container font-headline-md text-headline-md-mobile py-stack-lg rounded-lg uppercase italic tracking-wider flex items-center justify-center gap-3 active:scale-[0.98] transition-all hover:brightness-110 group" type="submit">
+                            EMPEZAR MI COLECCIÓN
+                            <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">auto_awesome</span>
+</button>
+<p class="text-center font-label-caps text-[11px] text-on-surface-variant opacity-60">
+                            Al unirte, aceptás los términos de intercambio y seguridad de FUTSAFEM.
+                        </p>
+</form>
+</div>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation (Mobile Only Footer Shell) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-gutter pb-stack-md bg-surface-container-low dark:bg-surface-container-low border-t border-outline-variant shadow-lg">
+<div class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full p-stack-md scale-105 transition-all">
+<span class="material-symbols-outlined">app_registration</span>
+<span class="font-label-caps text-[10px] uppercase">Join</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant p-stack-md hover:text-tertiary transition-colors">
+<span class="material-symbols-outlined">shield_person</span>
+<span class="font-label-caps text-[10px] uppercase">Clubs</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant p-stack-md hover:text-tertiary transition-colors">
+<span class="material-symbols-outlined">lock_person</span>
+<span class="font-label-caps text-[10px] uppercase">Safety</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant p-stack-md hover:text-tertiary transition-colors">
+<span class="material-symbols-outlined">help_outline</span>
+<span class="font-label-caps text-[10px] uppercase">Help</span>
+</div>
+</nav>
+<!-- Success Modal (Hidden by Default) -->
+<div class="fixed inset-0 z-[100] flex items-center justify-center p-6 bg-black/80 backdrop-blur-md hidden opacity-0 transition-opacity duration-300" id="successModal">
+<div class="bg-surface border-2 border-primary p-8 max-w-md w-full rounded-2xl text-center flex flex-col gap-6 rare-glow">
+<div class="w-24 h-24 bg-primary/20 rounded-full flex items-center justify-center mx-auto">
+<span class="material-symbols-outlined text-primary text-5xl" data-weight="fill">verified</span>
+</div>
+<div>
+<h3 class="font-display-lg-mobile text-display-lg-mobile text-white uppercase italic">¡Bienvenida a la Hinchada!</h3>
+<p class="font-body-md text-on-surface-variant mt-2">Ya podés abrir tus primeros sobres de <span class="text-primary font-bold" id="displayClubName"></span>.</p>
+</div>
+<button class="bg-tertiary-container text-white py-4 rounded-xl font-label-caps uppercase tracking-widest hover:brightness-110" onclick="window.location.reload()">IR AL ÁLBUM</button>
+</div>
+</div>
+<script>
+        function selectClub(element, name) {
+            // Remove selection from all
+            document.querySelectorAll('.club-option').forEach(opt => {
+                opt.classList.remove('club-card-selected');
+                opt.querySelector('span.material-symbols-outlined').classList.remove('text-primary');
+                opt.querySelector('span.material-symbols-outlined').classList.add('text-on-surface-variant');
+            });
+            
+            // Add selection to clicked
+            element.classList.add('club-card-selected');
+            element.querySelector('span.material-symbols-outlined').classList.remove('text-on-surface-variant');
+            element.querySelector('span.material-symbols-outlined').classList.add('text-primary');
+            
+            // Set values
+            document.getElementById('selectedClubInput').value = name;
+            document.getElementById('displayClubName').innerText = name;
+        }
+
+        // Native select sync
+        document.getElementById('clubSelectNative').addEventListener('change', (e) => {
+            if(e.target.value) {
+                document.querySelectorAll('.club-option').forEach(opt => opt.classList.remove('club-card-selected'));
+                document.getElementById('selectedClubInput').value = e.target.value;
+                document.getElementById('displayClubName').innerText = e.target.value;
+            }
+        });
+
+        // Form Submit Simulation
+        document.getElementById('registrationForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const club = document.getElementById('selectedClubInput').value;
+            if(!club) {
+                alert('Por favor, elegí el club de tus amores.');
+                return;
+            }
+            
+            const modal = document.getElementById('successModal');
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.classList.add('opacity-100');
+            }, 10);
+        });
+
+        // Interactive cursor effect
+        document.addEventListener('mousemove', (e) => {
+            const glow = document.createElement('div');
+            glow.className = 'fixed w-4 h-4 bg-primary/20 rounded-full blur-xl pointer-events-none z-0';
+            glow.style.left = e.clientX + 'px';
+            glow.style.top = e.clientY + 'px';
+            document.body.appendChild(glow);
+            setTimeout(() => glow.remove(), 500);
+        });
+    </script>
+
+
+</body></html>

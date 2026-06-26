@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FUTSAFEM - Iniciar Sesión</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:ital,wght@0,400..700;1,400..700&amp;family=JetBrains+Mono:wght@100..800&amp;family=Hanken+Grotesk:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-fixed": "#7df4ff",
+                    "primary": "#ecb2ff",
+                    "inverse-on-surface": "#2f3034",
+                    "on-error-container": "#ffdad6",
+                    "surface": "#111316",
+                    "tertiary": "#00dbe9",
+                    "surface-container-lowest": "#0c0e11",
+                    "on-tertiary-fixed-variant": "#004f54",
+                    "error-container": "#93000a",
+                    "on-tertiary": "#00363a",
+                    "on-secondary-container": "#556d00",
+                    "tertiary-fixed-dim": "#00dbe9",
+                    "on-primary-fixed-variant": "#74009f",
+                    "on-primary-container": "#ffffff",
+                    "on-surface": "#e2e2e6",
+                    "on-primary": "#520071",
+                    "secondary-fixed": "#c3f400",
+                    "tertiary-container": "#00838b",
+                    "surface-variant": "#333538",
+                    "surface-dim": "#111316",
+                    "surface-container-low": "#1a1c1f",
+                    "surface-container-highest": "#333538",
+                    "on-surface-variant": "#d4c0d7",
+                    "background": "#111316",
+                    "surface-bright": "#37393d",
+                    "on-primary-fixed": "#320047",
+                    "on-secondary": "#283500",
+                    "secondary-container": "#c3f400",
+                    "on-error": "#690005",
+                    "inverse-primary": "#9900cf",
+                    "secondary-fixed-dim": "#abd600",
+                    "surface-tint": "#ecb2ff",
+                    "error": "#ffb4ab",
+                    "on-tertiary-container": "#ffffff",
+                    "surface-container-high": "#282a2d",
+                    "primary-fixed": "#f8d8ff",
+                    "outline": "#9d8ba0",
+                    "on-tertiary-fixed": "#002022",
+                    "outline-variant": "#514255",
+                    "inverse-surface": "#e2e2e6",
+                    "secondary": "#ffffff",
+                    "primary-fixed-dim": "#ecb2ff",
+                    "on-secondary-fixed": "#161e00",
+                    "surface-container": "#1e2023",
+                    "primary-container": "#bd00ff",
+                    "on-background": "#e2e2e6",
+                    "on-secondary-fixed-variant": "#3c4d00"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "margin-desktop": "40px",
+                    "gutter": "16px",
+                    "base": "8px",
+                    "stack-sm": "4px",
+                    "margin-mobile": "20px",
+                    "stack-lg": "24px",
+                    "stack-md": "12px"
+            },
+            "fontFamily": {
+                    "headline-md": ["Archivo Narrow"],
+                    "display-lg-mobile": ["Archivo Narrow"],
+                    "label-caps": ["JetBrains Mono"],
+                    "display-lg": ["Archivo Narrow"],
+                    "body-sm": ["Hanken Grotesk"],
+                    "body-md": ["Hanken Grotesk"]
+            },
+            "fontSize": {
+                    "headline-md": ["24px", {"lineHeight": "28px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                    "display-lg-mobile": ["36px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "display-lg": ["48px", {"lineHeight": "52px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #111316;
+            color: #e2e2e6;
+            overflow-x: hidden;
+        }
+
+        .court-mesh {
+            background-image: 
+                linear-gradient(rgba(189, 0, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(189, 0, 255, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+            mask-image: radial-gradient(circle at center, black, transparent 80%);
+        }
+
+        .court-lines {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 2px solid rgba(255, 255, 255, 0.03);
+            pointer-events: none;
+        }
+
+        .glow-button {
+            box-shadow: 0 0 20px rgba(189, 0, 255, 0.4);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .glow-button:hover {
+            box-shadow: 0 0 35px rgba(189, 0, 255, 0.6);
+            transform: scale(1.02);
+        }
+
+        .glow-button:active {
+            transform: scale(0.98);
+        }
+
+        .input-focus-effect:focus-within {
+            border-color: #ecb2ff;
+            box-shadow: 0 0 0 1px #ecb2ff;
+        }
+
+        .stadium-overlay {
+            background: radial-gradient(circle at 50% -20%, rgba(189, 0, 255, 0.15) 0%, transparent 70%);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="font-body-md text-body-md flex min-h-screen items-center justify-center p-margin-mobile">
+<!-- Background Layer -->
+<div class="fixed inset-0 z-0">
+<div class="absolute inset-0 bg-surface"></div>
+<div class="absolute inset-0 court-mesh"></div>
+<div class="absolute inset-0 stadium-overlay"></div>
+<!-- Animated Background Assets -->
+
+<!-- Tactical Lines Decoration -->
+<div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px] opacity-10 pointer-events-none">
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 border-2 border-white rounded-full"></div>
+<div class="absolute top-0 left-1/2 -translate-x-1/2 w-0.5 h-full bg-white"></div>
+</div>
+</div>
+<!-- Login Container -->
+<main class="relative z-10 w-full max-w-[420px] bg-surface-container-low p-stack-lg rounded-xl border border-outline-variant shadow-2xl backdrop-blur-md">
+<!-- Header / Logo -->
+<header class="flex flex-col items-center mb-stack-lg">
+<div class="w-20 h-20 mb-stack-md relative">
+<div class="absolute inset-0 bg-primary opacity-20 blur-xl rounded-full"></div>
+<div class="relative flex items-center justify-center w-full h-full bg-surface-container-highest rounded-xl border-2 border-primary">
+<span class="material-symbols-outlined text-primary text-[48px]" style="font-variation-settings: 'FILL' 1;">sports_soccer</span>
+</div>
+</div>
+<h1 class="font-display-lg-mobile text-display-lg-mobile italic font-black text-primary tracking-tighter uppercase">
+                FUTSAFEM
+            </h1>
+<p class="font-label-caps text-label-caps text-on-surface-variant opacity-70 mt-1 uppercase tracking-widest">
+                Colección Digital Primera C
+            </p>
+</header>
+<!-- Form -->
+<form class="space-y-stack-md" onsubmit="event.preventDefault()">
+<!-- Email Field -->
+<div class="space-y-2">
+<label class="font-label-caps text-label-caps text-on-surface ml-1" for="email">CORREO ELECTRÓNICO</label>
+<div class="relative input-focus-effect bg-surface-container-highest rounded-lg border border-outline-variant transition-all duration-200">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-outline text-[20px]">mail</span>
+</div>
+<input class="block w-full pl-10 pr-3 py-3 bg-transparent border-none text-on-surface placeholder:text-outline focus:ring-0 font-body-md" id="email" name="email" placeholder="usuario@ejemplo.com" required="" type="email"/>
+</div>
+</div>
+<!-- Password Field -->
+<div class="space-y-2">
+<div class="flex justify-between items-center px-1">
+<label class="font-label-caps text-label-caps text-on-surface" for="password">CONTRASEÑA</label>
+<a class="font-label-caps text-label-caps text-tertiary hover:underline transition-all" href="#">¿OLVIDÉ MI CONTRASEÑA?</a>
+</div>
+<div class="relative input-focus-effect bg-surface-container-highest rounded-lg border border-outline-variant transition-all duration-200">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-outline text-[20px]">lock</span>
+</div>
+<input class="block w-full pl-10 pr-12 py-3 bg-transparent border-none text-on-surface placeholder:text-outline focus:ring-0 font-body-md" id="password" name="password" placeholder="••••••••" required="" type="password"/>
+<button class="absolute inset-y-0 right-0 pr-3 flex items-center text-outline hover:text-on-surface transition-colors" type="button">
+<span class="material-symbols-outlined text-[20px]">visibility</span>
+</button>
+</div>
+</div>
+<!-- Remember Me -->
+<div class="flex items-center px-1">
+<input class="h-4 w-4 rounded border-outline-variant bg-surface-container-highest text-primary focus:ring-primary focus:ring-offset-surface" id="remember-me" name="remember-me" type="checkbox"/>
+<label class="ml-2 block font-body-sm text-body-sm text-on-surface-variant" for="remember-me">
+                    Mantener sesión iniciada
+                </label>
+</div>
+<!-- Submit Button -->
+<button class="glow-button w-full py-4 px-6 bg-primary-container text-on-primary-container font-headline-md text-headline-md font-bold rounded-lg uppercase tracking-wide mt-stack-md" type="submit">
+                INGRESAR
+            </button>
+</form>
+<!-- Footer Actions -->
+<footer class="mt-stack-lg pt-stack-md border-t border-outline-variant/30 text-center">
+<p class="font-body-md text-body-md text-on-surface-variant mb-2">
+                ¿No tienes una cuenta todavía?
+            </p>
+<a class="inline-flex items-center gap-2 font-headline-md text-headline-md text-secondary hover:text-primary transition-colors font-bold uppercase italic" href="#">
+<span>Registrarme</span>
+<span class="material-symbols-outlined text-[18px]">trending_flat</span>
+</a>
+</footer>
+</main>
+<!-- UI Background Decoration elements -->
+<div class="fixed top-margin-mobile left-margin-mobile z-20">
+<div class="flex items-center gap-2 px-3 py-1 bg-surface-container-highest/50 backdrop-blur rounded-full border border-outline-variant">
+<div class="w-2 h-2 bg-secondary-fixed rounded-full animate-pulse"></div>
+<span class="font-label-caps text-[10px] text-on-surface-variant tracking-tighter">SERVER: BA_SOUTH_1</span>
+</div>
+</div>
+<!-- Decorative Image Context (As per guidelines) -->
+<div class="hidden lg:block fixed bottom-margin-desktop right-margin-desktop w-64 h-96 z-10 opacity-40">
+<div class="relative w-full h-full rounded-xl border border-outline-variant overflow-hidden rotate-6 transform transition-transform hover:rotate-0 duration-700">
+<div class="absolute inset-0 bg-gradient-to-t from-background to-transparent z-10"></div>
+<img class="w-full h-full object-cover" data-alt="A cinematic, low-angle action shot of a professional female futsal player in a high-intensity dark stadium setting. She is wearing a modern Argentinian-style soccer jersey in deep charcoal and electric purple accents. The lighting is dramatic, with high-contrast highlights reflecting off her athletic gear and a polished urban futsal court surface. The overall atmosphere is competitive, grit-infused, and digitally sophisticated with subtle light trails." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC26ITVJnypYIFU6jnkK41G5_ZjhTObKcbk9ADwNk6ijoOQUzgshLNAtmpep7dUShNsEQs5AZwupcbS0TY1QtzSZcipMY54O33ycLu3KB12GV4i6qZ1NvTr8hcpJoMsk84m74XSvAF8YD02TraDRwC6pgN84-IXa492LlaANcZ8Nll58WtWsieUv0DTCEN-NT1GiIq55Pj7IpQ5iVJ9n61fO5Ws-Ag2vq9o6EJLmMb9ZBJr9x8yflZBhbGrFfSB6PWxxXl9hb3RraXZ"/>
+<div class="absolute bottom-4 left-4 z-20">
+<p class="font-label-caps text-label-caps text-primary">MVP PREVIEW</p>
+<p class="font-headline-md text-headline-md font-black italic">PRÓXIMO PACK</p>
+</div>
+</div>
+</div>
+<script>
+        // Micro-interaction for the password visibility toggle
+        const toggleBtn = document.querySelector('button[type="button"]');
+        const passInput = document.getElementById('password');
+        const icon = toggleBtn?.querySelector('span');
+
+        toggleBtn?.addEventListener('click', () => {
+            if (passInput.type === 'password') {
+                passInput.type = 'text';
+                icon.textContent = 'visibility_off';
+            } else {
+                passInput.type = 'password';
+                icon.textContent = 'visibility';
+            }
+        });
+
+        // Simple parallax effect for background
+        document.addEventListener('mousemove', (e) => {
+            const moveX = (e.clientX - window.innerWidth / 2) * 0.01;
+            const moveY = (e.clientY - window.innerHeight / 2) * 0.01;
+            document.querySelector('.court-mesh').style.transform = `translate(${moveX}px, ${moveY}px)`;
+        });
+    </script>
+</body></html>

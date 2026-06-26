@@ -1,0 +1,313 @@
+<!DOCTYPE html><html class="dark" lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport">
+<title>FUTSAFEM - Digital Album</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@400;600;700&amp;family=Hanken+Grotesk:wght@400;600&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary-fixed": "#002022",
+                    "on-primary-container": "#ffffff",
+                    "primary-fixed-dim": "#ecb2ff",
+                    "primary-fixed": "#f8d8ff",
+                    "on-surface-variant": "#d4c0d7",
+                    "on-surface": "#e2e2e6",
+                    "on-secondary": "#283500",
+                    "on-tertiary-fixed-variant": "#004f54",
+                    "surface-variant": "#333538",
+                    "inverse-primary": "#9900cf",
+                    "surface-container": "#1e2023",
+                    "secondary": "#ffffff",
+                    "on-tertiary-container": "#ffffff",
+                    "secondary-fixed": "#c3f400",
+                    "on-primary-fixed": "#320047",
+                    "surface-bright": "#37393d",
+                    "surface-container-low": "#1a1c1f",
+                    "on-error-container": "#ffdad6",
+                    "on-tertiary": "#00363a",
+                    "surface-container-highest": "#333538",
+                    "tertiary-fixed": "#7df4ff",
+                    "surface-container-high": "#282a2d",
+                    "primary-container": "#bd00ff",
+                    "on-primary-fixed-variant": "#74009f",
+                    "on-error": "#690005",
+                    "surface-tint": "#ecb2ff",
+                    "inverse-on-surface": "#2f3034",
+                    "background": "#111316",
+                    "secondary-fixed-dim": "#abd600",
+                    "on-background": "#e2e2e6",
+                    "on-secondary-container": "#556d00",
+                    "outline": "#9d8ba0",
+                    "surface-dim": "#111316",
+                    "secondary-container": "#c3f400",
+                    "outline-variant": "#514255",
+                    "tertiary-container": "#00838b",
+                    "inverse-surface": "#e2e2e6",
+                    "primary": "#ecb2ff",
+                    "on-primary": "#520071",
+                    "surface-container-lowest": "#0c0e11",
+                    "error": "#ffb4ab",
+                    "surface": "#111316",
+                    "on-secondary-fixed": "#161e00",
+                    "on-secondary-fixed-variant": "#3c4d00",
+                    "tertiary-fixed-dim": "#00dbe9",
+                    "error-container": "#93000a",
+                    "tertiary": "#00dbe9"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "base": "8px",
+                    "margin-mobile": "20px",
+                    "stack-sm": "4px",
+                    "stack-md": "12px",
+                    "gutter": "16px",
+                    "margin-desktop": "40px",
+                    "stack-lg": "24px"
+            },
+            "fontFamily": {
+                    "display-lg": ["Archivo Narrow"],
+                    "body-sm": ["Hanken Grotesk"],
+                    "headline-md": ["Archivo Narrow"],
+                    "label-caps": ["JetBrains Mono"],
+                    "display-lg-mobile": ["Archivo Narrow"],
+                    "body-md": ["Hanken Grotesk"]
+            },
+            "fontSize": {
+                    "display-lg": ["48px", {"lineHeight": "52px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "headline-md": ["24px", {"lineHeight": "28px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                    "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "display-lg-mobile": ["36px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #111316;
+            color: #e2e2e6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .stadium-glow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% -20%, #320047 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .court-lines {
+            position: fixed;
+            inset: 0;
+            opacity: 0.05;
+            background-image: 
+                linear-gradient(to right, #ffffff 1px, transparent 1px),
+                linear-gradient(to bottom, #ffffff 1px, transparent 1px);
+            background-size: 40px 40px;
+            mask-image: radial-gradient(circle at center, black, transparent 80%);
+            z-index: 0;
+        }
+
+        .pack-glow {
+            animation: pulse-glow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 20px 0px rgba(189, 0, 255, 0.4); transform: scale(1); }
+            50% { box-shadow: 0 0 40px 10px rgba(189, 0, 255, 0.7); transform: scale(1.02); }
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .active-nav-glow {
+            box-shadow: 0 0 15px rgba(195, 244, 0, 0.3);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="font-body-md selection:bg-primary selection:text-on-primary overflow-x-hidden">
+<div class="stadium-glow"></div>
+<div class="court-lines"></div>
+<!-- Top App Bar (Mapped from JSON) -->
+<header class="bg-surface dark:bg-surface text-primary dark:text-primary z-50 fixed top-0 flex justify-between items-center w-full px-margin-mobile h-16 transition-all duration-200">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">sports_soccer</span>
+<h1 class="font-display-lg-mobile text-display-lg-mobile text-primary dark:text-primary tracking-tight">FUTSAFEM</h1>
+</div>
+<div class="flex items-center bg-surface-container-high px-3 py-1 rounded-full border border-outline-variant transition-all duration-200 active:scale-95">
+<span class="font-label-caps text-label-caps text-on-surface">1,250 🪙</span>
+</div>
+</header>
+<main class="relative z-10 pt-20 pb-32 px-margin-mobile max-w-md mx-auto flex flex-col gap-stack-lg">
+<!-- Profile Section -->
+<section class="flex flex-col items-center text-center py-stack-md">
+<div class="relative group">
+<div class="absolute inset-0 bg-primary opacity-20 blur-xl rounded-full group-hover:opacity-40 transition-opacity"></div>
+<div class="w-32 h-32 rounded-full border-4 border-primary p-1 bg-surface-container overflow-hidden relative z-10">
+<img class="w-full h-full object-cover rounded-full" data-alt="A professional close-up studio portrait of a young female Argentinian futsal player named Cami López. She has a determined expression, wearing a navy and white striped jersey. The lighting is high-contrast 'stadium style' with dramatic rim lighting and deep shadows, emphasizing her athletic features. The background is a dark, slightly blurred indoor sports arena." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAWP-sVtHaAxXvcHhUdWVQ6SQsJXg4aOQa5Mru5ejoEcQZFM4FS3MuJGw3H2MCA5t-vN_zUBr2dH8p7ExC_jTkVz3bddbc0oTfhkJkU9WSfhF3hPJhy8B8Hgh6RFmEkDw9aVlvuShYUGt3aKU87Uc46gkMsacW6H-iCbWamE796UpdVwF6U-rLykOkZWAoAaNbkbIsmP_355QIlPUAPyyT_kziu6mQBcDnZ_N94SirvMS4__ja42-RSdwpqy1HJaJa61-vbWO7lzWHi">
+</div>
+<div class="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-secondary-container text-on-secondary-container px-3 py-0.5 rounded-full z-20 border border-on-secondary-container shadow-lg">
+<span class="font-label-caps text-[10px]">VERIFIED</span>
+</div>
+</div>
+<div class="mt-4">
+<h2 class="font-display-lg-mobile text-display-lg-mobile text-on-surface">Cami López</h2>
+<div class="flex items-center justify-center gap-2 text-on-surface-variant font-label-caps mt-1">
+<span class="uppercase tracking-widest">Villa Malcolm</span>
+<span class="w-1 h-1 bg-outline rounded-full"></span>
+<span class="uppercase tracking-widest">Ala</span>
+</div>
+</div>
+</section>
+<!-- Dashboard Bento Grid -->
+<section class="grid grid-cols-2 gap-4">
+<!-- Streak Card -->
+<div class="bg-surface-container border border-outline-variant p-4 rounded-xl flex flex-col justify-between aspect-square transition-transform active:scale-95">
+<div class="flex justify-between items-start">
+<span class="material-symbols-outlined text-secondary-fixed text-3xl" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+<span class="font-label-caps text-on-surface-variant text-[10px]">STREAK</span>
+</div>
+<div>
+<p class="font-headline-md text-headline-md text-on-surface">7 días</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">¡Racha de fuego!</p>
+</div>
+</div>
+<!-- Progress Card -->
+<div class="bg-surface-container border border-outline-variant p-4 rounded-xl flex flex-col justify-between aspect-square transition-transform active:scale-95">
+<div class="relative w-12 h-12">
+<svg class="w-full h-full transform -rotate-90">
+<circle class="text-surface-variant" cx="24" cy="24" fill="transparent" r="20" stroke="currentColor" stroke-width="4"></circle>
+<circle class="text-secondary-fixed" cx="24" cy="24" fill="transparent" r="20" stroke="currentColor" stroke-dasharray="125.6" stroke-dashoffset="71.6" stroke-width="4"></circle>
+</svg>
+<div class="absolute inset-0 flex items-center justify-center">
+<span class="font-label-caps text-[10px] text-on-surface">43%</span>
+</div>
+</div>
+<div>
+<p class="font-headline-md text-headline-md text-on-surface">Colección</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">32/75 láminas</p>
+</div>
+</div>
+</section>
+<!-- Main Action: Pack Opener -->
+<section class="mt-4">
+<button class="pack-glow relative w-full h-48 bg-primary-container rounded-2xl border-2 border-primary overflow-hidden flex flex-col items-center justify-center transition-all active:scale-95">
+
+<div class="relative z-10 flex flex-col items-center">
+<div class="bg-surface-container-lowest px-4 py-1 rounded-full mb-4 border border-primary/30">
+<span class="font-label-caps text-label-caps text-primary">1 DISPONIBLE</span>
+</div>
+<span class="material-symbols-outlined text-6xl text-on-primary-container mb-2" style="font-variation-settings: 'FILL' 1;">package_2</span>
+<span class="font-display-lg-mobile text-display-lg-mobile text-on-primary-container uppercase italic tracking-tighter">Abrir Sobre</span>
+</div>
+<div class="absolute bottom-0 left-0 w-full h-1 bg-white/20">
+<div class="h-full bg-secondary-fixed w-1/3"></div>
+</div>
+</button>
+</section>
+<!-- Social Validation Banner -->
+<section class="bg-surface-container-high border-l-4 border-tertiary p-4 rounded-r-xl flex items-center justify-between cursor-pointer hover:bg-surface-variant transition-colors group">
+<div class="flex items-center gap-3">
+<div class="bg-tertiary-container/30 p-2 rounded-lg">
+<span class="material-symbols-outlined text-tertiary" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+</div>
+<div>
+<h4 class="font-headline-md text-[16px] text-on-surface">Ayudá a tu equipo</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">3 fotos por validar</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:translate-x-1 transition-transform">chevron_right</span>
+</section>
+</main>
+<!-- Bottom Navigation Bar (Mapped from JSON) -->
+<nav class="bg-surface-container dark:bg-surface-container fixed bottom-0 w-full z-50 flex justify-around items-center px-4 py-2 pb-safe shadow-lg rounded-t-xl border-t border-outline-variant">
+<!-- Home (Active) -->
+<a class="flex flex-col items-center justify-center bg-secondary-container dark:bg-secondary-container text-on-secondary-container dark:text-on-secondary-container rounded-full px-4 py-1 transition-transform duration-300 active:scale-90 active-nav-glow" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="font-label-caps text-label-caps">Home</span>
+</a>
+<!-- Album -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant p-2 transition-transform duration-300 active:scale-90 hover:text-primary dark:hover:text-primary" href="#">
+<span class="material-symbols-outlined">style</span>
+<span class="font-label-caps text-label-caps">Album</span>
+</a>
+<!-- Market -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant p-2 transition-transform duration-300 active:scale-90 hover:text-primary dark:hover:text-primary" href="#">
+<span class="material-symbols-outlined">swap_calls</span>
+<span class="font-label-caps text-label-caps">Market</span>
+</a>
+<!-- Verify -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant p-2 transition-transform duration-300 active:scale-90 hover:text-primary dark:hover:text-primary" href="#">
+<span class="material-symbols-outlined">verified_user</span>
+<span class="font-label-caps text-label-caps">Verify</span>
+</a>
+<!-- Profile -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant p-2 transition-transform duration-300 active:scale-90 hover:text-primary dark:hover:text-primary" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-caps text-label-caps">Profile</span>
+</a>
+</nav>
+<script>
+        // Micro-interaction for pack button
+        const packBtn = document.querySelector('.pack-glow');
+        packBtn.addEventListener('mousedown', () => {
+            packBtn.style.transform = 'scale(0.95)';
+        });
+        packBtn.addEventListener('mouseup', () => {
+            packBtn.style.transform = 'scale(1.02)';
+            setTimeout(() => {
+                packBtn.style.transform = 'scale(1)';
+            }, 100);
+        });
+
+        // Floating particle effect for the background
+        const createParticle = () => {
+            const particle = document.createElement('div');
+            particle.className = 'fixed rounded-full bg-primary opacity-20 pointer-events-none z-0';
+            const size = Math.random() * 4 + 2;
+            particle.style.width = `${size}px`;
+            particle.style.height = `${size}px`;
+            particle.style.left = `${Math.random() * 100}vw`;
+            particle.style.top = `${Math.random() * 100}vh`;
+            
+            document.body.appendChild(particle);
+
+            const animation = particle.animate([
+                { transform: 'translate(0, 0) scale(1)', opacity: 0.2 },
+                { transform: `translate(${Math.random() * 100 - 50}px, ${Math.random() * -100 - 50}px) scale(0)`, opacity: 0 }
+            ], {
+                duration: Math.random() * 3000 + 2000,
+                easing: 'ease-out'
+            });
+
+            animation.onfinish = () => particle.remove();
+        };
+
+        setInterval(createParticle, 300);
+    </script>
+
+
+<div class="fixed rounded-full bg-primary opacity-20 pointer-events-none z-0" style="width: 2.78208px; height: 2.78208px; left: 26.454vw; top: 65.1655vh;"></div></body></html>

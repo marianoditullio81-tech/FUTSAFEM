@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FUTSAFEM - Registro</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:ital,wght@0,400..700;1,400..700&family=Hanken+Grotesk:wght@300;400;600&family=JetBrains+Mono:wght@500&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@100..900&family=Hanken+Grotesk:wght@100..900&family=JetBrains+Mono:wght@100..900&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-fixed-dim": "#00dbe9",
+                    "surface": "#111316",
+                    "on-primary-fixed-variant": "#74009f",
+                    "on-secondary": "#283500",
+                    "on-tertiary-fixed": "#002022",
+                    "inverse-on-surface": "#2f3034",
+                    "on-secondary-container": "#556d00",
+                    "on-error": "#690005",
+                    "surface-container-high": "#282a2d",
+                    "surface-container-low": "#1a1c1f",
+                    "on-primary-container": "#ffffff",
+                    "on-tertiary-container": "#ffffff",
+                    "surface-container-lowest": "#0c0e11",
+                    "outline-variant": "#514255",
+                    "on-tertiary": "#00363a",
+                    "primary-container": "#bd00ff",
+                    "tertiary-container": "#00838b",
+                    "on-secondary-fixed": "#161e00",
+                    "primary-fixed": "#f8d8ff",
+                    "tertiary-fixed": "#7df4ff",
+                    "inverse-surface": "#e2e2e6",
+                    "on-error-container": "#ffdad6",
+                    "secondary-container": "#c3f400",
+                    "on-surface-variant": "#d4c0d7",
+                    "surface-container": "#1e2023",
+                    "on-primary": "#520071",
+                    "surface-variant": "#333538",
+                    "secondary-fixed-dim": "#abd600",
+                    "background": "#111316",
+                    "secondary": "#ffffff",
+                    "on-primary-fixed": "#320047",
+                    "on-background": "#e2e2e6",
+                    "primary": "#ecb2ff",
+                    "inverse-primary": "#9900cf",
+                    "on-surface": "#e2e2e6",
+                    "primary-fixed-dim": "#ecb2ff",
+                    "tertiary": "#00dbe9",
+                    "secondary-fixed": "#c3f400",
+                    "surface-tint": "#ecb2ff",
+                    "surface-container-highest": "#333538",
+                    "on-tertiary-fixed-variant": "#004f54",
+                    "surface-dim": "#111316",
+                    "surface-bright": "#37393d",
+                    "error-container": "#93000a",
+                    "outline": "#9d8ba0",
+                    "error": "#ffb4ab",
+                    "on-secondary-fixed-variant": "#3c4d00"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "stack-md": "12px",
+                    "margin-desktop": "40px",
+                    "stack-lg": "24px",
+                    "margin-mobile": "20px",
+                    "gutter": "16px",
+                    "base": "8px",
+                    "stack-sm": "4px"
+            },
+            "fontFamily": {
+                    "body-sm": ["Hanken Grotesk"],
+                    "label-caps": ["JetBrains Mono"],
+                    "display-lg": ["Archivo Narrow"],
+                    "headline-md": ["Archivo Narrow"],
+                    "display-lg-mobile": ["Archivo Narrow"],
+                    "body-md": ["Hanken Grotesk"]
+            },
+            "fontSize": {
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "display-lg": ["48px", {"lineHeight": "52px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "28px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                    "display-lg-mobile": ["36px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glow-primary {
+            box-shadow: 0 0 20px rgba(189, 0, 255, 0.3);
+        }
+        .court-texture {
+            background-image: radial-gradient(circle at 2px 2px, rgba(255,255,255,0.05) 1px, transparent 0);
+            background-size: 24px 24px;
+        }
+        .shimmer {
+            background: linear-gradient(90deg, transparent, rgba(236, 178, 255, 0.1), transparent);
+            background-size: 200% 100%;
+            animation: shimmer 3s infinite linear;
+        }
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+        input:focus {
+            outline: none !important;
+            border-color: #ecb2ff !important;
+            box-shadow: 0 0 0 2px rgba(236, 178, 255, 0.2);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-md selection:bg-primary-container selection:text-white min-h-screen flex flex-col items-center justify-center court-texture p-margin-mobile">
+<!-- Top Navigation Anchor (As per Shared Components, but tailored for focused journey) -->
+<header class="w-full top-0 fixed flex justify-between items-center px-margin-mobile h-16 z-50 bg-background/80 backdrop-blur-md">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-3xl">sports_soccer</span>
+<h1 class="font-display-lg-mobile text-display-lg-mobile italic font-black text-primary tracking-tighter">FUTSAFEM</h1>
+</div>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">help_outline</span>
+</button>
+</header>
+<!-- Main Registration Canvas -->
+<main class="w-full max-w-md mt-16 animate-in fade-in slide-in-from-bottom-4 duration-700">
+<!-- Progress Steps -->
+<div class="flex gap-2 mb-stack-lg">
+<div class="h-1 flex-1 bg-primary rounded-full"></div>
+<div class="h-1 flex-1 bg-surface-container-highest rounded-full"></div>
+<div class="h-1 flex-1 bg-surface-container-highest rounded-full"></div>
+</div>
+<div class="bg-surface-container border border-outline-variant p-margin-mobile rounded-xl relative overflow-hidden">
+<!-- Atmospheric Glow -->
+<div class="absolute -top-24 -right-24 w-48 h-48 bg-primary/10 blur-[80px] rounded-full"></div>
+<div class="relative z-10">
+<span class="font-label-caps text-label-caps text-secondary-fixed mb-stack-sm block">PASO 1 DE 3</span>
+<h2 class="font-headline-md text-headline-md font-bold mb-base">Configura tu perfil</h2>
+<p class="text-on-surface-variant font-body-sm mb-stack-lg">Necesitamos verificar tu edad para cumplir con las regulaciones de la Primera C.</p>
+<form class="space-y-stack-lg" id="registrationForm">
+<!-- Birth Date Field -->
+<div class="space-y-base">
+<label class="font-label-caps text-label-caps text-on-surface-variant flex items-center gap-2" for="birthdate">
+<span class="material-symbols-outlined text-[16px]">calendar_today</span>
+                            FECHA DE NACIMIENTO
+                        </label>
+<input class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg p-3 text-on-surface focus:ring-2 focus:ring-primary/20 transition-all appearance-none" id="birthdate" name="birthdate" required="" style="color-scheme: dark;" type="date"/>
+</div>
+<!-- Dynamic Guardian Section (Hidden by default) -->
+<div class="hidden animate-in zoom-in-95 fade-in duration-300" id="guardianSection">
+<div class="p-stack-md bg-primary-container/10 border border-primary/20 rounded-lg space-y-stack-md">
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary">security</span>
+<div>
+<h4 class="font-label-caps text-label-caps text-primary">REQUERIMIENTO DE MENORES</h4>
+<p class="text-body-sm text-on-surface-variant">Como eres menor de 18 años, necesitamos el contacto de un tutor legal para obtener el consentimiento.</p>
+</div>
+</div>
+<div class="space-y-stack-md pt-2">
+<div class="space-y-base">
+<label class="font-label-caps text-label-caps text-on-surface-variant">EMAIL O CELULAR DEL TUTOR</label>
+<div class="relative">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 material-symbols-outlined text-on-surface-variant text-[20px]">alternate_email</span>
+<input class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg p-3 pl-10 text-on-surface" placeholder="ejemplo@correo.com o +54..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<input class="rounded border-outline-variant bg-surface-container-lowest text-primary focus:ring-primary" id="consent" type="checkbox"/>
+<label class="text-body-sm text-on-surface-variant leading-tight" for="consent">
+                                        Entiendo que se enviará un código de verificación a este contacto.
+                                    </label>
+</div>
+</div>
+</div>
+</div>
+<!-- Action Button -->
+<button class="w-full bg-primary text-on-primary font-headline-md py-4 rounded-full font-bold flex items-center justify-center gap-2 active:scale-95 transition-all glow-primary overflow-hidden relative group" type="submit">
+<span class="shimmer absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity"></span>
+                        CONTINUAR
+                        <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</form>
+</div>
+</div>
+<p class="text-center mt-stack-lg text-on-surface-variant text-body-sm">
+            ¿Ya tienes una cuenta? <a class="text-primary font-bold hover:underline" href="#">Inicia sesión</a>
+</p>
+</main>
+<!-- Background Decorative Elements -->
+<div class="fixed bottom-0 left-0 w-full h-1/2 pointer-events-none z-[-1]">
+<div class="w-full h-full object-cover opacity-20 grayscale" data-alt="A cinematic, low-angle digital painting of an urban Argentinian futsal court at night. The dark charcoal pavement is marked with sharp white tactical lines, reflecting the ambient glow of neon purple and cyan stadium lights. In the background, heavy metal fences and silhouettes of tall city buildings create a gritty, high-octane atmosphere under a deep indigo sky. The lighting is dramatic, with long shadows and localized glows that match a dark-mode UI aesthetic." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAaJ1Ng6QGseruSbmWDD8Ir54lNNCFRF5fP3fXdVIsOpaTFs3NZuRe2PUMKlK6LPEGmUzMxrWC4TqxJYaqCCuQsE0QHfF60h5FFLO49HtIHGYks0bK5fxm4-GluyluIKB5B7fumR08L5KOQQ1DgT_Qn6WF5C7lMI6FYmk7qWWinO2Q2zbjXTwpBtvhZ89-zk2984yVHjgnskb5-3cTdPspO3NFBRcAPPLTw5Puyy5nP4NSC1dPcZuuaVX_woGGcZoDYn_F1RTSilAIj')"></div>
+</div>
+<!-- Interaction Script -->
+<script>
+        const birthdateInput = document.getElementById('birthdate');
+        const guardianSection = document.getElementById('guardianSection');
+
+        birthdateInput.addEventListener('change', function() {
+            if (!this.value) return;
+
+            const birthDate = new Date(this.value);
+            const today = new Date();
+            let age = today.getFullYear() - birthDate.getFullYear();
+            const m = today.getMonth() - birthDate.getMonth();
+            
+            if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+                age--;
+            }
+
+            if (age < 18 && age > 0) {
+                guardianSection.classList.remove('hidden');
+                // Pulse interaction
+                guardianSection.classList.add('scale-105');
+                setTimeout(() => guardianSection.classList.remove('scale-105'), 300);
+            } else {
+                guardianSection.classList.add('hidden');
+            }
+        });
+
+        // Simple button active state handler
+        document.querySelector('button[type="submit"]').addEventListener('click', (e) => {
+            // Here you would handle real validation and navigation
+        });
+    </script>
+</body></html>

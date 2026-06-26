@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Cancha Pro Admin - Pack Reveal</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@400;600;700&family=Hanken+Grotesk:wght@400;600&family=JetBrains+Mono:wght@500&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@100..900&family=Hanken+Grotesk:wght@100..900&family=JetBrains+Mono:wght@100..900&display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            vertical-align: middle;
+        }
+        
+        .gold-glow {
+            filter: drop-shadow(0 0 25px rgba(195, 244, 0, 0.6));
+            animation: pulse-gold 2s infinite ease-in-out;
+        }
+
+        @keyframes pulse-gold {
+            0%, 100% { filter: drop-shadow(0 0 15px rgba(195, 244, 0, 0.4)); transform: scale(1.05) rotate(2deg); }
+            50% { filter: drop-shadow(0 0 35px rgba(195, 244, 0, 0.8)); transform: scale(1.08) rotate(3deg); }
+        }
+
+        .card-reveal {
+            opacity: 0;
+            transform: translateY(30px) rotate(-5deg);
+            animation: reveal-in 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+
+        @keyframes reveal-in {
+            to { opacity: 1; transform: translateY(0) rotate(var(--tw-rotate)); }
+        }
+
+        .holographic-overlay {
+            background: linear-gradient(135deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0) 100%);
+            background-size: 200% 200%;
+            animation: shine 3s infinite linear;
+        }
+
+        @keyframes shine {
+            0% { background-position: -200% -200%; }
+            100% { background-position: 200% 200%; }
+        }
+
+        .mesh-pattern {
+            background-image: radial-gradient(rgba(236, 178, 255, 0.05) 1px, transparent 1px);
+            background-size: 16px 16px;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "tertiary-container": "#00838b",
+                      "surface-container-low": "#1a1c1f",
+                      "outline": "#9d8ba0",
+                      "on-tertiary-container": "#ffffff",
+                      "primary-fixed": "#f8d8ff",
+                      "surface-container-highest": "#333538",
+                      "on-surface": "#e2e2e6",
+                      "surface": "#111316",
+                      "surface-container-high": "#282a2d",
+                      "on-error": "#690005",
+                      "inverse-surface": "#e2e2e6",
+                      "secondary-container": "#c3f400",
+                      "outline-variant": "#514255",
+                      "tertiary-fixed": "#7df4ff",
+                      "on-tertiary-fixed-variant": "#004f54",
+                      "secondary-fixed-dim": "#abd600",
+                      "primary-fixed-dim": "#ecb2ff",
+                      "surface-bright": "#37393d",
+                      "on-tertiary": "#00363a",
+                      "on-secondary-container": "#556d00",
+                      "on-primary-fixed-variant": "#74009f",
+                      "tertiary-fixed-dim": "#00dbe9",
+                      "surface-container": "#1e2023",
+                      "primary-container": "#bd00ff",
+                      "on-background": "#e2e2e6",
+                      "on-primary-fixed": "#320047",
+                      "primary": "#ecb2ff",
+                      "on-secondary-fixed-variant": "#3c4d00",
+                      "on-secondary": "#283500",
+                      "secondary-fixed": "#c3f400",
+                      "on-tertiary-fixed": "#002022",
+                      "inverse-on-surface": "#2f3034",
+                      "secondary": "#ffffff",
+                      "on-secondary-fixed": "#161e00",
+                      "on-primary": "#520071",
+                      "surface-variant": "#333538",
+                      "on-surface-variant": "#d4c0d7",
+                      "on-primary-container": "#ffffff",
+                      "tertiary": "#00dbe9",
+                      "surface-container-lowest": "#0c0e11",
+                      "inverse-primary": "#9900cf",
+                      "background": "#111316",
+                      "surface-dim": "#111316",
+                      "on-error-container": "#ffdad6",
+                      "error-container": "#93000a",
+                      "surface-tint": "#ecb2ff",
+                      "error": "#ffb4ab"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "stack-sm": "4px",
+                      "margin-mobile": "20px",
+                      "margin-desktop": "40px",
+                      "gutter": "16px",
+                      "stack-lg": "24px",
+                      "stack-md": "12px",
+                      "base": "8px"
+              },
+              "fontFamily": {
+                      "display-lg": ["Archivo Narrow"],
+                      "body-md": ["Hanken Grotesk"],
+                      "label-caps": ["JetBrains Mono"],
+                      "display-lg-mobile": ["Archivo Narrow"],
+                      "body-sm": ["Hanken Grotesk"],
+                      "headline-md": ["Archivo Narrow"]
+              },
+              "fontSize": {
+                      "display-lg": ["48px", { "lineHeight": "52px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                      "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                      "label-caps": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                      "display-lg-mobile": ["36px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                      "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                      "headline-md": ["24px", { "lineHeight": "28px", "letterSpacing": "0.01em", "fontWeight": "600" }]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen flex flex-col font-body-md text-body-md overflow-x-hidden">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-margin-mobile h-16 bg-surface-container border-b border-outline-variant">
+<div class="flex items-center gap-base">
+<span class="material-symbols-outlined text-primary">menu</span>
+<h1 class="font-display-lg-mobile text-display-lg-mobile text-secondary tracking-tighter">Cancha Pro Admin</h1>
+</div>
+<div class="flex items-center gap-gutter bg-surface-container-high px-base py-stack-sm rounded-full border border-outline-variant">
+<div class="flex items-center gap-stack-sm">
+<span class="material-symbols-outlined text-secondary-fixed">database</span>
+<span class="font-label-caps text-label-caps text-secondary-fixed">2,450</span>
+</div>
+<div class="w-8 h-8 rounded-full border border-primary overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A professional profile avatar for a sports administrator, high-contrast digital portrait with cinematic lighting. The character has an intense expression, reflecting the gritty urban atmosphere of Argentinian Futsal. Deep charcoal background with electric purple and lime green accents in the lens flare. Modern, minimalist sport-tech aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDN-m01Qtgp1Zhhg8mEYvQPxJaFIqQB6TFe3_haIJgYStzDjSqmqbFuiXfI04uaZSECFoqLPpTuzbK2zmvB4Hi6Z_pXAix8fuGPUQuUqX2bMrhKoZC3K0H1ozBg7q-mf0jE_-XCwcfutCg4aUu4dMLsd-gp8Vxpnvzfk3zOK5DGqSRhlS4Cvg_TGIwz_f8cb2pIar4cr-d0rCJuz5e-Ox-6XZFKZ5S33HIc4Syy4q4DVlC_TZDpYV4UXaSqVOLYBkueMFDk4rpxH2dg"/>
+</div>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="flex-grow pt-24 pb-32 px-margin-mobile relative mesh-pattern">
+<!-- Atmosphere Background -->
+<div class="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary opacity-[0.03] blur-[120px] rounded-full"></div>
+<div class="absolute top-1/4 right-0 w-[400px] h-[400px] bg-secondary-container opacity-[0.03] blur-[100px] rounded-full"></div>
+</div>
+<section class="relative z-10 max-w-5xl mx-auto flex flex-col items-center">
+<div class="text-center mb-stack-lg">
+<p class="font-label-caps text-label-caps text-secondary-fixed uppercase tracking-[0.2em] mb-stack-sm">Pack Opened</p>
+<h2 class="font-display-lg text-display-lg text-secondary italic">NUEVA GENERACIÓN</h2>
+</div>
+<!-- Dynamic Grid Layout -->
+<div class="relative w-full max-w-4xl min-h-[500px] flex items-center justify-center py-stack-lg">
+<!-- Card 1 (Common) -->
+<div class="card-reveal absolute transform -rotate-6 -translate-x-48 z-10" style="animation-delay: 0.1s;">
+<div class="w-48 h-72 bg-surface-container border-2 border-outline-variant rounded-lg overflow-hidden flex flex-col relative group">
+<div class="h-2/3 relative bg-surface-container-high">
+<img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" data-alt="A dynamic action shot of a professional female futsal player from the Argentinian league, sprinting with a ball. High-contrast sports photography, dramatic stadium lighting with deep shadows. Urban court setting, gritty texture, high-velocity motion blur. Teal and charcoal color palette." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD51UDTiRS8fXHGvNyhVv_APqmKDYGWRyxDBhVN3ydSr4D1_0ORQDzOuWvkB1YW0NE-vkzR-liPjTWAUlulZKhShFwIiyW3UrvNM6OYfW4GZmUrdiEWzASMq0mgtyvhIbBo8N_VphZ6JWhqEyEZwBzjg9QUESn3Rev4OnpNTgpG-h3JsQTrYZcqRJALbxuKXWlqIjwJJmESlJtlPHBw1lD_KNKr1uvCtHE-K3zEwG-hkGG5uAokavZtQTu8dC6yeq0D788e1y35I1Y5"/>
+<span class="absolute top-2 right-2 font-label-caps text-label-caps bg-surface/80 px-2 py-1 rounded">DEF</span>
+</div>
+<div class="p-base flex-grow flex flex-col justify-between">
+<h4 class="font-headline-md text-headline-md leading-tight text-on-surface">M. SORIA</h4>
+<div class="flex justify-between items-end">
+<span class="font-label-caps text-label-caps text-on-surface-variant">PLATENSE</span>
+<span class="text-xl font-bold text-primary">78</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Card 2 (Rare) -->
+<div class="card-reveal absolute transform rotate-3 -translate-x-24 z-20" style="animation-delay: 0.3s;">
+<div class="w-48 h-72 bg-surface-container border-2 border-tertiary rounded-lg overflow-hidden flex flex-col relative group">
+<div class="h-2/3 relative bg-surface-container-high">
+<img class="w-full h-full object-cover" data-alt="Close-up portrait of a female futsal goalkeeper in mid-save, focused eyes and intense concentration. The lighting is sharp, emphasizing the athleticism and urban grit. Gritty atmosphere of a local court, electric cyan highlights. High-end sports card aesthetic with technical data overlays." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB2vMTF3MpYGfLcrTjosLLPCw-PU8Z8UBM21KjRWreeCzGMdfgG2srVRjHaneXfIExAnOTpplvT2IWK9jrwH2pst_GcIel1UPPQqNOrpIZIzBAyhQgWx9c4gbYSBd656ARONDHmC2LMykJ4l4qP5LFErtWtzDYgBYARxqDoWCVqt_GVyQQgQVeMOFFkICm7SwxJbCdElhd-5AFmuUtDCaKXlrnG4F_D-S48i5kL6V887kysgeXCUnBZrWgXjFHmayYyxAgtDi0GphZh"/>
+<div class="absolute inset-0 holographic-overlay opacity-30"></div>
+<span class="absolute top-2 right-2 font-label-caps text-label-caps bg-tertiary text-on-tertiary px-2 py-1 rounded">GK</span>
+</div>
+<div class="p-base flex-grow flex flex-col justify-between">
+<h4 class="font-headline-md text-headline-md leading-tight text-on-surface">P. GOMEZ</h4>
+<div class="flex justify-between items-end">
+<span class="font-label-caps text-label-caps text-on-surface-variant">HURACÁN</span>
+<span class="text-xl font-bold text-tertiary">84</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Card 3 (GOLD - Rare Tier) -->
+<div class="card-reveal gold-glow absolute transform rotate-0 z-50" style="animation-delay: 0.9s;">
+<div class="w-56 h-80 bg-surface-container border-4 border-secondary-container rounded-lg overflow-hidden flex flex-col relative group scale-110 shadow-[0_0_40px_rgba(195,244,0,0.3)]">
+<div class="h-2/3 relative bg-surface-container-highest">
+<img class="w-full h-full object-cover" data-alt="A cinematic, low-angle shot of an elite Argentinian female futsal star celebrating a goal. The background is a blurred stadium with thousands of glowing lights. Vibrant lime green and electric yellow light trails surround the player. Premium holographic finish, golden hour lighting, intense champion mood." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCzhzs9S6VHsYV-pCePP_c3fKFaCdr7l0ZsSbZ9SeSyAGm88Im08m5vDtnzBMs0BRqXV4q1SiSClPDmjmZ3of6V50KHiUA4YC-v1vgsigVO5nJFwUrWDS3i35nGNEJjjjKQ2ms_VOF6vYIBH9lb6pnAwNDR7gRMXSTxWwgII9cEbV9fum-769TxRL0PjAnUWbmUj-MDVKgkQLtQobxkuuic9OFCk3EjWclMv_wNaGgXLczqYgUIypIvXa4m6ElO5oiL4sW0Yg9QlX3z"/>
+<div class="absolute inset-0 holographic-overlay"></div>
+<div class="absolute top-0 left-0 w-full h-full bg-gradient-to-t from-secondary-container/20 to-transparent"></div>
+<span class="absolute top-3 right-3 font-label-caps text-label-caps bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full font-bold">LEGEND</span>
+</div>
+<div class="p-base flex-grow flex flex-col justify-between bg-surface-container-highest">
+<h4 class="text-[28px] font-bold leading-none text-secondary-container uppercase font-display-lg italic">VALENTINA R.</h4>
+<div class="flex justify-between items-end">
+<span class="font-label-caps text-label-caps text-on-surface">BOCA JUNIORS</span>
+<span class="text-3xl font-extrabold text-secondary-container drop-shadow-sm">94</span>
+</div>
+</div>
+<!-- Rarity Aura -->
+<div class="absolute -inset-1 border border-secondary-container/50 rounded-lg animate-pulse"></div>
+</div>
+</div>
+<!-- Card 4 (Rare) -->
+<div class="card-reveal absolute transform -rotate-2 translate-x-24 z-20" style="animation-delay: 0.5s;">
+<div class="w-48 h-72 bg-surface-container border-2 border-primary rounded-lg overflow-hidden flex flex-col relative group">
+<div class="h-2/3 relative bg-surface-container-high">
+<img class="w-full h-full object-cover" data-alt="A stylized action photo of a mid-field futsal player maneuvering through defenders. High-contrast lighting with purple and pink neon highlights against dark shadows. Textured urban court background, grainy film effect. Elite sports card design with sharp edges and modern typography." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDSbN3GS9p-h34cqmUCRXyRKPLo8i0QqJJg-lj2rwPhkoZRmpR3h5Tbr6xuXgqeOOrWJCYZ9QMRmdD4kAxSNNIJ94-wAC6SeIPKIjPtGtZcQI86v_--xKeqR_hSahVQ5z3yXgBB53oF4EZslOvH8LiiBdRhegd_fXp9DscLIFsiRh0KszONe1WN6IHpUaXDrlhEVSE-6XuiWm-F8iJBAk_vgrXj8BjjAcN9-EnLJUkjjlbRqDQMwgG1yA5ESphXPoHHSZ00yB_Z1x_t"/>
+<div class="absolute inset-0 holographic-overlay opacity-20"></div>
+<span class="absolute top-2 right-2 font-label-caps text-label-caps bg-primary text-on-primary px-2 py-1 rounded">MID</span>
+</div>
+<div class="p-base flex-grow flex flex-col justify-between">
+<h4 class="font-headline-md text-headline-md leading-tight text-on-surface">L. MARÍN</h4>
+<div class="flex justify-between items-end">
+<span class="font-label-caps text-label-caps text-on-surface-variant">RACING</span>
+<span class="text-xl font-bold text-primary">82</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Card 5 (Common) -->
+<div class="card-reveal absolute transform rotate-6 translate-x-48 z-10" style="animation-delay: 0.7s;">
+<div class="w-48 h-72 bg-surface-container border-2 border-outline-variant rounded-lg overflow-hidden flex flex-col relative group">
+<div class="h-2/3 relative bg-surface-container-high">
+<img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" data-alt="Action photography of a young futsal talent shooting at goal. Raw, unpolished urban court aesthetics, afternoon sunlight streaming through high windows. Gritty, dusty air particles caught in light beams. Muted tones with high contrast. Authentic sports feel." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDpU6hYlgx2aEo7z7OpanAbMzn6yy7UICm9p-FMe7J5sRBwaqXz9XiblJWIKuGr6aLJ_25YBHm61KuNU-sYxJG2e8XGdtnQds88wbdXA5-_6igGsrHKTUuGnuyJH6Wz3HRPIQuHFJqjd2y58HPydGAnextE9eXbXS0e32FsOKitaNiEBoBDutOGXrboCQPFsbIab1d-NSXWO-i03pZt2EDnsmI8tQkgEQGX-7sJerkIrdJ-_dfFPoNjw_c2RyYwCv98tYemiSsQf22l"/>
+<span class="absolute top-2 right-2 font-label-caps text-label-caps bg-surface/80 px-2 py-1 rounded">ATT</span>
+</div>
+<div class="p-base flex-grow flex flex-col justify-between">
+<h4 class="font-headline-md text-headline-md leading-tight text-on-surface">C. ORTIZ</h4>
+<div class="flex justify-between items-end">
+<span class="font-label-caps text-label-caps text-on-surface-variant">FERRO</span>
+<span class="text-xl font-bold text-on-surface">76</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Action Area -->
+<div class="mt-stack-lg flex flex-col items-center gap-stack-md w-full">
+<button class="bg-secondary-container hover:bg-secondary-fixed-dim text-on-secondary-container font-display-lg px-margin-desktop py-stack-md rounded-full shadow-lg transform hover:scale-105 active:scale-95 transition-all duration-200 uppercase tracking-widest flex items-center gap-base">
+<span>Collect All</span>
+<span class="material-symbols-outlined">auto_awesome</span>
+</button>
+<div class="flex gap-gutter">
+<button class="font-label-caps text-label-caps text-on-surface-variant hover:text-secondary flex items-center gap-stack-sm border border-outline-variant px-base py-stack-sm rounded-lg transition-colors">
+<span class="material-symbols-outlined">share</span>
+                        Share Reveal
+                    </button>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center px-margin-mobile py-base bg-surface-container-lowest rounded-t-xl border-t border-outline-variant shadow-lg">
+<div class="flex flex-col items-center justify-center text-on-surface-variant px-base py-stack-sm hover:text-secondary transition-all cursor-pointer">
+<span class="material-symbols-outlined">groups</span>
+<span class="font-label-caps text-label-caps">Clubs</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant px-base py-stack-sm hover:text-secondary transition-all cursor-pointer">
+<span class="material-symbols-outlined">sports_soccer</span>
+<span class="font-label-caps text-label-caps">Players</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full px-base py-stack-sm active:scale-105 duration-200 transition-transform cursor-pointer">
+<span class="material-symbols-outlined">package_2</span>
+<span class="font-label-caps text-label-caps">Packs</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant px-base py-stack-sm hover:text-secondary transition-all cursor-pointer">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-caps text-label-caps">Settings</span>
+</div>
+</nav>
+<!-- Micro-interactions Script -->
+<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelectorAll('.card-reveal');
+            
+            // Subtle tilt effect on mouse move
+            document.addEventListener('mousemove', (e) => {
+                const moveX = (e.clientX - window.innerWidth / 2) / 50;
+                const moveY = (e.clientY - window.innerHeight / 2) / 50;
+                
+                cards.forEach((card, index) => {
+                    const depth = index * 2;
+                    card.style.transform = `translate(${moveX * depth}px, ${moveY * depth}px) rotate(var(--tw-rotate))`;
+                });
+            });
+
+            // "Collect All" click effect
+            const collectBtn = document.querySelector('button.bg-secondary-container');
+            collectBtn.addEventListener('click', () => {
+                cards.forEach((card, index) => {
+                    setTimeout(() => {
+                        card.style.transition = 'all 0.5s cubic-bezier(0.6, -0.28, 0.735, 0.045)';
+                        card.style.transform = 'translateY(-1000px) scale(0)';
+                        card.style.opacity = '0';
+                    }, index * 100);
+                });
+                
+                setTimeout(() => {
+                    alert('Items added to your collection!');
+                }, 800);
+            });
+        });
+    </script>
+</body></html>

@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FUTSAL PRO - Registro Cuerpo Técnico</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:ital,wght@0,400..700;1,400..700&amp;family=Hanken+Grotesk:wght@300;400;600;800&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "primary": "#ecb2ff",
+                "on-primary-fixed": "#320047",
+                "tertiary": "#00dbe9",
+                "on-error": "#690005",
+                "on-tertiary-fixed": "#002022",
+                "on-tertiary": "#00363a",
+                "on-secondary": "#283500",
+                "error-container": "#93000a",
+                "on-error-container": "#ffdad6",
+                "error": "#ffb4ab",
+                "surface-dim": "#111316",
+                "on-background": "#e2e2e6",
+                "on-secondary-fixed": "#161e00",
+                "primary-fixed": "#f8d8ff",
+                "surface-container-high": "#282a2d",
+                "surface-container-highest": "#333538",
+                "primary-fixed-dim": "#ecb2ff",
+                "surface-container-lowest": "#0c0e11",
+                "secondary-container": "#c3f400",
+                "surface-container-low": "#1a1c1f",
+                "outline-variant": "#514255",
+                "on-primary-container": "#ffffff",
+                "on-tertiary-fixed-variant": "#004f54",
+                "tertiary-container": "#00838b",
+                "on-secondary-fixed-variant": "#3c4d00",
+                "outline": "#9d8ba0",
+                "primary-container": "#bd00ff",
+                "on-surface": "#e2e2e6",
+                "surface-variant": "#333538",
+                "surface": "#111316",
+                "secondary": "#ffffff",
+                "background": "#111316",
+                "secondary-fixed-dim": "#abd600",
+                "surface-bright": "#37393d",
+                "on-primary": "#520071",
+                "tertiary-fixed-dim": "#00dbe9",
+                "inverse-on-surface": "#2f3034",
+                "surface-container": "#1e2023",
+                "on-primary-fixed-variant": "#74009f",
+                "tertiary-fixed": "#7df4ff",
+                "on-secondary-container": "#556d00",
+                "secondary-fixed": "#c3f400",
+                "inverse-surface": "#e2e2e6",
+                "on-surface-variant": "#d4c0d7",
+                "surface-tint": "#ecb2ff"
+            },
+            "borderRadius": {
+                "DEFAULT": "0.125rem",
+                "lg": "0.25rem",
+                "xl": "0.5rem",
+                "full": "0.75rem"
+            },
+            "spacing": {
+                "stack-sm": "4px",
+                "stack-md": "12px",
+                "stack-lg": "24px",
+                "margin-desktop": "40px",
+                "margin-mobile": "20px",
+                "gutter": "16px",
+                "base": "8px"
+            },
+            "fontFamily": {
+                "display-lg": ["Archivo Narrow"],
+                "body-md": ["Hanken Grotesk"],
+                "label-caps": ["JetBrains Mono"],
+                "headline-md": ["Archivo Narrow"],
+                "body-sm": ["Hanken Grotesk"],
+                "display-lg-mobile": ["Archivo Narrow"]
+            },
+            "fontSize": {
+                "display-lg": ["48px", {"lineHeight": "52px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                "headline-md": ["24px", {"lineHeight": "28px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                "display-lg-mobile": ["36px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #111316;
+            color: #e2e2e6;
+            -webkit-font-smoothing: antialiased;
+        }
+        .pitch-grid {
+            background-image: 
+                linear-gradient(to right, rgba(236, 178, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(236, 178, 255, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+        .neon-glow-primary {
+            box-shadow: 0 0 15px rgba(189, 0, 255, 0.3);
+        }
+        .neon-border-tertiary {
+            border: 1px solid rgba(0, 219, 233, 0.4);
+            box-shadow: inset 0 0 10px rgba(0, 219, 233, 0.1);
+        }
+        .glass-panel {
+            background: rgba(30, 32, 35, 0.8);
+            backdrop-filter: blur(12px);
+        }
+        input:focus, select:focus {
+            outline: none;
+            border-color: #00dbe9;
+            box-shadow: 0 0 0 2px rgba(0, 219, 233, 0.2);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="font-body-md text-body-md overflow-x-hidden">
+<!-- Header / TopAppBar -->
+<header class="w-full top-0 sticky bg-surface dark:bg-surface flex justify-between items-center px-margin-mobile md:px-margin-desktop py-stack-md w-full z-50">
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-primary hover:opacity-80 transition-opacity active:scale-95 transition-transform duration-150">arrow_back</button>
+<h1 class="font-display-lg-mobile text-display-lg-mobile italic uppercase tracking-tighter text-primary dark:text-primary">FUTSAL PRO</h1>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary">security</span>
+</div>
+</header>
+<main class="relative min-h-screen pitch-grid px-margin-mobile md:px-margin-desktop py-stack-lg flex flex-col items-center">
+<!-- Decoration Elements -->
+<div class="absolute top-10 left-0 w-64 h-64 bg-primary-container/10 rounded-full blur-[120px] -z-10"></div>
+<div class="absolute bottom-20 right-0 w-80 h-80 bg-tertiary/10 rounded-full blur-[150px] -z-10"></div>
+<!-- Form Container -->
+<div class="w-full max-w-2xl mt-8">
+<div class="mb-stack-lg text-center md:text-left">
+<span class="font-label-caps text-label-caps text-tertiary tracking-widest uppercase mb-2 block">Alta de Personal</span>
+<h2 class="font-headline-md text-headline-md-mobile md:text-headline-md text-on-surface">REGISTRO CUERPO TÉCNICO</h2>
+<p class="text-on-surface-variant font-body-sm mt-2">Completa el perfil profesional para la temporada de Primera C FUTSAFEM.</p>
+</div>
+<form class="glass-panel border border-outline-variant/30 rounded-xl p-6 md:p-10 space-y-8 shadow-2xl" id="tech-reg-form">
+<!-- Section 1: Identity -->
+<div class="grid grid-cols-1 gap-6">
+<div class="relative group">
+<label class="font-label-caps text-label-caps text-on-surface-variant group-focus-within:text-primary transition-colors" for="fullName">Nombre Completo</label>
+<div class="mt-2 flex items-center bg-surface-container-low border border-outline-variant rounded-lg px-4 py-3 group-focus-within:border-primary transition-all">
+<span class="material-symbols-outlined text-outline-variant mr-3 group-focus-within:text-primary">badge</span>
+<input class="bg-transparent border-none w-full p-0 text-on-surface placeholder:text-outline-variant/50 focus:ring-0" id="fullName" placeholder="Ej: Marcela Fernandez" required="" type="text"/>
+</div>
+</div>
+</div>
+<!-- Section 2: Club and Role -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="relative group">
+<label class="font-label-caps text-label-caps text-on-surface-variant group-focus-within:text-tertiary transition-colors" for="clubSelect">Club Perteneciente</label>
+<div class="mt-2 flex items-center bg-surface-container-low border border-outline-variant rounded-lg px-4 py-3 group-focus-within:border-tertiary transition-all">
+<span class="material-symbols-outlined text-outline-variant mr-3 group-focus-within:text-tertiary">sports_soccer</span>
+<select class="bg-transparent border-none w-full p-0 text-on-surface focus:ring-0 cursor-pointer appearance-none" id="clubSelect" required="">
+<option class="bg-surface-container-high" disabled="" selected="" value="">Seleccionar Club</option>
+<option class="bg-surface-container-high" value="ferro">Ferro Carril Oeste</option>
+<option class="bg-surface-container-high" value="sanlorenzo">San Lorenzo</option>
+<option class="bg-surface-container-high" value="racing">Racing Club</option>
+<option class="bg-surface-container-high" value="boca">Boca Juniors</option>
+<option class="bg-surface-container-high" value="independiente">Independiente</option>
+<option class="bg-surface-container-high" value="huracan">Huracán</option>
+</select>
+<span class="material-symbols-outlined text-outline-variant pointer-events-none">expand_more</span>
+</div>
+</div>
+<div class="relative group">
+<label class="font-label-caps text-label-caps text-on-surface-variant group-focus-within:text-tertiary transition-colors" for="roleSelect">Cargo Desempeñado</label>
+<div class="mt-2 flex items-center bg-surface-container-low border border-outline-variant rounded-lg px-4 py-3 group-focus-within:border-tertiary transition-all">
+<span class="material-symbols-outlined text-outline-variant mr-3 group-focus-within:text-tertiary">assignment_ind</span>
+<select class="bg-transparent border-none w-full p-0 text-on-surface focus:ring-0 cursor-pointer appearance-none" id="roleSelect" required="">
+<option class="bg-surface-container-high" disabled="" selected="" value="">Seleccionar Cargo</option>
+<option class="bg-surface-container-high" value="dt">Director/a Técnico/a</option>
+<option class="bg-surface-container-high" value="at">Asistente Técnico/a</option>
+<option class="bg-surface-container-high" value="pf">Preparador/a Físico/a</option>
+<option class="bg-surface-container-high" value="ea">Entrenador/a de Arqueras</option>
+<option class="bg-surface-container-high" value="analista">Analista de Video</option>
+<option class="bg-surface-container-high" value="medico">Cuerpo Médico</option>
+</select>
+<span class="material-symbols-outlined text-outline-variant pointer-events-none">expand_more</span>
+</div>
+</div>
+</div>
+<!-- Section 3: Experience -->
+<div class="space-y-4">
+<label class="font-label-caps text-label-caps text-on-surface-variant">Años de Experiencia en Futsal</label>
+<div class="flex items-center gap-6 bg-surface-container-low border border-outline-variant rounded-lg p-6">
+<div class="flex-1">
+<input class="w-full h-2 bg-surface-variant rounded-lg appearance-none cursor-pointer accent-primary" id="expRange" max="30" min="0" step="1" type="range" value="5"/>
+<div class="flex justify-between mt-2 font-label-caps text-[10px] text-outline-variant">
+<span>INICIANTE</span>
+<span>PRO</span>
+<span>LEYENDA</span>
+</div>
+</div>
+<div class="flex flex-col items-center justify-center w-20 h-20 border-2 border-primary rounded-full neon-glow-primary bg-primary/5">
+<span class="font-display-lg text-[32px] leading-none text-primary" id="expValue">5</span>
+<span class="font-label-caps text-[10px] text-primary">AÑOS</span>
+</div>
+</div>
+</div><div class="space-y-4">
+<label class="font-label-caps text-label-caps text-on-surface-variant">FOTOGRAFÍA PARA FIGURITA</label>
+<p class="text-on-surface-variant font-body-sm">Sube una foto clara con indumentaria del club para generar tu figurita oficial.</p>
+<div class="relative group cursor-pointer">
+<div class="flex flex-col items-center justify-center border-2 border-dashed border-outline-variant/50 rounded-xl p-8 bg-surface-container-low hover:border-primary transition-all group-focus-within:border-primary">
+<span class="material-symbols-outlined text-[48px] text-outline-variant group-hover:text-primary transition-colors mb-3">add_a_photo</span>
+<p class="font-headline-md text-body-md text-on-surface-variant group-hover:text-on-surface">Arrastra o selecciona tu foto de perfil</p>
+<input accept="image/*" class="absolute inset-0 opacity-0 cursor-pointer" id="photoUpload" type="file"/>
+</div>
+</div>
+</div>
+<!-- Terms -->
+<div class="flex items-start gap-3 py-2">
+<input class="mt-1 w-5 h-5 rounded border-outline-variant bg-surface-container-low text-primary focus:ring-primary transition-all cursor-pointer" id="terms" required="" type="checkbox"/>
+<label class="font-body-sm text-on-surface-variant" for="terms">Declaro que la información proporcionada es verídica y acepto los reglamentos de ética y conducta de FUTSAFEM.</label>
+</div>
+<!-- Submit Button -->
+<button class="w-full bg-primary-container text-on-primary-container font-headline-md py-stack-lg rounded-full flex items-center justify-center gap-3 hover:opacity-90 active:scale-95 transition-all duration-150 shadow-lg neon-glow-primary group" type="submit">
+<span class="material-symbols-outlined group-hover:rotate-12 transition-transform">how_to_reg</span>
+                    FINALIZAR REGISTRO
+                </button>
+</form>
+</div>
+<!-- Professional Context Card (Asymmetric Layout element) -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-4xl mt-stack-lg mb-20">
+<div class="md:col-span-1 bg-surface-container-high border-l-4 border-tertiary p-6 rounded-r-xl">
+<span class="material-symbols-outlined text-tertiary mb-2">verified</span>
+<h4 class="font-headline-md text-[18px] text-on-surface uppercase mb-1">Carnet Digital</h4>
+<p class="text-on-surface-variant text-body-sm">Al finalizar, recibirás tu acreditación digital habilitante para el banco de suplentes.</p>
+</div>
+<div class="md:col-span-2 relative overflow-hidden rounded-xl h-48 group">
+<div class="absolute inset-0 bg-cover bg-center group-hover:scale-105 transition-transform duration-700" data-alt="A cinematic, wide shot of an indoor futsal court with high-contrast stadium lighting. In the foreground, a professional coaching board and a tactical folder are placed on a bench. The atmosphere is intense and professional, with deep charcoal and slate tones punctuated by electric cyan and magenta neon accents. The setting is modern and urban, reflecting a premium sports competitive environment." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDL5Cr1JmBDx5Gd8-5HJqpbagBqkc467kAWTCiNjHB3IQ7R4kywM5zI2tObEQBN7hqRWhvvxkSpoRULXZGgb7TT0EEPKOVX1CeeSHiW-qThsKEZh7rF4ZJ2IZ-Xivvps5SQKhPd_Ii9ebDENQH7DzqIoG4aqYDGVuB6wiUS_kuz_zUDfi4MYuzID4OXMSNEwU6OYbucrSj5gFMJiBOlMzQfc0i7gC7HaMf_oDHSlCISLmiuTHPHrm1SlzhpfqKJ5oVxgqk88nlEhstC')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-surface to-transparent opacity-60"></div>
+<div class="absolute bottom-4 left-4">
+<span class="font-label-caps text-secondary bg-primary-container/80 backdrop-blur-md px-3 py-1 rounded-full text-[10px]">TEMPORADA 2024</span>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Only for top-level destinations) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-gutter pb-stack-md bg-surface-container-low dark:bg-surface-container-low border-t border-outline-variant shadow-lg md:hidden rounded-t-full">
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full p-stack-md active:scale-105 transition-all duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">app_registration</span>
+<span class="font-label-caps text-label-caps">Join</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-stack-md hover:text-tertiary transition-colors active:scale-105 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">shield_person</span>
+<span class="font-label-caps text-label-caps">Clubs</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-stack-md hover:text-tertiary transition-colors active:scale-105 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">lock_person</span>
+<span class="font-label-caps text-label-caps">Safety</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-stack-md hover:text-tertiary transition-colors active:scale-105 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">help_outline</span>
+<span class="font-label-caps text-label-caps">Help</span>
+</a>
+</nav>
+<script>
+        // Experience Range Interactivity
+        const range = document.getElementById('expRange');
+        const display = document.getElementById('expValue');
+
+        range.addEventListener('input', (e) => {
+            display.textContent = e.target.value;
+            
+            // Adjust visual feedback based on years
+            const val = parseInt(e.target.value);
+            if(val > 20) {
+                display.parentElement.classList.remove('border-primary');
+                display.parentElement.classList.add('border-tertiary');
+                display.classList.remove('text-primary');
+                display.classList.add('text-tertiary');
+            } else {
+                display.parentElement.classList.remove('border-tertiary');
+                display.parentElement.classList.add('border-primary');
+                display.classList.remove('text-tertiary');
+                display.classList.add('text-primary');
+            }
+        });
+
+        // Form Submit Simulation
+        const form = document.getElementById('tech-reg-form');
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const btn = form.querySelector('button[type="submit"]');
+            const originalContent = btn.innerHTML;
+            
+            btn.innerHTML = '<span class="material-symbols-outlined animate-spin">sync</span> PROCESANDO...';
+            btn.classList.add('opacity-50');
+            btn.disabled = true;
+
+            setTimeout(() => {
+                btn.innerHTML = '<span class="material-symbols-outlined">check_circle</span> REGISTRO EXITOSO';
+                btn.classList.remove('bg-primary-container');
+                btn.classList.add('bg-tertiary-container');
+                
+                // Subtle success animation for form fields
+                form.querySelectorAll('input, select').forEach(el => {
+                    el.closest('div').classList.add('opacity-40');
+                });
+            }, 1500);
+        });
+
+        // Parallax effect on court texture
+        window.addEventListener('mousemove', (e) => {
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+            document.querySelector('.pitch-grid').style.backgroundPosition = `${x * 10}px ${y * 10}px`;
+        });
+    </script>
+</body></html>

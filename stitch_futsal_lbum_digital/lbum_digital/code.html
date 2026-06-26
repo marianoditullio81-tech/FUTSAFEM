@@ -1,0 +1,333 @@
+<!DOCTYPE html><html class="dark" lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport">
+<title>FUTSAFEM - Digital Album</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@400;600;700&amp;family=Hanken+Grotesk:wght@400;500;700&amp;family=JetBrains+Mono:wght@500&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@100..900&amp;family=Hanken+Grotesk:wght@100..900&amp;family=JetBrains+Mono:wght@100..900&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary-fixed": "#002022",
+                    "on-primary-container": "#ffffff",
+                    "primary-fixed-dim": "#ecb2ff",
+                    "primary-fixed": "#f8d8ff",
+                    "on-surface-variant": "#d4c0d7",
+                    "on-surface": "#e2e2e6",
+                    "on-secondary": "#283500",
+                    "on-tertiary-fixed-variant": "#004f54",
+                    "surface-variant": "#333538",
+                    "inverse-primary": "#9900cf",
+                    "surface-container": "#1e2023",
+                    "secondary": "#ffffff",
+                    "on-tertiary-container": "#ffffff",
+                    "secondary-fixed": "#c3f400",
+                    "on-primary-fixed": "#320047",
+                    "surface-bright": "#37393d",
+                    "surface-container-low": "#1a1c1f",
+                    "on-error-container": "#ffdad6",
+                    "on-tertiary": "#00363a",
+                    "surface-container-highest": "#333538",
+                    "tertiary-fixed": "#7df4ff",
+                    "surface-container-high": "#282a2d",
+                    "primary-container": "#bd00ff",
+                    "on-primary-fixed-variant": "#74009f",
+                    "on-error": "#690005",
+                    "surface-tint": "#ecb2ff",
+                    "inverse-on-surface": "#2f3034",
+                    "background": "#111316",
+                    "secondary-fixed-dim": "#abd600",
+                    "on-background": "#e2e2e6",
+                    "on-secondary-container": "#556d00",
+                    "outline": "#9d8ba0",
+                    "surface-dim": "#111316",
+                    "secondary-container": "#c3f400",
+                    "outline-variant": "#514255",
+                    "tertiary-container": "#00838b",
+                    "inverse-surface": "#e2e2e6",
+                    "primary": "#ecb2ff",
+                    "on-primary": "#520071",
+                    "surface-container-lowest": "#0c0e11",
+                    "error": "#ffb4ab",
+                    "surface": "#111316",
+                    "on-secondary-fixed": "#161e00",
+                    "on-secondary-fixed-variant": "#3c4d00",
+                    "tertiary-fixed-dim": "#00dbe9",
+                    "error-container": "#93000a",
+                    "tertiary": "#00dbe9"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "base": "8px",
+                    "margin-mobile": "20px",
+                    "stack-sm": "4px",
+                    "stack-md": "12px",
+                    "gutter": "16px",
+                    "margin-desktop": "40px",
+                    "stack-lg": "24px"
+            },
+            "fontFamily": {
+                    "display-lg": ["Archivo Narrow"],
+                    "body-sm": ["Hanken Grotesk"],
+                    "headline-md": ["Archivo Narrow"],
+                    "label-caps": ["JetBrains Mono"],
+                    "display-lg-mobile": ["Archivo Narrow"],
+                    "body-md": ["Hanken Grotesk"]
+            },
+            "fontSize": {
+                    "display-lg": ["48px", {"lineHeight": "52px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "headline-md": ["24px", {"lineHeight": "28px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                    "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "display-lg-mobile": ["36px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #111316;
+            color: #e2e2e6;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .sticker-glow-gold {
+            box-shadow: 0 0 15px -2px rgba(255, 215, 0, 0.4);
+            border: 2px solid #FFD700;
+        }
+        .sticker-glow-silver {
+            box-shadow: 0 0 15px -2px rgba(192, 192, 192, 0.4);
+            border: 2px solid #C0C0C0;
+        }
+        .sticker-glow-bronze {
+            box-shadow: 0 0 15px -2px rgba(205, 127, 50, 0.4);
+            border: 2px solid #CD7F32;
+        }
+        .rarity-gradient-gold {
+            background: linear-gradient(135deg, rgba(255,215,0,0.1) 0%, rgba(255,215,0,0) 100%);
+        }
+        .perspective-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .perspective-card:active {
+            transform: scale(0.96);
+        }
+        .pitch-texture {
+            background-image: radial-gradient(#333538 0.5px, transparent 0.5px);
+            background-size: 16px 16px;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-body-md selection:bg-primary selection:text-on-primary">
+<!-- TopAppBar -->
+<header class="bg-surface dark:bg-surface text-primary dark:text-primary docked full-width top-0 flex justify-between items-center w-full px-margin-mobile h-16 z-50 fixed top-0">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-2xl" data-icon="sports_soccer">sports_soccer</span>
+<h1 class="font-display-lg-mobile text-display-lg-mobile text-primary dark:text-primary tracking-tight">FUTSAFEM</h1>
+</div>
+<div class="flex items-center gap-2 bg-surface-container-highest px-3 py-1.5 rounded-full transition-all duration-200 active:scale-95">
+<span class="font-label-caps text-label-caps text-secondary-fixed">1,250 🪙</span>
+</div>
+</header>
+<main class="pt-20 pb-32 px-margin-mobile max-w-7xl mx-auto pitch-texture min-h-screen">
+<!-- Search and Filter Bar -->
+<section class="mb-stack-lg sticky top-16 z-40 bg-background/95 backdrop-blur-md pt-4 pb-2">
+<div class="relative mb-4">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full bg-surface-container border-none rounded-xl pl-11 pr-4 py-3 text-body-md focus:ring-2 focus:ring-primary placeholder:text-on-surface-variant transition-all" placeholder="Buscar jugadora o club..." type="text">
+</div>
+<div class="flex gap-2 overflow-x-auto hide-scrollbar pb-1">
+<button class="bg-primary text-on-primary px-6 py-2 rounded-full font-label-caps text-label-caps transition-all duration-200 active:scale-95">Todas</button>
+<button class="bg-surface-container text-on-surface-variant hover:bg-surface-variant px-6 py-2 rounded-full font-label-caps text-label-caps transition-all duration-200 active:scale-95">Faltantes</button>
+<button class="bg-surface-container text-on-surface-variant hover:bg-surface-variant px-6 py-2 rounded-full font-label-caps text-label-caps transition-all duration-200 active:scale-95">Repetidas</button>
+</div>
+</section>
+<!-- Progress Overview -->
+<div class="mb-stack-lg bg-surface-container rounded-xl p-4 border border-outline-variant/30">
+<div class="flex justify-between items-center mb-2">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Progreso del Album</span>
+<span class="font-label-caps text-label-caps text-secondary">142 / 350</span>
+</div>
+<div class="h-2 w-full bg-surface-container-highest rounded-full overflow-hidden flex gap-0.5">
+<div class="h-full bg-secondary w-[40%] rounded-r-sm"></div>
+<div class="h-full bg-surface-variant w-[60%]"></div>
+</div>
+</div>
+<!-- Album Sections -->
+<div class="space-y-10">
+<!-- Club Section: Villa Malcolm -->
+<section>
+<div class="flex items-center gap-4 mb-stack-md">
+<div class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center border border-outline-variant">
+<span class="material-symbols-outlined text-primary" data-icon="shield">shield</span>
+</div>
+<h2 class="font-headline-md text-headline-md-mobile text-on-surface">Villa Malcolm</h2>
+<span class="ml-auto font-label-caps text-label-caps text-on-surface-variant">8/12</span>
+</div>
+<div class="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
+<!-- Gold Sticker (Found) -->
+<div class="aspect-[2/3] rounded-lg overflow-hidden relative sticker-glow-gold perspective-card">
+<div class="absolute inset-0 rarity-gradient-gold z-10"></div>
+<img class="w-full h-full object-cover grayscale-[0.2]" data-alt="Close-up action portrait of a professional female futsal player from Villa Malcolm club. She has an intense, focused expression, wearing a vibrant team jersey. The lighting is cinematic, highlighting the athletic sweat and gritty stadium atmosphere. The background is a blurred dark arena with hints of arena lights. High-contrast, sharp detail in 4k resolution." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCR3XydGvDP88zSILQ_oZ_7JtaehHOJpxkfKFpmHkEzX0Klcq67DYIU3KHPt_Y21HyISgqW7bRnEw_h7F7kt9U_oJxlY3JZkoKdSqCBXMZe6UJ5TVwM1KszGiwiqNm_OuMTDu2epS-DG44S8G7robVAi2lAFmCK1sv-m8Uu5pjWdMrUdycUgFRXuaZjjqCgf9VDkcZLregKEmWxF6VGA3AI7YiV1OHH7_2lDltIoH50QEaMwyTEi7t-rC20wL0WjTLuKf_1K8h-tpjy">
+<div class="absolute top-2 left-2 z-20">
+<span class="bg-black/60 backdrop-blur-md text-[10px] font-label-caps px-1.5 py-0.5 rounded border border-yellow-500/50 text-white">PIVOT</span>
+</div>
+<div class="absolute bottom-0 w-full p-1.5 bg-gradient-to-t from-black/80 to-transparent z-20">
+<p class="text-[11px] font-bold text-white truncate">Luciana Rossi</p>
+</div>
+</div>
+<!-- Silver Sticker (Found) -->
+<div class="aspect-[2/3] rounded-lg overflow-hidden relative sticker-glow-silver perspective-card">
+<img class="w-full h-full object-cover" data-alt="Dynamic medium shot of a female futsal goalkeeper in mid-action, wearing a silver-trimmed team jersey for Villa Malcolm. The environment is a dark indoor court with sharp, dramatic lighting creating deep shadows. Her hands are in gloves reaching for an invisible ball. The aesthetic is gritty and high-octane digital collectible style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC6MmJb4aooLsiyADtfUXDNcnyVvXW4vY1dUz3MGfDLl46fOt7w7hP7UshecTguUVndLNSYM6RygAtVC-VlOF0uF-p0yy4RArZ5-ahhr-uzWRjMYXrx-cBHOnjqRi4Gj2c9-CyOrqy5ZKg8C0pEdloOi8RfKiK5pbvZN67dlb68hGskxsQz2e3yb996Zs0JjaXZkFQfBpOZMnZf_U_9cHw6AgDytcPF2voyYnsJFbEtN7CjlUC_s4qddejZiK7c99ekjsWcjwaNrsku">
+<div class="absolute top-2 left-2 z-20">
+<span class="bg-black/60 backdrop-blur-md text-[10px] font-label-caps px-1.5 py-0.5 rounded border border-gray-400/50 text-white">ARQUERA</span>
+</div>
+<div class="absolute bottom-0 w-full p-1.5 bg-gradient-to-t from-black/80 to-transparent z-20">
+<p class="text-[11px] font-bold text-white truncate">Micaela Sanz</p>
+</div>
+</div>
+<!-- Bronze Sticker (Found) -->
+<div class="aspect-[2/3] rounded-lg overflow-hidden relative sticker-glow-bronze perspective-card">
+<img class="w-full h-full object-cover" data-alt="Action portrait of a female futsal player in a dark team uniform with bronze accents. She is looking directly at the camera with a determined smile. The lighting is low-key, professional sports photography style, emphasizing the texture of the jersey and the atmospheric grit of a futsal court. Deep blacks and warm bronze tones dominate the palette." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDz2--R-OjznKy2knGJyK-UiXCzbh3wrjIWB-dqprZ_Cwkc1V5p0DdwzG0Tj67zLvdJxzovNxv2hKbWjtHf65vlMJ33m6zQeHNSz3PD7LYIAHBpp5JL7d138jpk3W7XWX8O-PtbEEwB_lvAKHH7kB8IBdWxOkI6aDcNN6bc58kzBXUKsNogUDeXxUamAO8suNN6RTx300qAnylx7s2gS7Uw4ni5n118mgneiVjRyUNGF8mRTXBRVdc8DcSAq546GUSwSWhecHzthcEJ">
+<div class="absolute top-2 left-2 z-20">
+<span class="bg-black/60 backdrop-blur-md text-[10px] font-label-caps px-1.5 py-0.5 rounded border border-amber-700/50 text-white">ALA</span>
+</div>
+<div class="absolute bottom-0 w-full p-1.5 bg-gradient-to-t from-black/80 to-transparent z-20">
+<p class="text-[11px] font-bold text-white truncate">Sofia Vega</p>
+</div>
+</div>
+<!-- Missing Sticker -->
+<div class="aspect-[2/3] rounded-lg bg-surface-container-high border-2 border-dashed border-outline-variant flex flex-col items-center justify-center opacity-50 relative group">
+<span class="material-symbols-outlined text-4xl text-on-surface-variant mb-2" data-icon="person">person</span>
+<span class="font-label-caps text-[10px] text-on-surface-variant">#042</span>
+<div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"></div>
+</div>
+<!-- Missing Sticker -->
+<div class="aspect-[2/3] rounded-lg bg-surface-container-high border-2 border-dashed border-outline-variant flex flex-col items-center justify-center opacity-50 relative">
+<span class="material-symbols-outlined text-4xl text-on-surface-variant mb-2" data-icon="person">person</span>
+<span class="font-label-caps text-[10px] text-on-surface-variant">#043</span>
+</div>
+<!-- Missing Sticker -->
+<div class="aspect-[2/3] rounded-lg bg-surface-container-high border-2 border-dashed border-outline-variant flex flex-col items-center justify-center opacity-50 relative">
+<span class="material-symbols-outlined text-4xl text-on-surface-variant mb-2" data-icon="person">person</span>
+<span class="font-label-caps text-[10px] text-on-surface-variant">#044</span>
+</div>
+</div>
+</section>
+<!-- Club Section: Centro Asturiano -->
+<section>
+<div class="flex items-center gap-4 mb-stack-md">
+<div class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center border border-outline-variant">
+<span class="material-symbols-outlined text-primary" data-icon="sports_score">sports_score</span>
+</div>
+<h2 class="font-headline-md text-headline-md-mobile text-on-surface">Centro Asturiano</h2>
+<span class="ml-auto font-label-caps text-label-caps text-on-surface-variant">5/12</span>
+</div>
+<div class="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
+<!-- Silver Sticker (Found) -->
+<div class="aspect-[2/3] rounded-lg overflow-hidden relative sticker-glow-silver perspective-card">
+<img class="w-full h-full object-cover" data-alt="Portrait of a female futsal player from Centro Asturiano club, wearing a sleek navy and silver team kit. She is positioned against a background of mesh textures and court tactical lines. The lighting is cool and blue-toned, reflecting a modern stadium night atmosphere. Her expression is fierce and ready for competition. High-fidelity textures and shadows." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDe7eWrCnD5ChccEnvwfsskEGim94PmZGOzkq2HFSBqdOKlhNGOkGEpP1kN2BWnyJzuevg1qlHFftSRWfzAM2ulbhuzSPTRZ0dCzfEa6G-wuDUAGTJffHpkAyIAJcoWz16QLGLPjBZuqSb6jbQsobHNO_hJ4-0L22j_fayGSXJhRSQrF01LzHUTLlz2weA96RAQlDTIFSYduOvWYCSctmqiUB15MJIT0MwGOgOYZfDCzNg5rdsvXF2jRW7NqrBh80Vj_-ibJlxuJQ1u">
+<div class="absolute top-2 left-2 z-20">
+<span class="bg-black/60 backdrop-blur-md text-[10px] font-label-caps px-1.5 py-0.5 rounded border border-gray-400/50 text-white">CIERRE</span>
+</div>
+<div class="absolute bottom-0 w-full p-1.5 bg-gradient-to-t from-black/80 to-transparent z-20">
+<p class="text-[11px] font-bold text-white truncate">Carla Mendez</p>
+</div>
+</div>
+<!-- Missing Sticker -->
+<div class="aspect-[2/3] rounded-lg bg-surface-container-high border-2 border-dashed border-outline-variant flex flex-col items-center justify-center opacity-50 relative">
+<span class="material-symbols-outlined text-4xl text-on-surface-variant mb-2" data-icon="person">person</span>
+<span class="font-label-caps text-[10px] text-on-surface-variant">#088</span>
+</div>
+<!-- Bronze Sticker (Found) -->
+<div class="aspect-[2/3] rounded-lg overflow-hidden relative sticker-glow-bronze perspective-card">
+<img class="w-full h-full object-cover" data-alt="Detailed action shot of a futsal player dribbling a ball on a dark glossy court. Her jersey has subtle bronze accents. Reflections of the arena lights are visible on the floor. The style is cinematic sports photography with a deep, immersive charcoal background. Intense energy and fast-paced motion are captured in this digital trading card image." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB0o5A7_aKCeMHV26wOcA-zk1h7imR9vaDNqN3hiL6kKki3VL3Uw-K1zdceeN9PQg3PV2drf0iRCm3YQAEpQBLSphFpR-CbKTxE447QFqCY-5Nc7mm9NDg_amLfRC7ICw91iKgzFZKdvgdrr3TsQdEX3-GerJbdcZOZqzoUHQqEpnvEiLTAc8r2atGf2YZIlp5FU2Auo_8wCYnwMpEWxQaq4348PIWy79YONOV3Jrwgf_QRrMFrK3ifBnVBg9glAQx5u-cxqg3VPDEc">
+<div class="absolute top-2 left-2 z-20">
+<span class="bg-black/60 backdrop-blur-md text-[10px] font-label-caps px-1.5 py-0.5 rounded border border-amber-700/50 text-white">ALA</span>
+</div>
+<div class="absolute bottom-0 w-full p-1.5 bg-gradient-to-t from-black/80 to-transparent z-20">
+<p class="text-[11px] font-bold text-white truncate">Valeria Ruiz</p>
+</div>
+</div>
+<!-- Missing Stickers Repeat -->
+<div class="aspect-[2/3] rounded-lg bg-surface-container-high border-2 border-dashed border-outline-variant flex flex-col items-center justify-center opacity-50 relative">
+<span class="material-symbols-outlined text-4xl text-on-surface-variant mb-2" data-icon="person">person</span>
+<span class="font-label-caps text-[10px] text-on-surface-variant">#090</span>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- FAB: Pack Opener -->
+<button class="fixed right-6 bottom-24 w-16 h-16 bg-primary text-on-primary rounded-full shadow-[0_0_20px_rgba(236,178,255,0.4)] flex items-center justify-center z-50 transition-all duration-300 active:scale-90 hover:scale-105 animate-pulse">
+<span class="material-symbols-outlined text-3xl" data-icon="featured_play_list" data-weight="fill" style="font-variation-settings: 'FILL' 1;">featured_play_list</span>
+</button>
+<!-- BottomNavBar -->
+<nav class="bg-surface-container dark:bg-surface-container fixed bottom-0 w-full z-50 flex justify-around items-center px-4 py-2 pb-safe rounded-t-xl shadow-lg border-t border-outline-variant">
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant p-2 transition-transform duration-300 active:scale-90 hover:text-primary" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-label-caps text-label-caps">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-secondary-container dark:bg-secondary-container text-on-secondary-container dark:text-on-secondary-container rounded-full px-4 py-1 transition-transform duration-300 active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="style">style</span>
+<span class="font-label-caps text-label-caps">Album</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant p-2 transition-transform duration-300 active:scale-90 hover:text-primary" href="#">
+<span class="material-symbols-outlined" data-icon="swap_calls">swap_calls</span>
+<span class="font-label-caps text-label-caps">Market</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant p-2 transition-transform duration-300 active:scale-90 hover:text-primary" href="#">
+<span class="material-symbols-outlined" data-icon="verified_user">verified_user</span>
+<span class="font-label-caps text-label-caps">Verify</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant p-2 transition-transform duration-300 active:scale-90 hover:text-primary" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-label-caps text-label-caps">Profile</span>
+</a>
+</nav>
+<script>
+        // Micro-interaction for stickers
+        document.querySelectorAll('.perspective-card').forEach(card => {
+            card.addEventListener('mousemove', e => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                const rotateX = (y - centerY) / 10;
+                const rotateY = (centerX - x) / 10;
+                
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
+            });
+        });
+    </script>
+
+
+</body></html>

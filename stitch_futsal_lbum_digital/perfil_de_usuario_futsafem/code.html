@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Perfil de Usuario | FUTSAFEM</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:ital,wght@0,400..700;1,400..700&amp;family=JetBrains+Mono:wght@100..800&amp;family=Hanken+Grotesk:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-low": "#1a1c1f",
+                        "on-primary-fixed-variant": "#74009f",
+                        "on-primary-container": "#ffffff",
+                        "tertiary-container": "#00838b",
+                        "primary": "#ecb2ff",
+                        "on-secondary-fixed-variant": "#3c4d00",
+                        "surface-bright": "#37393d",
+                        "secondary-fixed-dim": "#abd600",
+                        "outline": "#9d8ba0",
+                        "on-tertiary": "#00363a",
+                        "primary-fixed-dim": "#ecb2ff",
+                        "on-error-container": "#ffdad6",
+                        "outline-variant": "#514255",
+                        "on-background": "#e2e2e6",
+                        "surface-variant": "#333538",
+                        "surface-container-high": "#282a2d",
+                        "error-container": "#93000a",
+                        "secondary-container": "#c3f400",
+                        "secondary": "#ffffff",
+                        "on-tertiary-container": "#ffffff",
+                        "primary-fixed": "#f8d8ff",
+                        "primary-container": "#bd00ff",
+                        "tertiary-fixed-dim": "#00dbe9",
+                        "inverse-surface": "#e2e2e6",
+                        "error": "#ffb4ab",
+                        "tertiary": "#00dbe9",
+                        "surface-container": "#1e2023",
+                        "secondary-fixed": "#c3f400",
+                        "on-tertiary-fixed-variant": "#004f54",
+                        "surface-tint": "#ecb2ff",
+                        "on-surface": "#e2e2e6",
+                        "on-secondary-fixed": "#161e00",
+                        "inverse-primary": "#9900cf",
+                        "on-tertiary-fixed": "#002022",
+                        "on-surface-variant": "#d4c0d7",
+                        "on-secondary-container": "#556d00",
+                        "on-primary-fixed": "#320047",
+                        "surface-container-lowest": "#0c0e11",
+                        "background": "#111316",
+                        "on-error": "#690005",
+                        "on-secondary": "#283500",
+                        "surface-container-highest": "#333538",
+                        "surface-dim": "#111316",
+                        "surface": "#111316",
+                        "on-primary": "#520071",
+                        "inverse-on-surface": "#2f3034",
+                        "tertiary-fixed": "#7df4ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "stack-md": "12px",
+                        "stack-lg": "24px",
+                        "margin-desktop": "40px",
+                        "gutter": "16px",
+                        "margin-mobile": "20px",
+                        "base": "8px",
+                        "stack-sm": "4px"
+                    },
+                    "fontFamily": {
+                        "display-lg-mobile": ["Archivo Narrow"],
+                        "label-caps": ["JetBrains Mono"],
+                        "headline-md": ["Archivo Narrow"],
+                        "body-sm": ["Hanken Grotesk"],
+                        "body-md": ["Hanken Grotesk"],
+                        "display-lg": ["Archivo Narrow"]
+                    },
+                    "fontSize": {
+                        "display-lg-mobile": ["36px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "headline-md": ["24px", {"lineHeight": "28px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "display-lg": ["48px", {"lineHeight": "52px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+        }
+        .court-texture {
+            background-image: radial-gradient(circle at 2px 2px, rgba(255,255,255,0.05) 1px, transparent 0);
+            background-size: 24px 24px;
+        }
+        .glow-rarity-gold {
+            box-shadow: 0 0 20px rgba(252, 211, 77, 0.2);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface font-body-md selection:bg-primary-container selection:text-white">
+<!-- Top Navigation Shell -->
+<header class="w-full top-0 sticky bg-surface border-b border-outline-variant z-50 flex justify-between items-center px-margin-mobile h-16">
+<div class="flex items-center gap-4">
+<button class="hover:bg-surface-variant transition-colors p-2 rounded-full scale-95 active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-primary">menu</span>
+</button>
+<h1 class="font-display-lg-mobile text-display-lg-mobile tracking-tighter text-primary italic">FUTSAFEM</h1>
+</div>
+<div class="flex items-center gap-2">
+<button class="hover:bg-surface-variant transition-colors p-2 rounded-full scale-95 active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-primary">notifications</span>
+</button>
+</div>
+</header>
+<main class="pb-24 max-w-screen-xl mx-auto court-texture min-h-screen">
+<!-- Profile Hero Section -->
+<section class="px-margin-mobile pt-stack-lg">
+<div class="relative bg-surface-container-high rounded-xl p-6 overflow-hidden border border-outline-variant">
+<!-- Decorative background elements -->
+<div class="absolute top-0 right-0 p-8 opacity-10">
+<span class="material-symbols-outlined text-[120px]" style="font-variation-settings: 'FILL' 1;">sports_soccer</span>
+</div>
+<div class="flex flex-col md:flex-row items-center md:items-end gap-6 relative z-10">
+<div class="relative">
+<div class="w-32 h-32 md:w-40 md:h-40 rounded-full border-4 border-primary p-1 bg-background overflow-hidden">
+<img class="w-full h-full object-cover rounded-full" data-alt="A professional, high-action portrait of a female futsal player in a team jersey, illuminated by dramatic stadium lighting with a deep charcoal background and vibrant purple lens flares. The athlete looks confident and ready for competition, embodying the gritty yet modern energy of the Argentinian Primera C futsal league." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCml55u9rgP3XjehfG7wLTWOGu1M6rqlouoGgl4cbVY3ZI7Q7QJ73MgGOHmb6PZXvqyIeTQP0ji02E5oC58Mx1uWNizrZf8t92vYbyJHegdHJ4j7oojrMaVhWd7-zWNaqh4-CmwcP3Qp4_Ny_b9NRijYdPDQCChcMAg9zJRv8ExOJ0E73QhES1biSvmCCm0QEkou1dpCdey7T_UYnbhZ4IqGZNllbnmNH1C8HHZ_eRIr6LEU9IkxF_YQYioB_r6nGppEkHL0J5P6afD"/>
+</div>
+<button class="absolute bottom-1 right-1 bg-primary-container text-on-primary-container p-2 rounded-full shadow-lg hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-base">edit</span>
+</button>
+</div>
+<div class="text-center md:text-left flex-grow">
+<div class="flex items-center justify-center md:justify-start gap-2 mb-1">
+<h2 class="font-display-lg-mobile text-display-lg-mobile text-white uppercase italic">VALENTINA ORTIZ</h2>
+<span class="material-symbols-outlined text-tertiary" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+<p class="font-label-caps text-label-caps text-secondary-fixed mb-4">MAVIA F.C. • PRIMERA C</p>
+<div class="flex flex-wrap justify-center md:justify-start gap-3">
+<span class="px-3 py-1 bg-surface-container-lowest border border-outline-variant rounded-full font-label-caps text-[10px] text-on-surface-variant">ALA</span>
+<span class="px-3 py-1 bg-surface-container-lowest border border-outline-variant rounded-full font-label-caps text-[10px] text-on-surface-variant">CAT. 2002</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Stats Bento Bar -->
+<section class="px-margin-mobile mt-stack-md">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<!-- Collected Cards -->
+<div class="bg-surface-container rounded-xl p-4 border border-outline-variant flex items-center gap-4">
+<div class="bg-primary-container/20 p-3 rounded-lg">
+<span class="material-symbols-outlined text-primary">style</span>
+</div>
+<div>
+<p class="font-label-caps text-label-caps text-on-surface-variant">COLECCIÓN</p>
+<p class="font-headline-md text-headline-md text-white">432 / 600</p>
+</div>
+</div>
+<!-- Balance -->
+<div class="bg-surface-container rounded-xl p-4 border border-outline-variant flex items-center gap-4">
+<div class="bg-secondary-container/20 p-3 rounded-lg">
+<span class="material-symbols-outlined text-secondary-fixed">payments</span>
+</div>
+<div>
+<p class="font-label-caps text-label-caps text-on-surface-variant">FUTS ACOINS</p>
+<p class="font-headline-md text-headline-md text-white">12,450</p>
+</div>
+</div>
+<!-- Social Rep -->
+<div class="bg-surface-container rounded-xl p-4 border border-outline-variant flex items-center gap-4">
+<div class="bg-tertiary-container/20 p-3 rounded-lg">
+<span class="material-symbols-outlined text-tertiary">shield_person</span>
+</div>
+<div>
+<p class="font-label-caps text-label-caps text-on-surface-variant">REP SOCIAL</p>
+<p class="font-headline-md text-headline-md text-white">98%</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Main Content Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6 px-margin-mobile mt-stack-lg">
+<!-- Left Column: Personal Info & Account -->
+<div class="lg:col-span-1 space-y-6">
+<!-- Info Section -->
+<div class="bg-surface-container rounded-xl p-6 border border-outline-variant">
+<h3 class="font-headline-md text-headline-md text-primary mb-4 italic uppercase">Información</h3>
+<div class="space-y-4">
+<div>
+<label class="font-label-caps text-label-caps text-on-surface-variant block mb-1">POSICIÓN</label>
+<p class="font-body-md text-body-md text-white">Ala / Pivot</p>
+</div>
+<div>
+<label class="font-label-caps text-label-caps text-on-surface-variant block mb-1">CATEGORÍA</label>
+<p class="font-body-md text-body-md text-white">Femenino Primera C - AFA</p>
+</div>
+<div>
+<label class="font-label-caps text-label-caps text-on-surface-variant block mb-1">BIO</label>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                                Jugadora de Mavia desde 2019. Amante de la táctica y el juego rápido. Coleccionista de stickers épicos. ¡Busco completar el álbum de la Primera C!
+                            </p>
+</div>
+</div>
+</div>
+<!-- Account Links -->
+<div class="bg-surface-container rounded-xl p-1 border border-outline-variant overflow-hidden">
+<button class="w-full flex items-center justify-between p-4 hover:bg-surface-variant transition-colors border-b border-outline-variant group">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-tertiary">verified_user</span>
+<span class="font-body-md text-body-md">Estado de Verificación</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:translate-x-1 transition-transform">chevron_right</span>
+</button>
+<button class="w-full flex items-center justify-between p-4 hover:bg-surface-variant transition-colors border-b border-outline-variant group">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary-fixed">security</span>
+<span class="font-body-md text-body-md">Configuración 2FA</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:translate-x-1 transition-transform">chevron_right</span>
+</button>
+<button class="w-full flex items-center justify-between p-4 hover:bg-surface-variant transition-colors group">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">receipt_long</span>
+<span class="font-body-md text-body-md">Historial de Transacciones</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:translate-x-1 transition-transform">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- Right Column: Photo Gallery -->
+<div class="lg:col-span-2">
+<div class="bg-surface-container rounded-xl p-6 border border-outline-variant h-full">
+<div class="flex items-center justify-between mb-6">
+<h3 class="font-headline-md text-headline-md text-primary italic uppercase">Mis Momentos</h3>
+<button class="flex items-center gap-2 bg-primary text-on-primary px-4 py-2 rounded-full font-label-caps text-label-caps hover:bg-primary-container transition-all active:scale-95">
+<span class="material-symbols-outlined text-sm">add_a_photo</span>
+                            AÑADIR FOTO
+                        </button>
+</div>
+<div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+<!-- Photo Card 1 -->
+<div class="aspect-[3/4] rounded-lg overflow-hidden border-2 border-primary/30 group relative">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="A dynamic, wide-angle shot of a female futsal player performing a bicycle kick during an intense match. The background shows blurred fans in a local Argentinian sports hall, with bright stadium lights casting long, dramatic shadows across the polished court surface. High contrast with deep blacks and vibrant neon purple color grading." src="https://lh3.googleusercontent.com/aida-public/AB6AXuClc9NkKA_36DiA3caGkMLKWlurus_TQdX9ePRlJ56ztcBL4uBm1VuMcp_sVz1W8PNbXcmRw6ggFwm4Ua_3T1eXsaHZjFmyOgoqa9FBnUbhgVS7Bcny31up1xQjUJAVLXfDaguFXbEZkL_jaW8RgEeKl7f4bXJopM7LISofc5ZyPY9krcyhK7NXvO39C3cmvppPJliHVvtllOgcOS1Hdvz8y7v7z_eteBHvJHXOC6k7jrf9t7DZ1uJduFaV2gj_mtFSEOPPRb0JSn6o"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-3">
+<p class="text-[10px] font-label-caps text-white">vs. Sportivo Barracas</p>
+</div>
+</div>
+<!-- Photo Card 2 -->
+<div class="aspect-[3/4] rounded-lg overflow-hidden border-2 border-outline-variant group relative">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="A close-up action shot focusing on a futsal player's feet as she expertly dribbles a specialized ball on a worn court surface. The lighting is moody and focused, highlighting the texture of the pitch and the motion of the play. The aesthetic is dark and gritty, capturing the raw energy of urban indoor football." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCA1VRfsAX8J3C3qXdKJq-yTWN_mkHx1_qvFAuiotS6jS_K453TSmmKmLm7_HTLRZUMBp51F6wZdv8U7ZMmR55cInXFbYMgqPfVcqR_HAF-o9vmXlOVSIJAlmVM7HM4lxLdtcgFXAHjhSxHIkFxxX5AKkdDMapwlcMaqLNAAudJlAhCQ1hCp0TnQP9bxL3NLkQzSGHOa8ZguV6W2rDqs24CgtrPYzbLQTza_af7k63HCBnE-eI0ptaQgDIVn0t7UvH-m6qni3qOnkm0"/>
+</div>
+<!-- Photo Card 3 -->
+<div class="aspect-[3/4] rounded-lg overflow-hidden border-2 border-tertiary/30 group relative">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="A triumphant moment captured from behind the goal, showing a female futsal team celebrating a score. The scene is filled with emotion and energy, illuminated by the high-contrast light-and-shadow environment of a local sports complex. The color palette features deep charcoal tones and electric cyan accents." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDvbVZ3L2lwLv3xEcEToD6nwMOZZTpUbvhP_TJQXtFI_858_jPFjIhVhqNKX-KIPE1lNQZBn7jpyHEP55l_P2RhHnWWJeH3k2V7_75Gi7Ov2nLlHjAXch6ecfbCT_wQrgTodbycU5fm8m5kIcDVGTRPo2dDTIaMK_2qAxxpWt700DqA6Ngd8OlNYVZFvuVPxxXPNpW2zLvmqqwt71gHmX36SrcR_v2U4jaAm-GxIaj2-R3j5XO7NMjvHEE9g2W9306gJbCTRy8QK7hY"/>
+</div>
+<!-- Placeholder for new uploads -->
+<div class="aspect-[3/4] rounded-lg border-2 border-dashed border-outline-variant flex flex-col items-center justify-center bg-surface-container-low hover:bg-surface-variant transition-colors cursor-pointer group">
+<span class="material-symbols-outlined text-on-surface-variant text-4xl mb-2 group-hover:scale-110 transition-transform">add_circle</span>
+<span class="font-label-caps text-[10px] text-on-surface-variant">NUEVO RECUERDO</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation Shell -->
+<nav class="fixed bottom-0 w-full z-50 rounded-t-xl bg-surface-container-low border-t border-outline-variant shadow-[0_-4px_10px_rgba(189,0,255,0.15)] flex justify-around items-center px-2 py-3">
+<button class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-caps text-label-caps">Home</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all">
+<span class="material-symbols-outlined">import_contacts</span>
+<span class="font-label-caps text-label-caps">Album</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all">
+<span class="material-symbols-outlined">storefront</span>
+<span class="font-label-caps text-label-caps">Market</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+<span class="font-label-caps text-label-caps">Wallet</span>
+</button>
+<button class="flex flex-col items-center justify-center text-primary font-bold bg-primary-container/10 rounded-xl py-1 px-4 scale-110 duration-200 ease-out">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="font-label-caps text-label-caps">Profile</span>
+</button>
+</nav>
+<script>
+        // Simple micro-interactions
+        document.querySelectorAll('button').forEach(button => {
+            button.addEventListener('mousedown', () => {
+                button.classList.add('scale-95');
+            });
+            button.addEventListener('mouseup', () => {
+                button.classList.remove('scale-95');</script></body></html>
