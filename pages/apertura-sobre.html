@@ -1,0 +1,144 @@
+<!DOCTYPE html><html class="dark" lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport">
+<title>FUTSAFEM - Abrir Sobre</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@400;600;700&amp;family=Hanken+Grotesk:wght@400;500&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-container": "#00838b", "surface-container-low": "#1a1c1f", "outline": "#9d8ba0",
+                        "on-tertiary-container": "#ffffff", "primary-fixed": "#f8d8ff", "surface-container-highest": "#333538",
+                        "on-surface": "#e2e2e6", "surface": "#111316", "surface-container-high": "#282a2d",
+                        "on-error": "#690005", "inverse-surface": "#e2e2e6", "secondary-container": "#c3f400",
+                        "outline-variant": "#514255", "tertiary-fixed": "#7df4ff", "on-tertiary-fixed-variant": "#004f54",
+                        "secondary-fixed-dim": "#abd600", "primary-fixed-dim": "#ecb2ff", "surface-bright": "#37393d",
+                        "on-tertiary": "#00363a", "on-secondary-container": "#556d00", "on-primary-fixed-variant": "#74009f",
+                        "tertiary-fixed-dim": "#00dbe9", "surface-container": "#1e2023", "primary-container": "#bd00ff",
+                        "on-background": "#e2e2e6", "on-primary-fixed": "#320047", "primary": "#ecb2ff",
+                        "on-secondary-fixed-variant": "#3c4d00", "on-secondary": "#283500", "secondary-fixed": "#c3f400",
+                        "on-tertiary-fixed": "#002022", "inverse-on-surface": "#2f3034", "secondary": "#ffffff",
+                        "on-secondary-fixed": "#161e00", "on-primary": "#520071", "surface-variant": "#333538",
+                        "on-surface-variant": "#d4c0d7", "on-primary-container": "#ffffff", "tertiary": "#00dbe9",
+                        "surface-container-lowest": "#0c0e11", "inverse-primary": "#9900cf", "background": "#111316",
+                        "surface-dim": "#111316", "on-error-container": "#ffdad6", "error-container": "#93000a",
+                        "surface-tint": "#ecb2ff", "error": "#ffb4ab"
+                    },
+                    "borderRadius": {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+                    "spacing": {"stack-sm": "4px", "margin-mobile": "20px", "margin-desktop": "40px", "gutter": "16px", "stack-lg": "24px", "stack-md": "12px", "base": "8px"},
+                    "fontFamily": {"display-lg": ["Archivo Narrow"], "body-md": ["Hanken Grotesk"], "label-caps": ["JetBrains Mono"], "display-lg-mobile": ["Archivo Narrow"], "body-sm": ["Hanken Grotesk"], "headline-md": ["Archivo Narrow"]},
+                    "fontSize": {
+                        "display-lg": ["48px", {"lineHeight": "52px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "display-lg-mobile": ["36px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "headline-md": ["24px", {"lineHeight": "28px", "letterSpacing": "0.01em", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .stadium-gradient { background: radial-gradient(circle at center, #1e2023 0%, #111316 100%); }
+        @keyframes float { 0%, 100% { transform: translateY(0px) rotate(0deg); } 50% { transform: translateY(-20px) rotate(1deg); } }
+        .floating-pack { animation: float 4s ease-in-out infinite; perspective: 1000px; }
+        .floating-pack.abriendo { animation: none; }
+        .neon-glow-lime { box-shadow: 0 0 30px -5px #c3f400, 0 0 15px -5px #c3f400 inset; }
+        .pack-surface { background: linear-gradient(135deg, #1a1c1f 0%, #333538 100%); border: 1px solid rgba(255, 255, 255, 0.1); }
+        .holographic-sheen { background: linear-gradient(105deg, transparent 20%, rgba(195, 244, 0, 0.1) 40%, rgba(189, 0, 255, 0.1) 60%, transparent 80%); background-size: 200% 200%; animation: sheen 6s linear infinite; }
+        @keyframes sheen { 0% { background-position: -200% -200%; } 100% { background-position: 200% 200%; } }
+    </style>
+</head>
+<body class="bg-background text-on-background overflow-hidden stadium-gradient h-screen w-full font-body-md selection:bg-primary-container selection:text-white">
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-margin-mobile h-16 bg-surface-container-high border-b border-outline-variant">
+<div class="flex items-center gap-base">
+<span class="material-symbols-outlined text-primary">sports_soccer</span>
+<h1 class="font-display-lg-mobile text-display-lg-mobile text-secondary tracking-tighter">FUTSAFEM</h1>
+</div>
+<div class="flex items-center gap-2 bg-surface-container-highest px-3 py-1.5 rounded-full">
+<span class="font-label-caps text-label-caps text-secondary-fixed" id="futsacoins-badge">0 🪙</span>
+</div>
+</header>
+<main class="relative h-full flex flex-col items-center justify-center px-margin-mobile">
+<div class="relative w-full max-w-[320px] aspect-[2/3] floating-pack cursor-pointer group" id="pack">
+<div class="absolute -inset-8 bg-primary-container/20 blur-[60px] rounded-full group-hover:bg-primary-container/30 transition-all duration-500"></div>
+<div class="pack-surface relative w-full h-full rounded-xl overflow-hidden flex flex-col items-center justify-between p-stack-lg border-2 border-outline-variant group-hover:border-primary-fixed-dim transition-all duration-300">
+<div class="holographic-sheen absolute inset-0 pointer-events-none"></div>
+<div class="z-10 w-full flex justify-between items-start">
+<span class="font-label-caps text-label-caps text-secondary-container bg-surface-container-highest px-base py-1 rounded" id="sobre-tipo-badge">SOBRE</span>
+<div class="flex flex-col items-end">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">sports_soccer</span>
+<span class="font-label-caps text-[10px] text-on-surface-variant">SERIE C</span>
+</div>
+</div>
+<div class="relative z-10 flex flex-col items-center text-center">
+<div class="w-24 h-24 mb-stack-md flex items-center justify-center rounded-full bg-surface-container-low border border-secondary-container/30 neon-glow-lime">
+<span class="material-symbols-outlined text-[48px] text-secondary-container">package_2</span>
+</div>
+<h2 class="font-display-lg-mobile text-display-lg-mobile text-secondary leading-none uppercase italic tracking-tighter">Primera C<br><span class="text-primary-container">Futsal</span></h2>
+</div>
+<div class="z-10 w-full flex flex-col gap-base items-center">
+<div class="w-full h-[1px] bg-outline-variant/30"></div>
+<div class="flex justify-between w-full font-label-caps text-label-caps text-on-surface-variant">
+<span id="sobre-cantidad-badge">FIGURITAS</span>
+<span class="text-secondary-container">PREMIUM</span>
+</div>
+</div>
+<div class="absolute inset-0 opacity-10 pointer-events-none" style="background-image: radial-gradient(#ffffff 1px, transparent 1px); background-size: 16px 16px;"></div>
+</div>
+<div class="absolute -bottom-16 left-1/2 -translate-x-1/2 w-full text-center">
+<p class="font-label-caps text-label-caps text-secondary tracking-widest animate-pulse" id="prompt-texto">TOCA PARA ABRIR</p>
+</div>
+</div>
+</main>
+<script type="module">
+  import { exigirSesion, obtenerPerfil } from "../js/auth-helpers.js";
+  import { calcularDiaDeRacha, determinarTipoSobre, abrirSobre } from "../js/sobre-helpers.js";
+
+  let perfilActual = null;
+  let usuariaActual = null;
+  let abriendo = false;
+
+  const NOMBRES_SOBRE = { comun: "SOBRE COMÚN", silver: "SOBRE SILVER", gold: "SOBRE GOLD" };
+  const FIGUS_POR_SOBRE = { comun: 3, silver: 4, gold: 5 };
+
+  exigirSesion(async (user) => {
+    const perfil = await obtenerPerfil(user.uid);
+    if (!perfil) return;
+    if (perfil.estadoConsentimiento === 'pendiente') {
+      window.location.replace('./esperando-consentimiento.html');
+      return;
+    }
+    usuariaActual = user;
+    perfilActual = perfil;
+    document.getElementById('futsacoins-badge').textContent = `${perfil.futsacoins || 0} 🪙`;
+
+    const diaDeRacha = calcularDiaDeRacha(perfil);
+    const tipoSobre = determinarTipoSobre(diaDeRacha);
+    document.getElementById('sobre-tipo-badge').textContent = NOMBRES_SOBRE[tipoSobre];
+    document.getElementById('sobre-cantidad-badge').textContent = `${FIGUS_POR_SOBRE[tipoSobre]} CARDS`;
+
+    document.getElementById('pack').addEventListener('click', async () => {
+      if (abriendo) return;
+      abriendo = true;
+      document.getElementById('pack').classList.add('abriendo');
+      document.getElementById('prompt-texto').textContent = 'ABRIENDO...';
+      try {
+        const resultado = await abrirSobre(usuariaActual.uid, perfilActual);
+        sessionStorage.setItem('ultimoSobre', JSON.stringify(resultado));
+        window.location.href = './resultado-de-apertura.html';
+      } catch (e) {
+        document.getElementById('prompt-texto').textContent = 'ERROR, REINTENTÁ';
+        abriendo = false;
+        document.getElementById('pack').classList.remove('abriendo');
+      }
+    });
+  });
+</script>
+</body></html>

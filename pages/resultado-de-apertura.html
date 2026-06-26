@@ -1,0 +1,130 @@
+<!DOCTYPE html><html class="dark" lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport">
+<title>FUTSAFEM - Resultado del Sobre</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@400;600;700&amp;family=Hanken+Grotesk:wght@400;600&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "tertiary-container": "#00838b", "surface-container-low": "#1a1c1f", "outline": "#9d8ba0",
+                      "on-tertiary-container": "#ffffff", "primary-fixed": "#f8d8ff", "surface-container-highest": "#333538",
+                      "on-surface": "#e2e2e6", "surface": "#111316", "surface-container-high": "#282a2d",
+                      "on-error": "#690005", "inverse-surface": "#e2e2e6", "secondary-container": "#c3f400",
+                      "outline-variant": "#514255", "tertiary-fixed": "#7df4ff", "on-tertiary-fixed-variant": "#004f54",
+                      "secondary-fixed-dim": "#abd600", "primary-fixed-dim": "#ecb2ff", "surface-bright": "#37393d",
+                      "on-tertiary": "#00363a", "on-secondary-container": "#556d00", "on-primary-fixed-variant": "#74009f",
+                      "tertiary-fixed-dim": "#00dbe9", "surface-container": "#1e2023", "primary-container": "#bd00ff",
+                      "on-background": "#e2e2e6", "on-primary-fixed": "#320047", "primary": "#ecb2ff",
+                      "on-secondary-fixed-variant": "#3c4d00", "on-secondary": "#283500", "secondary-fixed": "#c3f400",
+                      "on-tertiary-fixed": "#002022", "inverse-on-surface": "#2f3034", "secondary": "#ffffff",
+                      "on-secondary-fixed": "#161e00", "on-primary": "#520071", "surface-variant": "#333538",
+                      "on-surface-variant": "#d4c0d7", "on-primary-container": "#ffffff", "tertiary": "#00dbe9",
+                      "surface-container-lowest": "#0c0e11", "inverse-primary": "#9900cf", "background": "#111316",
+                      "surface-dim": "#111316", "on-error-container": "#ffdad6", "error-container": "#93000a",
+                      "surface-tint": "#ecb2ff", "error": "#ffb4ab"
+              },
+              "borderRadius": {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+              "spacing": {"stack-sm": "4px", "margin-mobile": "20px", "margin-desktop": "40px", "gutter": "16px", "stack-lg": "24px", "stack-md": "12px", "base": "8px"},
+              "fontFamily": {"display-lg": ["Archivo Narrow"], "body-md": ["Hanken Grotesk"], "label-caps": ["JetBrains Mono"], "display-lg-mobile": ["Archivo Narrow"], "body-sm": ["Hanken Grotesk"], "headline-md": ["Archivo Narrow"]},
+              "fontSize": {
+                      "display-lg": ["48px", { "lineHeight": "52px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                      "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                      "label-caps": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                      "display-lg-mobile": ["36px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                      "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                      "headline-md": ["24px", { "lineHeight": "28px", "letterSpacing": "0.01em", "fontWeight": "600" }]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; display: inline-block; line-height: 1; vertical-align: middle; }
+        .gold-glow { filter: drop-shadow(0 0 25px rgba(195, 244, 0, 0.6)); animation: pulse-gold 2s infinite ease-in-out; }
+        @keyframes pulse-gold { 0%, 100% { filter: drop-shadow(0 0 15px rgba(195, 244, 0, 0.4)); } 50% { filter: drop-shadow(0 0 35px rgba(195, 244, 0, 0.8)); } }
+        .card-reveal { opacity: 0; transform: translateY(30px); animation: reveal-in 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; }
+        @keyframes reveal-in { to { opacity: 1; transform: translateY(0); } }
+        .mesh-pattern { background-image: radial-gradient(rgba(236, 178, 255, 0.05) 1px, transparent 1px); background-size: 16px 16px; }
+        .glow-gold { box-shadow: 0 0 20px -2px rgba(255, 215, 0, 0.5); border-color: #FFD700 !important; }
+        .glow-silver { box-shadow: 0 0 20px -2px rgba(192, 192, 192, 0.5); border-color: #C0C0C0 !important; }
+        .glow-comun { border-color: #514255 !important; }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col font-body-md text-body-md overflow-x-hidden">
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-margin-mobile h-16 bg-surface-container border-b border-outline-variant">
+<div class="flex items-center gap-base">
+<span class="material-symbols-outlined text-primary">sports_soccer</span>
+<h1 class="font-display-lg-mobile text-display-lg-mobile text-secondary tracking-tighter">FUTSAFEM</h1>
+</div>
+<div class="flex items-center gap-2 bg-surface-container-highest px-3 py-1.5 rounded-full">
+<span class="font-label-caps text-label-caps text-secondary-fixed" id="futsacoins-badge">0 🪙</span>
+</div>
+</header>
+<main class="flex-grow pt-24 pb-32 px-margin-mobile relative mesh-pattern">
+<section class="relative z-10 max-w-5xl mx-auto flex flex-col items-center">
+<div class="text-center mb-stack-lg">
+<p class="font-label-caps text-label-caps text-secondary-fixed uppercase tracking-[0.2em] mb-stack-sm" id="sobre-titulo">SOBRE ABIERTO</p>
+<h2 class="font-display-lg text-display-lg text-secondary italic" id="creditos-texto"></h2>
+</div>
+<div class="w-full grid grid-cols-2 sm:grid-cols-3 gap-4 max-w-3xl" id="cartas-contenedor"></div>
+</section>
+</main>
+<div class="fixed bottom-0 w-full z-50 flex flex-col items-center gap-stack-md px-margin-mobile py-stack-lg bg-surface-container-lowest border-t border-outline-variant">
+<button class="bg-secondary-container hover:bg-secondary-fixed-dim text-on-secondary-container font-display-lg px-margin-desktop py-stack-md rounded-full shadow-lg active:scale-95 transition-all duration-200 uppercase tracking-widest w-full max-w-sm" id="btn-continuar">
+            Ir al Álbum
+        </button>
+</div>
+<script type="module">
+  import { exigirSesion, obtenerPerfil } from "../js/auth-helpers.js";
+  import { obtenerJugadorasDeStickers } from "../js/sobre-helpers.js";
+
+  exigirSesion(async (user) => {
+    const perfil = await obtenerPerfil(user.uid);
+    if (!perfil) return;
+    document.getElementById('futsacoins-badge').textContent = `${perfil.futsacoins || 0} 🪙`;
+
+    const datos = JSON.parse(sessionStorage.getItem('ultimoSobre') || 'null');
+    if (!datos) {
+      window.location.replace('./home.html');
+      return;
+    }
+
+    document.getElementById('sobre-titulo').textContent = `SOBRE ${datos.tipoSobre.toUpperCase()} ABIERTO`;
+    if (datos.creditosGanados > 0) {
+      document.getElementById('creditos-texto').textContent = `+${datos.creditosGanados} FUTSACOINS 🪙`;
+    }
+
+    const jugadoras = await obtenerJugadorasDeStickers(datos.stickersObtenidos);
+    const contenedor = document.getElementById('cartas-contenedor');
+    datos.stickersObtenidos.forEach((sticker, index) => {
+      const jugadora = jugadoras.get(sticker.playerId);
+      const nombre = jugadora ? jugadora.nombre : 'Desconocida';
+      const puesto = jugadora ? (jugadora.puesto || '').toUpperCase() : '';
+      const card = document.createElement('div');
+      card.className = `card-reveal bg-surface-container border-2 rounded-lg overflow-hidden flex flex-col aspect-[2/3] glow-${sticker.rareza === 'gold' ? 'gold' : sticker.rareza === 'silver' ? 'silver' : 'comun'}`;
+      card.style.animationDelay = `${index * 0.15}s`;
+      card.innerHTML = `
+        <div class="h-2/3 relative bg-surface-container-high">
+          <img class="w-full h-full object-cover" src="${sticker.imagenUrl || ''}" alt="${nombre}">
+          <span class="absolute top-2 right-2 font-label-caps text-label-caps bg-surface/80 px-2 py-1 rounded">${puesto}</span>
+        </div>
+        <div class="p-base flex-grow flex flex-col justify-between">
+          <h4 class="font-headline-md text-headline-md leading-tight text-on-surface truncate">${nombre}</h4>
+          <span class="font-label-caps text-label-caps text-on-surface-variant uppercase">${sticker.rareza}</span>
+        </div>
+      `;
+      contenedor.appendChild(card);
+    });
+
+    sessionStorage.removeItem('ultimoSobre');
+    document.getElementById('btn-continuar').addEventListener('click', () => {
+      window.location.href = './album.html';
+    });
+  });
+</script>
+</body></html>
