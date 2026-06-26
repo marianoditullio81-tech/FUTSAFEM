@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Registro de Jugadora | FUTSAFEM</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:ital,wght@0,400;0,600;0,700;1,700&amp;family=Hanken+Grotesk:wght@400;500&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "primary": "#ecb2ff", "on-primary-fixed": "#320047", "tertiary": "#00dbe9", "on-error": "#690005",
+                "on-tertiary-fixed": "#002022", "on-tertiary": "#00363a", "on-secondary": "#283500",
+                "error-container": "#93000a", "on-error-container": "#ffdad6", "error": "#ffb4ab",
+                "surface-dim": "#111316", "on-background": "#e2e2e6", "on-secondary-fixed": "#161e00",
+                "primary-fixed": "#f8d8ff", "surface-container-high": "#282a2d", "surface-container-highest": "#333538",
+                "primary-fixed-dim": "#ecb2ff", "surface-container-lowest": "#0c0e11", "secondary-container": "#c3f400",
+                "surface-container-low": "#1a1c1f", "outline-variant": "#514255", "on-primary-container": "#ffffff",
+                "on-tertiary-fixed-variant": "#004f54", "tertiary-container": "#00838b", "on-secondary-fixed-variant": "#3c4d00",
+                "outline": "#9d8ba0", "primary-container": "#bd00ff", "on-surface": "#e2e2e6", "surface-variant": "#333538",
+                "surface": "#111316", "secondary": "#ffffff", "background": "#111316", "secondary-fixed-dim": "#abd600",
+                "surface-bright": "#37393d", "on-primary": "#520071", "tertiary-fixed-dim": "#00dbe9",
+                "inverse-on-surface": "#2f3034", "surface-container": "#1e2023", "on-primary-fixed-variant": "#74009f",
+                "tertiary-fixed": "#7df4ff", "on-secondary-container": "#556d00", "secondary-fixed": "#c3f400",
+                "inverse-surface": "#e2e2e6", "on-tertiary-container": "#ffffff", "inverse-primary": "#9900cf",
+                "on-surface-variant": "#d4c0d7", "surface-tint": "#ecb2ff"
+            },
+            "borderRadius": {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+            "spacing": {"stack-sm": "4px", "stack-md": "12px", "stack-lg": "24px", "margin-desktop": "40px", "margin-mobile": "20px", "gutter": "16px", "base": "8px"},
+            "fontFamily": {"display-lg": ["Archivo Narrow"], "body-md": ["Hanken Grotesk"], "label-caps": ["JetBrains Mono"], "headline-md": ["Archivo Narrow"], "body-sm": ["Hanken Grotesk"], "display-lg-mobile": ["Archivo Narrow"]},
+            "fontSize": {
+                "display-lg": ["48px", {"lineHeight": "52px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                "headline-md": ["24px", {"lineHeight": "28px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                "display-lg-mobile": ["36px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        body { background-color: #111316; color: #e2e2e6; -webkit-font-smoothing: antialiased; }
+        .neon-glow-primary { box-shadow: 0 0 15px rgba(189, 0, 255, 0.3); }
+        .glass-panel { background: rgba(30, 32, 35, 0.8); backdrop-filter: blur(12px); border: 1px solid rgba(157, 139, 160, 0.2); }
+        .input-focus:focus { outline: none; border-color: #bd00ff; box-shadow: 0 0 0 2px rgba(189, 0, 255, 0.2); }
+    </style>
+</head>
+<body class="font-body-md text-body-md overflow-x-hidden">
+<header class="w-full top-0 sticky z-50 bg-surface flex justify-between items-center px-margin-mobile py-stack-md">
+<div class="flex items-center gap-base">
+<a href="./bienvenida.html"><span class="material-symbols-outlined text-primary">arrow_back</span></a>
+<h1 class="font-display-lg-mobile text-display-lg-mobile italic uppercase tracking-tighter text-primary">FUTSAFEM</h1>
+</div>
+</header>
+<main class="min-h-screen relative pb-32">
+<div class="max-w-4xl mx-auto px-margin-mobile pt-stack-lg">
+<div class="mb-stack-lg">
+<span class="font-label-caps text-label-caps text-tertiary mb-stack-sm block uppercase tracking-widest">Inscripción Oficial</span>
+<h2 class="font-headline-md text-headline-md text-white uppercase italic">Registro de Jugadora Primera C</h2>
+<div class="h-1 w-24 bg-primary-container mt-stack-sm"></div>
+</div>
+<form class="space-y-gutter" id="registro-form">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<div class="md:col-span-8 glass-panel p-stack-lg rounded-xl">
+<h3 class="font-label-caps text-label-caps text-primary-fixed mb-stack-lg flex items-center gap-base">DATOS PERSONALES</h3>
+<div class="space-y-stack-lg">
+<div class="group">
+<label class="block font-label-caps text-[10px] text-on-surface-variant mb-1 ml-1">NOMBRE COMPLETO</label>
+<input class="w-full bg-surface-container-low border border-outline-variant rounded-lg p-stack-md text-on-surface font-body-md input-focus transition-all" id="nombre" placeholder="Ej. Martina Rodriguez" required type="text"/>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-stack-lg">
+<div class="group">
+<label class="block font-label-caps text-[10px] text-on-surface-variant mb-1 ml-1">CLUB ACTUAL</label>
+<select class="w-full bg-surface-container-low border border-outline-variant rounded-lg p-stack-md text-on-surface font-body-md input-focus transition-all appearance-none" id="club" required>
+<option value="">Seleccionar Club</option>
+<option value="fenix">Club Atlético Fénix</option>
+<option value="television">Social Atlético Televisión</option>
+<option value="moron">Deportivo Morón</option>
+<option value="lamadrid">General Lamadrid</option>
+</select>
+</div>
+<div class="group">
+<label class="block font-label-caps text-[10px] text-on-surface-variant mb-1 ml-1">CATEGORÍA</label>
+<select class="w-full bg-surface-container-low border border-outline-variant rounded-lg p-stack-md text-on-surface font-body-md input-focus transition-all appearance-none" id="categoria" required>
+<option value="">Seleccionar Categoría</option>
+<option value="1ra">1ra</option><option value="2da">2da</option><option value="3ra">3ra</option>
+<option value="4ta">4ta</option><option value="5ta">5ta</option><option value="6ta">6ta</option>
+</select>
+</div>
+</div>
+</div>
+</div>
+<div class="md:col-span-4 glass-panel p-stack-lg rounded-xl relative overflow-hidden group">
+<h3 class="font-label-caps text-label-caps text-primary-fixed mb-stack-lg flex items-center gap-base">TÁCTICA</h3>
+<div class="space-y-stack-lg">
+<label class="block font-label-caps text-[10px] text-on-surface-variant mb-1 ml-1">POSICIÓN EN CANCHA</label>
+<input type="hidden" id="puesto" required/>
+<div class="grid grid-cols-2 gap-stack-sm" id="puesto-buttons">
+<button class="puesto-btn py-stack-md px-base rounded border border-outline-variant hover:border-primary hover:bg-primary-container/10 transition-all font-label-caps text-center" data-puesto="arquera" type="button">ARQUERA</button>
+<button class="puesto-btn py-stack-md px-base rounded border border-outline-variant hover:border-primary hover:bg-primary-container/10 transition-all font-label-caps text-center" data-puesto="cierre" type="button">CIERRE</button>
+<button class="puesto-btn py-stack-md px-base rounded border border-outline-variant hover:border-primary hover:bg-primary-container/10 transition-all font-label-caps text-center" data-puesto="ala" type="button">ALA</button>
+<button class="puesto-btn py-stack-md px-base rounded border border-outline-variant hover:border-primary hover:bg-primary-container/10 transition-all font-label-caps text-center" data-puesto="pivot" type="button">PIVOT</button>
+</div>
+</div>
+</div>
+<div class="md:col-span-12 glass-panel p-stack-lg rounded-xl">
+<h3 class="font-label-caps text-label-caps text-primary-fixed mb-stack-lg flex items-center gap-base">ACCESO A LA CUENTA</h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-stack-lg">
+<div class="group">
+<label class="block font-label-caps text-[10px] text-on-surface-variant mb-1 ml-1">CORREO ELECTRÓNICO</label>
+<input class="w-full bg-surface-container-low border border-outline-variant rounded-lg p-stack-md text-on-surface font-body-md input-focus transition-all" id="email" placeholder="usuario@ejemplo.com" required type="email"/>
+</div>
+<div class="group">
+<label class="block font-label-caps text-[10px] text-on-surface-variant mb-1 ml-1">CONTRASEÑA</label>
+<input class="w-full bg-surface-container-low border border-outline-variant rounded-lg p-stack-md text-on-surface font-body-md input-focus transition-all" id="password" minlength="6" placeholder="Mínimo 6 caracteres" required type="password"/>
+</div>
+</div>
+</div>
+<div class="md:col-span-12 glass-panel p-stack-lg rounded-xl border-l-4 border-l-tertiary">
+<div class="flex flex-col md:flex-row gap-stack-lg items-start">
+<div class="flex-shrink-0 bg-tertiary/10 p-stack-md rounded-full">
+<span class="material-symbols-outlined text-tertiary" style="font-variation-settings: 'FILL' 1;">lock_person</span>
+</div>
+<div class="flex-1">
+<h3 class="font-headline-md text-white mb-stack-sm uppercase italic">Protocolo de Seguridad para Menores</h3>
+<p class="text-on-surface-variant text-body-sm mb-stack-md">
+                                    Si sos menor de 18 años, en el siguiente paso te vamos a pedir tu fecha de nacimiento y el contacto de tu tutor legal para activar tu figurita.
+                                </p>
+</div>
+</div>
+</div>
+<div class="md:col-span-12 glass-panel p-stack-lg rounded-xl">
+<h3 class="font-label-caps text-label-caps text-primary-fixed mb-stack-lg flex items-center gap-base">FOTO CON LA CAMISETA DEL CLUB</h3>
+<div class="border-2 border-dashed border-outline-variant rounded-xl p-12 text-center hover:border-primary transition-colors cursor-pointer group bg-surface-container-lowest/50 relative">
+<input accept="image/*" class="absolute inset-0 opacity-0 cursor-pointer" id="foto" type="file"/>
+<div class="mb-stack-md">
+<span class="material-symbols-outlined text-4xl text-outline group-hover:text-primary transition-colors">photo_camera</span>
+</div>
+<p class="text-body-sm text-on-surface-variant" id="foto-label">Arrastra o selecciona tu foto con la camiseta oficial</p>
+<p class="text-[10px] text-outline mt-1 uppercase">JPG o PNG (MÁX 5MB)</p>
+</div>
+</div>
+</div>
+<div class="flex flex-col md:flex-row items-center justify-between gap-stack-lg pt-stack-lg border-t border-outline-variant/30">
+<label class="flex items-center gap-stack-md cursor-pointer group">
+<input class="peer" id="acepta-terminos" required type="checkbox"/>
+<span class="text-body-sm text-on-surface-variant group-hover:text-white transition-colors">Acepto los términos de competencia y reglamento FUTSAFEM.</span>
+</label>
+<button class="w-full md:w-auto bg-primary-container text-on-primary-container px-12 py-stack-lg rounded-full font-display-lg-mobile text-display-lg-mobile italic uppercase tracking-tighter hover:scale-105 active:scale-95 transition-all shadow-lg neon-glow-primary" id="btn-submit" type="submit">
+                        CONFIRMAR REGISTRO
+                    </button>
+</div>
+<p class="text-error text-body-sm hidden" id="form-error"></p>
+</form>
+</div>
+</main>
+<script type="module">
+  import { registrarUsuaria } from "../js/auth-helpers.js";
+
+  let puestoSeleccionado = "";
+  document.querySelectorAll('.puesto-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.puesto-btn').forEach((b) => b.classList.remove('bg-primary-container/20', 'border-primary', 'text-primary'));
+      btn.classList.add('bg-primary-container/20', 'border-primary', 'text-primary');
+      puestoSeleccionado = btn.dataset.puesto;
+      document.getElementById('puesto').value = puestoSeleccionado;
+    });
+  });
+
+  document.getElementById('foto').addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if (file) document.getElementById('foto-label').textContent = file.name;
+  });
+
+  document.getElementById('registro-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const errorEl = document.getElementById('form-error');
+    errorEl.classList.add('hidden');
+
+    if (!puestoSeleccionado) {
+      errorEl.textContent = 'Elegí tu posición en cancha.';
+      errorEl.classList.remove('hidden');
+      return;
+    }
+
+    const btn = document.getElementById('btn-submit');
+    btn.disabled = true;
+    btn.textContent = 'PROCESANDO...';
+
+    try {
+      const fotoFile = document.getElementById('foto').files[0] || null;
+      await registrarUsuaria({
+        email: document.getElementById('email').value,
+        password: document.getElementById('password').value,
+        perfil: {
+          rol: 'jugadora',
+          nombre: document.getElementById('nombre').value,
+          clubId: document.getElementById('club').value,
+          categoria: document.getElementById('categoria').value,
+          puesto: puestoSeleccionado,
+        },
+        fotoFile,
+      });
+      window.location.href = './registro-fecha-nacimiento.html';
+    } catch (err) {
+      errorEl.textContent = 'No pudimos completar el registro: ' + err.message;
+      errorEl.classList.remove('hidden');
+      btn.disabled = false;
+      btn.textContent = 'CONFIRMAR REGISTRO';
+    }
+  });
+</script>
+</body></html>

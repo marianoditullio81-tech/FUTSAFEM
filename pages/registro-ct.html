@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FUTSAFEM - Registro Cuerpo Técnico</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:ital,wght@0,400..700;1,400..700&amp;family=Hanken+Grotesk:wght@300;400;600;800&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "primary": "#ecb2ff", "on-primary-fixed": "#320047", "tertiary": "#00dbe9", "on-error": "#690005",
+                "on-tertiary-fixed": "#002022", "on-tertiary": "#00363a", "on-secondary": "#283500",
+                "error-container": "#93000a", "on-error-container": "#ffdad6", "error": "#ffb4ab",
+                "surface-dim": "#111316", "on-background": "#e2e2e6", "on-secondary-fixed": "#161e00",
+                "primary-fixed": "#f8d8ff", "surface-container-high": "#282a2d", "surface-container-highest": "#333538",
+                "primary-fixed-dim": "#ecb2ff", "surface-container-lowest": "#0c0e11", "secondary-container": "#c3f400",
+                "surface-container-low": "#1a1c1f", "outline-variant": "#514255", "on-primary-container": "#ffffff",
+                "on-tertiary-fixed-variant": "#004f54", "tertiary-container": "#00838b", "on-secondary-fixed-variant": "#3c4d00",
+                "outline": "#9d8ba0", "primary-container": "#bd00ff", "on-surface": "#e2e2e6", "surface-variant": "#333538",
+                "surface": "#111316", "secondary": "#ffffff", "background": "#111316", "secondary-fixed-dim": "#abd600",
+                "surface-bright": "#37393d", "on-primary": "#520071", "tertiary-fixed-dim": "#00dbe9",
+                "inverse-on-surface": "#2f3034", "surface-container": "#1e2023", "on-primary-fixed-variant": "#74009f",
+                "tertiary-fixed": "#7df4ff", "on-secondary-container": "#556d00", "secondary-fixed": "#c3f400",
+                "inverse-surface": "#e2e2e6", "on-surface-variant": "#d4c0d7", "surface-tint": "#ecb2ff"
+            },
+            "borderRadius": {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+            "spacing": {"stack-sm": "4px", "stack-md": "12px", "stack-lg": "24px", "margin-desktop": "40px", "margin-mobile": "20px", "gutter": "16px", "base": "8px"},
+            "fontFamily": {"display-lg": ["Archivo Narrow"], "body-md": ["Hanken Grotesk"], "label-caps": ["JetBrains Mono"], "headline-md": ["Archivo Narrow"], "body-sm": ["Hanken Grotesk"], "display-lg-mobile": ["Archivo Narrow"]},
+            "fontSize": {
+                "display-lg": ["48px", {"lineHeight": "52px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                "headline-md": ["24px", {"lineHeight": "28px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                "display-lg-mobile": ["36px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { background-color: #111316; color: #e2e2e6; -webkit-font-smoothing: antialiased; }
+        .neon-glow-primary { box-shadow: 0 0 15px rgba(189, 0, 255, 0.3); }
+        .glass-panel { background: rgba(30, 32, 35, 0.8); backdrop-filter: blur(12px); }
+        input:focus, select:focus { outline: none; border-color: #00dbe9; box-shadow: 0 0 0 2px rgba(0, 219, 233, 0.2); }
+    </style>
+</head>
+<body class="font-body-md text-body-md overflow-x-hidden">
+<header class="w-full top-0 sticky bg-surface flex justify-between items-center px-margin-mobile py-stack-md z-50">
+<div class="flex items-center gap-4">
+<a href="./bienvenida.html"><span class="material-symbols-outlined text-primary">arrow_back</span></a>
+<h1 class="font-display-lg-mobile text-display-lg-mobile italic uppercase tracking-tighter text-primary">FUTSAFEM</h1>
+</div>
+</header>
+<main class="relative min-h-screen px-margin-mobile py-stack-lg flex flex-col items-center">
+<div class="w-full max-w-2xl mt-8">
+<div class="mb-stack-lg text-center md:text-left">
+<span class="font-label-caps text-label-caps text-tertiary tracking-widest uppercase mb-2 block">Alta de Personal</span>
+<h2 class="font-headline-md text-headline-md text-on-surface">REGISTRO CUERPO TÉCNICO</h2>
+<p class="text-on-surface-variant font-body-sm mt-2">Completa el perfil profesional para la temporada de Primera C FUTSAFEM.</p>
+</div>
+<form class="glass-panel border border-outline-variant/30 rounded-xl p-6 md:p-10 space-y-8 shadow-2xl" id="registro-form">
+<div class="grid grid-cols-1 gap-6">
+<div class="relative group">
+<label class="font-label-caps text-label-caps text-on-surface-variant" for="nombre">Nombre Completo</label>
+<input class="mt-2 w-full bg-surface-container-low border border-outline-variant rounded-lg px-4 py-3 text-on-surface" id="nombre" placeholder="Ej: Marcela Fernandez" required type="text"/>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="relative group">
+<label class="font-label-caps text-label-caps text-on-surface-variant" for="club">Club Perteneciente</label>
+<select class="mt-2 w-full bg-surface-container-low border border-outline-variant rounded-lg px-4 py-3 text-on-surface" id="club" required>
+<option value="">Seleccionar Club</option>
+<option value="ferro">Ferro Carril Oeste</option>
+<option value="sanlorenzo">San Lorenzo</option>
+<option value="racing">Racing Club</option>
+<option value="boca">Boca Juniors</option>
+<option value="independiente">Independiente</option>
+<option value="huracan">Huracán</option>
+</select>
+</div>
+<div class="relative group">
+<label class="font-label-caps text-label-caps text-on-surface-variant" for="cargo">Cargo Desempeñado</label>
+<select class="mt-2 w-full bg-surface-container-low border border-outline-variant rounded-lg px-4 py-3 text-on-surface" id="cargo" required>
+<option value="">Seleccionar Cargo</option>
+<option value="dt">Director/a Técnico/a</option>
+<option value="at">Asistente Técnico/a</option>
+<option value="pf">Preparador/a Físico/a</option>
+<option value="ea">Entrenador/a de Arqueras</option>
+<option value="analista">Analista de Video</option>
+<option value="medico">Cuerpo Médico</option>
+</select>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="relative group">
+<label class="font-label-caps text-label-caps text-on-surface-variant" for="email">Correo Electrónico</label>
+<input class="mt-2 w-full bg-surface-container-low border border-outline-variant rounded-lg px-4 py-3 text-on-surface" id="email" placeholder="usuario@ejemplo.com" required type="email"/>
+</div>
+<div class="relative group">
+<label class="font-label-caps text-label-caps text-on-surface-variant" for="password">Contraseña</label>
+<input class="mt-2 w-full bg-surface-container-low border border-outline-variant rounded-lg px-4 py-3 text-on-surface" id="password" minlength="6" placeholder="Mínimo 6 caracteres" required type="password"/>
+</div>
+</div>
+<div class="space-y-4">
+<label class="font-label-caps text-label-caps text-on-surface-variant">FOTOGRAFÍA PARA FIGURITA</label>
+<p class="text-on-surface-variant font-body-sm">Sube una foto clara con indumentaria del club para generar tu figurita oficial.</p>
+<div class="relative group cursor-pointer">
+<div class="flex flex-col items-center justify-center border-2 border-dashed border-outline-variant/50 rounded-xl p-8 bg-surface-container-low hover:border-primary transition-all">
+<span class="material-symbols-outlined text-[48px] text-outline-variant mb-3">add_a_photo</span>
+<p class="font-headline-md text-body-md text-on-surface-variant" id="foto-label">Arrastra o selecciona tu foto de perfil</p>
+<input accept="image/*" class="absolute inset-0 opacity-0 cursor-pointer" id="foto" type="file"/>
+</div>
+</div>
+</div>
+<div class="flex items-start gap-3 py-2">
+<input class="mt-1 w-5 h-5 rounded border-outline-variant bg-surface-container-low text-primary" id="acepta-terminos" required type="checkbox"/>
+<label class="font-body-sm text-on-surface-variant" for="acepta-terminos">Declaro que la información proporcionada es verídica y acepto los reglamentos de ética y conducta de FUTSAFEM.</label>
+</div>
+<button class="w-full bg-primary-container text-on-primary-container font-headline-md py-stack-lg rounded-full flex items-center justify-center gap-3 active:scale-95 transition-all duration-150 shadow-lg neon-glow-primary" id="btn-submit" type="submit">
+                    FINALIZAR REGISTRO
+                </button>
+<p class="text-error text-body-sm hidden" id="form-error"></p>
+</form>
+</div>
+</main>
+<script type="module">
+  import { registrarUsuaria } from "../js/auth-helpers.js";
+
+  document.getElementById('foto').addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if (file) document.getElementById('foto-label').textContent = file.name;
+  });
+
+  document.getElementById('registro-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const errorEl = document.getElementById('form-error');
+    errorEl.classList.add('hidden');
+    const btn = document.getElementById('btn-submit');
+    btn.disabled = true;
+    btn.textContent = 'PROCESANDO...';
+
+    try {
+      const fotoFile = document.getElementById('foto').files[0] || null;
+      await registrarUsuaria({
+        email: document.getElementById('email').value,
+        password: document.getElementById('password').value,
+        perfil: {
+          rol: 'ct',
+          nombre: document.getElementById('nombre').value,
+          clubId: document.getElementById('club').value,
+          puesto: document.getElementById('cargo').value,
+        },
+        fotoFile,
+      });
+      window.location.href = './registro-fecha-nacimiento.html';
+    } catch (err) {
+      errorEl.textContent = 'No pudimos completar el registro: ' + err.message;
+      errorEl.classList.remove('hidden');
+      btn.disabled = false;
+      btn.textContent = 'FINALIZAR REGISTRO';
+    }
+  });
+</script>
+</body></html>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FUTSAFEM - Consentimiento Parental</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@400;600;700;900&amp;family=Hanken+Grotesk:wght@400;500;600&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed-dim": "#00dbe9", "surface": "#111316", "on-primary-fixed-variant": "#74009f",
+                        "on-secondary": "#283500", "on-tertiary-fixed": "#002022", "inverse-on-surface": "#2f3034",
+                        "on-secondary-container": "#556d00", "on-error": "#690005", "surface-container-high": "#282a2d",
+                        "surface-container-low": "#1a1c1f", "on-primary-container": "#ffffff", "on-tertiary-container": "#ffffff",
+                        "surface-container-lowest": "#0c0e11", "outline-variant": "#514255", "on-tertiary": "#00363a",
+                        "primary-container": "#bd00ff", "tertiary-container": "#00838b", "on-secondary-fixed": "#161e00",
+                        "primary-fixed": "#f8d8ff", "tertiary-fixed": "#7df4ff", "inverse-surface": "#e2e2e6",
+                        "on-error-container": "#ffdad6", "secondary-container": "#c3f400", "on-surface-variant": "#d4c0d7",
+                        "surface-container": "#1e2023", "on-primary": "#520071", "surface-dim": "#111316",
+                        "surface-bright": "#37393d", "error-container": "#93000a", "outline": "#9d8ba0",
+                        "error": "#ffb4ab", "on-secondary-fixed-variant": "#3c4d00", "background": "#111316",
+                        "secondary": "#ffffff", "on-primary-fixed": "#320047", "on-background": "#e2e2e6",
+                        "primary": "#ecb2ff", "inverse-primary": "#9900cf", "on-surface": "#e2e2e6",
+                        "primary-fixed-dim": "#ecb2ff", "tertiary": "#00dbe9", "secondary-fixed": "#c3f400",
+                        "surface-tint": "#ecb2ff", "surface-container-highest": "#333538", "on-tertiary-fixed-variant": "#004f54"
+                    },
+                    "borderRadius": {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+                    "spacing": {"stack-md": "12px", "margin-desktop": "40px", "stack-lg": "24px", "margin-mobile": "20px", "gutter": "16px", "base": "8px", "stack-sm": "4px"},
+                    "fontFamily": {"body-sm": ["Hanken Grotesk"], "label-caps": ["JetBrains Mono"], "display-lg": ["Archivo Narrow"], "headline-md": ["Archivo Narrow"], "display-lg-mobile": ["Archivo Narrow"], "body-md": ["Hanken Grotesk"]},
+                    "fontSize": {
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "display-lg": ["48px", {"lineHeight": "52px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-md": ["24px", {"lineHeight": "28px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                        "display-lg-mobile": ["36px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .glow-overlay { background: radial-gradient(circle at center, rgba(189, 0, 255, 0.05) 0%, transparent 70%); }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md selection:bg-primary-container selection:text-on-primary-container min-h-screen flex flex-col">
+<header class="w-full top-0 sticky bg-background border-b border-outline-variant flex justify-between items-center px-margin-mobile h-16 z-50">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" style="font-size: 28px;">verified_user</span>
+<span class="font-display-lg-mobile text-display-lg-mobile italic font-black text-primary tracking-tighter">FUTSAFEM</span>
+</div>
+</header>
+<main class="flex-grow px-margin-mobile py-8 relative">
+<div class="glow-overlay absolute inset-0 pointer-events-none"></div>
+<div class="max-w-xl mx-auto space-y-6 relative z-10">
+<div class="space-y-2 text-center">
+<span class="font-label-caps text-label-caps text-tertiary uppercase">Validación de Identidad</span>
+<h1 class="font-headline-md text-headline-md text-on-surface">Consentimiento Parental</h1>
+<p class="text-body-sm text-on-surface-variant max-w-xs mx-auto">
+                    Por favor, revisá cuidadosamente el documento de autorización para la jugadora.
+                </p>
+</div>
+<div class="bg-surface-container border border-outline-variant p-4 rounded-xl flex items-center gap-4">
+<div class="p-3 bg-surface-container-high rounded-full border-2 border-primary">
+<span class="material-symbols-outlined text-primary">sports_soccer</span>
+</div>
+<div>
+<h3 class="font-headline-md text-on-surface text-[18px]" id="nombre-jugadora">—</h3>
+<p class="font-label-caps text-label-caps text-on-surface-variant">Primera C FUTSAFEM</p>
+</div>
+</div>
+<div class="bg-surface-container-low border border-outline-variant rounded-xl overflow-hidden flex flex-col h-[300px]">
+<div class="bg-surface-container-high px-4 py-3 flex justify-between items-center border-b border-outline-variant">
+<span class="font-label-caps text-label-caps text-on-surface">AUTORIZACIÓN DE TUTOR</span>
+</div>
+<div class="flex-grow p-6 overflow-y-auto bg-white/5 backdrop-blur-sm">
+<div class="prose prose-invert max-w-none text-body-sm text-on-surface-variant space-y-3">
+<p>Quien suscribe declara ser madre, padre o tutor/a legal de la jugadora mencionada, y autoriza su participación como coleccionista digital en FUTSAFEM, incluyendo la generación de su figurita oficial, su foto de perfil y su intercambio dentro del mercado de pases de la plataforma.</p>
+<p>FUTSAFEM no realiza transacciones con dinero real ni habilita compras dentro de la app para usuarias menores de edad.</p>
+</div>
+</div>
+<div class="bg-surface-container-high/50 px-4 py-2 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-primary" style="font-size: 16px;">lock</span>
+<span class="text-[11px] font-label-caps text-on-surface-variant">FUTSAFEM - Protocolo de Menores</span>
+</div>
+</div>
+<div class="flex gap-3 px-2">
+<div class="mt-1">
+<input class="rounded bg-surface-container-highest border-outline text-primary focus:ring-primary" id="legal-check" type="checkbox"/>
+</div>
+<label class="text-body-sm text-on-surface-variant" for="legal-check">
+                    Certifico que soy el padre, madre o tutor/a legal de la menor mencionada y que los datos proporcionados son verídicos.
+                </label>
+</div>
+<p class="text-error text-body-sm hidden" id="form-error"></p>
+</div>
+</main>
+<footer class="bg-surface-container-highest border-t border-outline-variant px-margin-mobile py-6 z-50">
+<div class="max-w-xl mx-auto grid grid-cols-2 gap-4">
+<button class="flex items-center justify-center h-14 rounded-xl border border-outline text-on-surface font-label-caps hover:bg-error-container/20 transition-all active:scale-95 duration-150" id="btn-rechazar">
+<span class="material-symbols-outlined mr-2" style="font-size: 20px;">close</span>
+                Rechazar
+            </button>
+<button class="flex items-center justify-center h-14 rounded-xl bg-primary-container text-on-primary-container font-headline-md text-[16px] font-bold shadow-[0_4px_12px_rgba(189,0,255,0.3)] hover:brightness-110 active:scale-95 duration-150" id="btn-aceptar">
+<span class="material-symbols-outlined mr-2" style="font-size: 20px; font-variation-settings: 'FILL' 1;">check_circle</span>
+                Aceptar
+            </button>
+</div>
+</footer>
+<script type="module">
+  import { exigirSesion, obtenerPerfil, actualizarPerfil, cerrarSesion } from "../js/auth-helpers.js";
+
+  let usuariaActual = null;
+
+  exigirSesion(async (user) => {
+    usuariaActual = user;
+    const perfil = await obtenerPerfil(user.uid);
+    if (perfil && perfil.nombre) document.getElementById('nombre-jugadora').textContent = perfil.nombre;
+  });
+
+  document.getElementById('btn-aceptar').addEventListener('click', async () => {
+    const errorEl = document.getElementById('form-error');
+    errorEl.classList.add('hidden');
+    if (!document.getElementById('legal-check').checked) {
+      errorEl.textContent = 'Debés certificar tu identidad marcando la casilla de verificación.';
+      errorEl.classList.remove('hidden');
+      return;
+    }
+    try {
+      await actualizarPerfil(usuariaActual.uid, { estadoConsentimiento: 'aprobado' });
+      window.location.href = './home.html';
+    } catch (err) {
+      errorEl.textContent = 'No pudimos registrar el consentimiento: ' + err.message;
+      errorEl.classList.remove('hidden');
+    }
+  });
+
+  document.getElementById('btn-rechazar').addEventListener('click', async () => {
+    if (!confirm('¿Estás seguro de que querés rechazar el consentimiento? Esto impedirá que la jugadora participe en FUTSAFEM.')) return;
+    try {
+      await actualizarPerfil(usuariaActual.uid, { estadoConsentimiento: 'rechazado' });
+      await cerrarSesion();
+      window.location.href = './bienvenida.html';
+    } catch (err) {
+      const errorEl = document.getElementById('form-error');
+      errorEl.textContent = 'No pudimos procesar el rechazo: ' + err.message;
+      errorEl.classList.remove('hidden');
+    }
+  });
+</script>
+</body></html>
