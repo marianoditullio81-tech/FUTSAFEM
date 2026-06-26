@@ -1,0 +1,130 @@
+<!DOCTYPE html><html class="dark" lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport">
+<title>FUTSAFEM - ¡Hay Match!</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:ital,wght@0,400..700;1,400..700&amp;family=Hanken+Grotesk:wght@300;400;600&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-surface-variant": "#d4c0d7", "on-secondary-fixed": "#161e00", "outline": "#9d8ba0",
+                    "on-secondary-container": "#556d00", "on-secondary": "#283500", "surface": "#111316",
+                    "surface-container-highest": "#333538", "outline-variant": "#514255", "on-primary": "#520071",
+                    "on-primary-container": "#ffffff", "secondary-container": "#c3f400", "surface-dim": "#111316",
+                    "primary": "#ecb2ff", "on-primary-fixed": "#320047", "on-tertiary-fixed": "#002022",
+                    "surface-container-lowest": "#0c0e11", "secondary": "#ffffff", "inverse-on-surface": "#2f3034",
+                    "on-tertiary-fixed-variant": "#004f54", "on-secondary-fixed-variant": "#3c4d00", "error": "#ffb4ab",
+                    "surface-tint": "#ecb2ff", "tertiary": "#00dbe9", "surface-bright": "#37393d",
+                    "on-primary-fixed-variant": "#74009f", "primary-fixed": "#f8d8ff", "on-tertiary": "#00363a",
+                    "tertiary-fixed-dim": "#00dbe9", "secondary-fixed": "#c3f400", "surface-container": "#1e2023",
+                    "background": "#111316", "surface-variant": "#333538", "on-error": "#690005",
+                    "error-container": "#93000a", "primary-container": "#bd00ff", "on-tertiary-container": "#ffffff",
+                    "tertiary-container": "#00838b", "on-error-container": "#ffdad6", "on-background": "#e2e2e6",
+                    "inverse-surface": "#e2e2e6", "secondary-fixed-dim": "#abd600", "primary-fixed-dim": "#ecb2ff",
+                    "tertiary-fixed": "#7df4ff", "surface-container-low": "#1a1c1f", "surface-container-high": "#282a2d",
+                    "on-surface": "#e2e2e6", "inverse-primary": "#9900cf",
+                    "gold": "#D4AF37"
+            },
+            "borderRadius": {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+            "spacing": {"base": "8px", "stack-md": "12px", "margin-mobile": "20px", "margin-desktop": "40px", "gutter": "16px", "stack-sm": "4px", "stack-lg": "24px"},
+            "fontFamily": {"display-lg-mobile": ["Archivo Narrow"], "body-sm": ["Hanken Grotesk"], "body-md": ["Hanken Grotesk"], "display-lg": ["Archivo Narrow"], "label-caps": ["JetBrains Mono"], "headline-md": ["Archivo Narrow"]},
+            "fontSize": {
+                    "display-lg-mobile": ["36px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "display-lg": ["48px", {"lineHeight": "52px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "headline-md": ["24px", {"lineHeight": "28px", "letterSpacing": "0.01em", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .card-collision-left { animation: collision-left 0.8s cubic-bezier(0.17, 0.67, 0.83, 0.67) forwards; }
+        .card-collision-right { animation: collision-right 0.8s cubic-bezier(0.17, 0.67, 0.83, 0.67) forwards; }
+        @keyframes collision-left { 0% { transform: translateX(-150%) rotate(-15deg); opacity: 0; } 80% { transform: translateX(10%) rotate(-5deg); } 100% { transform: translateX(0%) rotate(-8deg); opacity: 1; } }
+        @keyframes collision-right { 0% { transform: translateX(150%) rotate(15deg); opacity: 0; } 80% { transform: translateX(-10%) rotate(5deg); } 100% { transform: translateX(0%) rotate(8deg); opacity: 1; } }
+        .text-shimmer { background: linear-gradient(90deg, #D4AF37, #FFFFFF, #D4AF37); background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: shimmer 3s linear infinite; }
+        @keyframes shimmer { to { background-position: 200% center; } }
+        .gold-border-glow { box-shadow: 0 0 20px rgba(212, 175, 55, 0.3), inset 0 0 10px rgba(212, 175, 55, 0.2); }
+        .stadium-bg { background: radial-gradient(circle at 50% 20%, #320047 0%, #111316 70%); }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .fade-in { animation: fadeIn 1s ease-out 0.5s both; }
+    </style>
+</head>
+<body class="bg-background text-on-background overflow-hidden h-screen w-full font-body-md selection:bg-primary selection:text-on-primary stadium-bg">
+<main class="relative z-10 flex flex-col items-center justify-center h-full px-margin-mobile text-center">
+<div class="mb-stack-lg animate-bounce">
+<h1 class="font-display-lg-mobile text-display-lg-mobile md:font-display-lg md:text-display-lg italic uppercase tracking-tighter text-shimmer drop-shadow-2xl">
+                ¡HAY MATCH!
+            </h1>
+</div>
+<div class="relative flex items-center justify-center w-full max-w-2xl h-80 mb-stack-lg">
+<div class="card-collision-left absolute z-20 -translate-x-12">
+<div class="w-44 h-64 bg-surface-container border-2 border-outline-variant rounded-xl overflow-hidden relative rotate-[-8deg]">
+<div class="absolute top-2 left-2 z-30">
+<span class="font-label-caps text-label-caps bg-surface/80 px-2 py-1 rounded text-gold">INTERCAMBIO</span>
+</div>
+<div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-surface to-transparent">
+<p class="font-label-caps text-label-caps text-on-surface-variant">REPETIDA ENVIADA</p>
+</div>
+</div>
+</div>
+<div class="card-collision-right absolute z-30 translate-x-12">
+<div class="w-44 h-64 bg-surface-container-high border-4 rounded-xl overflow-hidden relative rotate-[8deg] gold-border-glow" id="card-recibida">
+<div class="absolute top-2 right-2 z-30">
+<span class="material-symbols-outlined text-gold" style="font-variation-settings: 'FILL' 1;">stars</span>
+</div>
+<img class="w-full h-full object-cover" id="card-imagen" src="" alt="">
+<div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-surface-container-highest to-transparent">
+<p class="font-label-caps text-label-caps text-gold font-bold uppercase" id="card-rareza"></p>
+<h3 class="font-headline-md text-headline-md italic uppercase text-secondary" id="card-nombre"></h3>
+</div>
+</div>
+</div>
+<div class="absolute z-40 w-32 h-32 bg-gold/30 blur-3xl rounded-full animate-pulse"></div>
+</div>
+<div class="max-w-md w-full space-y-stack-md fade-in">
+<div class="bg-surface-container-low/80 backdrop-blur-md p-stack-md rounded-xl border border-outline-variant/30">
+<p class="font-body-md text-on-surface">
+                    ¡Intercambio completado con éxito! <br>
+<span class="font-bold text-gold" id="mensaje-resultado">Conseguiste una nueva figurita.</span>
+                </p>
+</div>
+<button class="group relative w-full h-14 bg-gold rounded-full overflow-hidden transition-all duration-300 active:scale-95 shadow-[0_0_20px_rgba(212,175,55,0.4)]" id="btn-volver">
+<div class="relative flex items-center justify-center gap-2">
+<span class="font-display-lg-mobile text-xl italic uppercase text-on-secondary-fixed font-bold">Ir al Mercado</span>
+<span class="material-symbols-outlined text-on-secondary-fixed">arrow_forward</span>
+</div>
+</button>
+</div>
+</main>
+<script type="module">
+  import { exigirSesion } from "../js/auth-helpers.js";
+
+  const RAREZA_LABEL = { comun: "Común", silver: "Silver", gold: "Gold", epica: "Épica" };
+
+  exigirSesion(() => {
+    const datos = JSON.parse(sessionStorage.getItem('ultimoMatch') || 'null');
+    if (!datos) {
+      window.location.replace('./mercado-pases.html');
+      return;
+    }
+    document.getElementById('card-imagen').src = datos.imagenUrl || '';
+    document.getElementById('card-nombre').textContent = datos.nombre;
+    document.getElementById('card-rareza').textContent = RAREZA_LABEL[datos.rareza] || datos.rareza;
+    document.getElementById('mensaje-resultado').textContent = `Conseguiste a ${datos.nombre} para tu álbum.`;
+    sessionStorage.removeItem('ultimoMatch');
+
+    document.getElementById('btn-volver').addEventListener('click', () => {
+      window.location.href = './mercado-pases.html';
+    });
+  });
+</script>
+</body></html>

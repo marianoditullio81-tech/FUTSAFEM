@@ -1,0 +1,260 @@
+<!DOCTYPE html><html class="dark" lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport">
+<title>FUTSAFEM - Mercado de Pases</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@400;600;700&amp;family=Hanken+Grotesk:wght@400;500;600&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary-fixed": "#002022", "on-primary-container": "#ffffff", "primary-fixed-dim": "#ecb2ff",
+                    "primary-fixed": "#f8d8ff", "on-surface-variant": "#d4c0d7", "on-surface": "#e2e2e6",
+                    "on-secondary": "#283500", "on-tertiary-fixed-variant": "#004f54", "surface-variant": "#333538",
+                    "inverse-primary": "#9900cf", "surface-container": "#1e2023", "secondary": "#ffffff",
+                    "on-tertiary-container": "#ffffff", "secondary-fixed": "#c3f400", "on-primary-fixed": "#320047",
+                    "surface-bright": "#37393d", "surface-container-low": "#1a1c1f", "on-error-container": "#ffdad6",
+                    "on-tertiary": "#00363a", "surface-container-highest": "#333538", "tertiary-fixed": "#7df4ff",
+                    "surface-container-high": "#282a2d", "primary-container": "#bd00ff", "on-primary-fixed-variant": "#74009f",
+                    "on-error": "#690005", "surface-tint": "#ecb2ff", "inverse-on-surface": "#2f3034",
+                    "background": "#111316", "secondary-fixed-dim": "#abd600", "on-background": "#e2e2e6",
+                    "on-secondary-container": "#556d00", "outline": "#9d8ba0", "surface-dim": "#111316",
+                    "secondary-container": "#c3f400", "outline-variant": "#514255", "tertiary-container": "#00838b",
+                    "inverse-surface": "#e2e2e6", "primary": "#ecb2ff", "on-primary": "#520071",
+                    "surface-container-lowest": "#0c0e11", "error": "#ffb4ab", "surface": "#111316",
+                    "on-secondary-fixed": "#161e00", "on-secondary-fixed-variant": "#3c4d00", "tertiary-fixed-dim": "#00dbe9",
+                    "error-container": "#93000a", "tertiary": "#00dbe9"
+            },
+            "borderRadius": {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+            "spacing": {"base": "8px", "margin-mobile": "20px", "stack-sm": "4px", "stack-md": "12px", "gutter": "16px", "margin-desktop": "40px", "stack-lg": "24px"},
+            "fontFamily": {"display-lg": ["Archivo Narrow"], "body-sm": ["Hanken Grotesk"], "headline-md": ["Archivo Narrow"], "label-caps": ["JetBrains Mono"], "display-lg-mobile": ["Archivo Narrow"], "body-md": ["Hanken Grotesk"]},
+            "fontSize": {
+                    "display-lg": ["48px", {"lineHeight": "52px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "headline-md": ["24px", {"lineHeight": "28px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                    "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "display-lg-mobile": ["36px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .silver-glow { box-shadow: 0 0 25px rgba(226, 226, 230, 0.2); border: 2px solid #e2e2e6; }
+        .gold-glow { box-shadow: 0 0 25px rgba(255, 215, 0, 0.25); border: 2px solid #FFD700; }
+        .comun-glow { border: 2px solid #514255; }
+        .card-perspective { perspective: 1000px; }
+        .swipe-card { transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s ease; }
+        .court-texture { background-image: radial-gradient(circle at 2px 2px, rgba(255,255,255,0.05) 1px, transparent 0); background-size: 24px 24px; }
+    </style>
+</head>
+<body class="bg-background text-on-background selection:bg-primary selection:text-on-primary overflow-hidden h-screen flex flex-col font-body-md">
+<header class="flex justify-between items-center w-full px-margin-mobile h-16 z-50 fixed top-0 bg-surface dark:bg-surface">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">sports_soccer</span>
+<h1 class="font-display-lg-mobile text-display-lg-mobile text-primary tracking-tight">FUTSAFEM</h1>
+</div>
+<div class="bg-surface-container-high px-4 py-1.5 rounded-full flex items-center gap-2">
+<span class="font-label-caps text-label-caps text-on-surface" id="futsacoins-badge">0 🪙</span>
+</div>
+</header>
+<main class="flex-1 mt-16 pb-24 relative flex flex-col items-center justify-center court-texture overflow-hidden">
+<div class="z-10 mb-stack-lg bg-surface-container/80 backdrop-blur-md px-6 py-2 rounded-full border border-outline-variant shadow-xl">
+<span class="font-label-caps text-label-caps text-on-surface-variant">Intercambios hoy: <span class="text-secondary font-bold" id="matches-contador">0/5</span></span>
+</div>
+<div class="relative w-full max-w-[340px] px-margin-mobile z-10 card-perspective" id="zona-swipe">
+<p class="text-center text-on-surface-variant font-body-sm py-stack-lg hidden" id="cola-vacia">
+                No hay intercambios disponibles ahora. ¡Volvé pronto!
+            </p>
+<div class="absolute -top-12 left-1/2 -translate-x-1/2 w-full text-center z-20 hidden" id="contexto-oferta">
+<p class="font-body-sm text-body-sm text-on-surface-variant bg-surface-container-high/90 px-4 py-2 rounded-lg border border-outline-variant inline-block" id="contexto-oferta-texto"></p>
+</div>
+<div class="swipe-card w-full aspect-[2/3] bg-surface-container-high rounded-xl overflow-hidden relative flex flex-col hidden" id="main-card">
+<div class="absolute top-4 left-4 z-20 bg-surface-container-highest/90 border border-outline-variant px-3 py-1 rounded-sm">
+<span class="font-label-caps text-label-caps text-on-surface uppercase tracking-widest" id="card-rareza">Común</span>
+</div>
+<div class="relative flex-1 overflow-hidden bg-surface-container-highest">
+<img class="w-full h-full object-cover" id="card-imagen" src="" alt="">
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-high via-transparent to-transparent"></div>
+</div>
+<div class="p-6 bg-surface-container-high relative z-10 border-t border-outline-variant">
+<div class="flex justify-between items-end">
+<div>
+<p class="font-label-caps text-label-caps text-primary uppercase mb-1" id="card-puesto"></p>
+<h2 class="font-display-lg-mobile text-display-lg-mobile text-on-surface leading-none" id="card-nombre"></h2>
+</div>
+<div class="w-12 h-12 bg-on-surface/5 rounded-lg flex items-center justify-center border border-outline-variant">
+<span class="material-symbols-outlined text-on-surface-variant">shield</span>
+</div>
+</div>
+</div>
+</div>
+<div class="flex justify-between items-center mt-stack-lg px-4" id="controles-swipe">
+<button class="w-16 h-16 rounded-full bg-surface-container-high border-2 border-error flex items-center justify-center text-error transition-all duration-200 hover:bg-error/10 active:scale-90 shadow-lg" id="btn-pass">
+<span class="material-symbols-outlined text-[32px]">close</span>
+</button>
+<button class="font-label-caps text-label-caps text-on-surface-variant underline underline-offset-8 decoration-outline-variant hover:text-on-surface transition-colors" id="btn-skip">
+                    Saltar
+                </button>
+<button class="w-16 h-16 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container transition-all duration-300 hover:scale-110 active:scale-95 shadow-[0_0_20px_rgba(195,244,0,0.3)] group" id="btn-swap">
+<span class="material-symbols-outlined text-[32px] group-hover:scale-125 transition-transform" style="font-variation-settings: 'FILL' 1;">favorite</span>
+</button>
+</div>
+</div>
+</main>
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center px-4 py-2 pb-safe bg-surface-container dark:bg-surface-container border-t border-outline-variant shadow-lg rounded-t-xl">
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 transition-transform duration-300 active:scale-90 hover:text-primary" href="./home.html">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-caps text-label-caps">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 transition-transform duration-300 active:scale-90 hover:text-primary" href="./album.html">
+<span class="material-symbols-outlined">style</span>
+<span class="font-label-caps text-label-caps">Album</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full px-4 py-1 transition-transform duration-300 active:scale-90" href="./mercado-pases.html">
+<span class="material-symbols-outlined">swap_calls</span>
+<span class="font-label-caps text-label-caps">Market</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 transition-transform duration-300 active:scale-90 hover:text-primary" href="./perfil.html">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-caps text-label-caps">Profile</span>
+</a>
+</nav>
+<script type="module">
+  import { exigirSesion, obtenerPerfil } from "../js/auth-helpers.js";
+  import {
+    obtenerColaIntercambios,
+    obtenerJugadorasDeStickers,
+    proponerIntercambio,
+    descartarCandidato,
+    responderPropuesta,
+    sincronizarTradesPropios,
+    contarSwipesHoy,
+    contarMatchesHoy,
+    LIMITE_SWIPES_DIARIO,
+    LIMITE_MATCHES_DIARIO,
+  } from "../js/mercado-helpers.js";
+
+  let usuariaActual = null;
+  let stickersMap = new Map();
+  let jugadorasMap = new Map();
+  let cola = [];
+  let swipesHoy = 0;
+  let matchesHoy = 0;
+
+  const RAREZA_LABEL = { comun: "Común", silver: "Silver", gold: "Gold", epica: "Épica" };
+
+  function mostrarItemActual() {
+    document.getElementById('main-card').classList.toggle('hidden', cola.length === 0);
+    document.getElementById('controles-swipe').classList.toggle('hidden', cola.length === 0);
+    document.getElementById('cola-vacia').classList.toggle('hidden', cola.length > 0);
+    document.getElementById('matches-contador').textContent = `${matchesHoy}/${LIMITE_MATCHES_DIARIO}`;
+
+    if (cola.length === 0) return;
+    const item = cola[0];
+    const sticker = stickersMap.get(item.stickerObjetivoId);
+    const jugadora = jugadorasMap.get(sticker?.playerId);
+
+    document.getElementById('card-rareza').textContent = RAREZA_LABEL[sticker?.rareza] || sticker?.rareza || '';
+    document.getElementById('card-imagen').src = sticker?.imagenUrl || '';
+    document.getElementById('card-nombre').textContent = jugadora ? jugadora.nombre : 'Desconocida';
+    document.getElementById('card-puesto').textContent = jugadora ? (jugadora.puesto || '').toUpperCase() : '';
+
+    const card = document.getElementById('main-card');
+    card.className = `swipe-card w-full aspect-[2/3] bg-surface-container-high rounded-xl overflow-hidden relative flex flex-col ${sticker?.rareza === 'gold' ? 'gold-glow' : sticker?.rareza === 'silver' ? 'silver-glow' : 'comun-glow'}`;
+
+    const contexto = document.getElementById('contexto-oferta');
+    const contextoTexto = document.getElementById('contexto-oferta-texto');
+    if (item.tipo === 'entrante') {
+      const stickerOfrecido = stickersMap.get(item.stickerOfrecidoId);
+      const jugadoraOfrecida = jugadorasMap.get(stickerOfrecido?.playerId);
+      contextoTexto.innerHTML = `Te ofrecen tu repetida a cambio de: <span class="text-secondary font-semibold">${jugadoraOfrecida ? jugadoraOfrecida.nombre : ''}</span>`;
+      contexto.classList.remove('hidden');
+    } else {
+      contexto.classList.add('hidden');
+    }
+  }
+
+  async function avanzarCola(decision) {
+    if (swipesHoy >= LIMITE_SWIPES_DIARIO) {
+      alert('Llegaste al límite diario de intercambios. ¡Volvé mañana!');
+      return;
+    }
+    const item = cola.shift();
+    if (!item) return;
+
+    swipesHoy++;
+    let hizoMatch = false;
+    try {
+      if (item.tipo === 'entrante') {
+        const resultado = await responderPropuesta(usuariaActual.uid, item, decision);
+        hizoMatch = resultado.match;
+      } else if (decision === 'like') {
+        await proponerIntercambio(usuariaActual.uid, item);
+      } else {
+        await descartarCandidato(usuariaActual.uid, item);
+      }
+    } catch (e) {
+      console.error(e);
+    }
+
+    if (hizoMatch) {
+      matchesHoy++;
+      const sticker = stickersMap.get(item.stickerObjetivoId);
+      const jugadora = jugadorasMap.get(sticker?.playerId);
+      sessionStorage.setItem('ultimoMatch', JSON.stringify({
+        nombre: jugadora ? jugadora.nombre : 'Desconocida',
+        rareza: sticker?.rareza || 'comun',
+        imagenUrl: sticker?.imagenUrl || '',
+      }));
+      window.location.href = './celebracion-match.html';
+      return;
+    }
+
+    mostrarItemActual();
+  }
+
+  document.getElementById('btn-pass').addEventListener('click', () => avanzarCola('pass'));
+  document.getElementById('btn-swap').addEventListener('click', () => avanzarCola('like'));
+  document.getElementById('btn-skip').addEventListener('click', () => {
+    const item = cola.shift();
+    if (item) cola.push(item);
+    mostrarItemActual();
+  });
+
+  exigirSesion(async (user) => {
+    const perfil = await obtenerPerfil(user.uid);
+    if (!perfil) return;
+    if (perfil.estadoConsentimiento === 'pendiente') {
+      window.location.replace('./esperando-consentimiento.html');
+      return;
+    }
+    usuariaActual = user;
+    document.getElementById('futsacoins-badge').textContent = `${perfil.futsacoins || 0} 🪙`;
+
+    await sincronizarTradesPropios(user.uid);
+
+    const [resultado, swipesCount, matchesCount] = await Promise.all([
+      obtenerColaIntercambios(user.uid),
+      contarSwipesHoy(user.uid),
+      contarMatchesHoy(user.uid),
+    ]);
+    cola = resultado.cola;
+    stickersMap = resultado.stickersMap;
+    swipesHoy = swipesCount;
+    matchesHoy = matchesCount;
+
+    jugadorasMap = await obtenerJugadorasDeStickers(
+      cola.flatMap((item) => [item.stickerObjetivoId, item.stickerOfrecidoId]),
+      stickersMap
+    );
+
+    mostrarItemActual();
+  });
+</script>
+</body></html>
