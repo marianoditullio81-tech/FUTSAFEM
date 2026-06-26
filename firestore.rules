@@ -1,0 +1,74 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    // users: cada usuaria lee y escribe solo su propio documento.
+    match /users/{userId} {
+      allow read: if isSignedIn();
+      allow create: if isOwner(userId);
+      allow update: if isOwner(userId);
+      allow delete: if false;
+    }
+
+    // clubs, players, stickers: catálogo de lectura pública (para usuarias autenticadas).
+    // La escritura queda para el panel de admin (fase 2).
+    match /clubs/{clubId} {
+      allow read: if isSignedIn();
+      allow write: if false;
+    }
+
+    match /players/{playerId} {
+      allow read: if isSignedIn();
+      allow write: if false;
+    }
+
+    match /stickers/{stickerId} {
+      allow read: if isSignedIn();
+      allow write: if false;
+    }
+
+    // userCollection: cada usuaria gestiona solo sus propias figuritas.
+    match /userCollection/{entryId} {
+      allow read: if isSignedIn() && resource.data.userId == request.auth.uid;
+      allow create: if isSignedIn() && request.resource.data.userId == request.auth.uid;
+      allow update: if isSignedIn() && resource.data.userId == request.auth.uid;
+      allow delete: if false;
+    }
+
+    // trades: visibles y editables solo por las dos usuarias involucradas.
+    match /trades/{tradeId} {
+      allow read: if isSignedIn() &&
+        (resource.data.userA == request.auth.uid || resource.data.userB == request.auth.uid);
+      allow create: if isSignedIn() &&
+        (request.resource.data.userA == request.auth.uid || request.resource.data.userB == request.auth.uid);
+      allow update: if isSignedIn() &&
+        (resource.data.userA == request.auth.uid || resource.data.userB == request.auth.uid);
+      allow delete: if false;
+    }
+
+    // swipes: cada usuaria solo crea/lee sus propios swipes.
+    match /swipes/{swipeId} {
+      allow read: if isSignedIn() && resource.data.swiperId == request.auth.uid;
+      allow create: if isSignedIn() && request.resource.data.swiperId == request.auth.uid;
+      allow update: if false;
+      allow delete: if false;
+    }
+
+    // packsLog: historial de sobres abiertos, cada usuaria solo ve y crea el suyo.
+    match /packsLog/{logId} {
+      allow read: if isSignedIn() && resource.data.userId == request.auth.uid;
+      allow create: if isSignedIn() && request.resource.data.userId == request.auth.uid;
+      allow update: if false;
+      allow delete: if false;
+    }
+  }
+}

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>FUTSAFEM</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body style="background-color:#111316;color:#e2e2e6;">
+<script type="module">
+  import { auth } from "./js/firebase-init.js";
+  import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+  onAuthStateChanged(auth, (user) => {
+    window.location.replace(user ? "./pages/home.html" : "./pages/bienvenida.html");
+  });
+</script>
+</body>
+</html>
