@@ -57,6 +57,7 @@ export async function registrarUsuaria({ email, password, perfil, fotoFile }) {
     estadoConsentimiento: "no_requerido",
     futsacoins: 0,
     rachaActual: 0,
+    ultimaAperturaFecha: "",
     creadoEn: new Date().toISOString(),
   };
 
