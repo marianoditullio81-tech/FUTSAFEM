@@ -30,12 +30,7 @@ service cloud.firestore {
          request.resource.data.fotoUrl == resource.data.fotoUrl &&
          request.resource.data.diff(resource.data).affectedKeys()
            .hasOnly(['votosFotoAprobar', 'votosFotoRechazar', 'estadoFoto'])) ||
-        (esAdmin() &&
-         resource.data.estadoFoto == 'rechazada_revision' &&
-         request.resource.data.estadoFoto == 'sin_foto' &&
-         request.resource.data.fotoUrl == '' &&
-         request.resource.data.diff(resource.data).affectedKeys()
-           .hasOnly(['votosFotoAprobar', 'votosFotoRechazar', 'estadoFoto', 'fotoUrl']));
+        esAdmin();
       allow delete: if false;
     }
 
@@ -57,7 +52,15 @@ service cloud.firestore {
     // necesitan listar los clubes antes de que la usuaria se autentique.
     match /clubs/{clubId} {
       allow read: if true;
-      allow write: if false;
+      allow write: if esAdmin();
+    }
+
+    // config: parámetros globales editables por la admin (ej. probabilidades
+    // de sobres). Lectura abierta a usuarias logueadas porque el cliente la
+    // necesita para abrir sobres sin Cloud Functions.
+    match /config/{configId} {
+      allow read: if isSignedIn();
+      allow write: if esAdmin();
     }
 
     match /players/{playerId} {

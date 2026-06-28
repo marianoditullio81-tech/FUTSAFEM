@@ -92,9 +92,15 @@ export async function enviarRecuperacionContrasena(email) {
 }
 
 export function exigirSesion(onUsuaria) {
-  onAuthStateChanged(auth, (user) => {
+  onAuthStateChanged(auth, async (user) => {
     if (!user) {
       window.location.replace("./bienvenida.html");
+      return;
+    }
+    const perfil = await obtenerPerfil(user.uid);
+    if (perfil && perfil.deshabilitada) {
+      await signOut(auth);
+      window.location.replace("./login.html");
       return;
     }
     onUsuaria(user);

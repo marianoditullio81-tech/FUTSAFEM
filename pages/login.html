@@ -90,7 +90,7 @@
 </footer>
 </main>
 <script type="module">
-  import { iniciarSesion, obtenerPerfil, redirigirSegunConsentimiento } from "../js/auth-helpers.js";
+  import { iniciarSesion, obtenerPerfil, redirigirSegunConsentimiento, cerrarSesion } from "../js/auth-helpers.js";
 
   document.getElementById('login-form').addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -101,6 +101,12 @@
     try {
       const uid = await iniciarSesion(email, password);
       const perfil = await obtenerPerfil(uid);
+      if (perfil && perfil.deshabilitada) {
+        await cerrarSesion();
+        errorEl.textContent = 'Esta cuenta fue deshabilitada. Contactá a la administración.';
+        errorEl.classList.remove('hidden');
+        return;
+      }
       redirigirSegunConsentimiento(perfil);
     } catch (err) {
       errorEl.textContent = 'No pudimos iniciar sesión. Revisá tu correo y contraseña.';
