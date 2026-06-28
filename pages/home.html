@@ -116,6 +116,16 @@
 </div>
 </div>
 </section>
+<section class="hidden" id="banner-validacion">
+<a class="flex items-center gap-3 bg-surface-container border border-outline-variant rounded-xl p-4 active:scale-[0.98] transition-all" href="./validacion-fotos.html">
+<span class="material-symbols-outlined text-primary text-3xl">how_to_vote</span>
+<div class="flex-grow">
+<p class="font-headline-md text-headline-md text-on-surface">Validar fotos</p>
+<p class="font-body-sm text-on-surface-variant" id="texto-banner-validacion"></p>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant">chevron_right</span>
+</a>
+</section>
 <section class="mt-4">
 <button class="pack-glow relative w-full h-48 bg-primary-container rounded-2xl border-2 border-primary overflow-hidden flex flex-col items-center justify-center transition-all active:scale-95" id="btn-abrir-sobre">
 <div class="relative z-10 flex flex-col items-center">
@@ -149,6 +159,7 @@
 <script type="module">
   import { exigirSesion, obtenerPerfil } from "../js/auth-helpers.js";
   import { obtenerClub, contarStickersTotales, contarColeccionUnica, esSobreDisponibleHoy } from "../js/home-helpers.js";
+  import { contarFotosPendientes } from "../js/validacion-helpers.js";
 
   const NOMBRES_PUESTO = { arquera: 'Arquera', cierre: 'Cierre', ala: 'Ala', pivot: 'Pivot' };
   const NOMBRES_CARGO = { dt: 'Directora Técnica', at: 'Asistente Técnica', pf: 'Preparadora Física', ea: 'Entrenadora de Arqueras', analista: 'Analista de Video', medico: 'Cuerpo Médico' };
@@ -190,6 +201,12 @@
       contarColeccionUnica(user.uid),
     ]);
     document.getElementById('coleccion-progreso').textContent = `${coleccion}/${totalStickers} figuritas`;
+
+    const pendientes = await contarFotosPendientes(user.uid);
+    if (pendientes > 0) {
+      document.getElementById('texto-banner-validacion').textContent = `${pendientes} foto${pendientes === 1 ? '' : 's'} esperando tu voto`;
+      document.getElementById('banner-validacion').classList.remove('hidden');
+    }
 
     const disponible = esSobreDisponibleHoy(perfil);
     const btn = document.getElementById('btn-abrir-sobre');

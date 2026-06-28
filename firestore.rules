@@ -15,7 +15,25 @@ service cloud.firestore {
     match /users/{userId} {
       allow read: if isSignedIn();
       allow create: if isOwner(userId);
-      allow update: if isOwner(userId);
+      // El voto social de fotos necesita actualizar el contador y el estado
+      // de la foto de OTRA usuaria: se permite si esos son los únicos campos
+      // que cambian (la transacción de voto en validacion-helpers.js).
+      allow update: if isOwner(userId) ||
+        (isSignedIn() &&
+         request.resource.data.diff(resource.data).affectedKeys()
+           .hasOnly(['votosFotoAprobar', 'votosFotoRechazar', 'estadoFoto', 'fotoUrl']));
+      allow delete: if false;
+    }
+
+    // votosFoto: un voto por par (foto evaluada, votante). El id del
+    // documento fuerza unicidad y evita votar dos veces la misma foto.
+    match /votosFoto/{voteId} {
+      allow read: if isSignedIn();
+      allow create: if isSignedIn() &&
+        request.resource.data.voterUid == request.auth.uid &&
+        request.resource.data.targetUid != request.auth.uid &&
+        voteId == request.resource.data.targetUid + '_' + request.resource.data.voterUid;
+      allow update: if false;
       allow delete: if false;
     }
 

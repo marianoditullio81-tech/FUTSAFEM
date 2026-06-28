@@ -55,6 +55,8 @@ export async function registrarUsuaria({ email, password, perfil, fotoFile }) {
     edad: null,
     fotoUrl,
     estadoFoto,
+    votosFotoAprobar: 0,
+    votosFotoRechazar: 0,
     estadoConsentimiento: "no_requerido",
     futsacoins: 0,
     rachaActual: 0,
