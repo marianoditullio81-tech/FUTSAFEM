@@ -1,0 +1,209 @@
+<!DOCTYPE html><html class="dark" lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Tienda FutsaCoins | Primera C Futsal</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@400;600;700&amp;family=Hanken+Grotesk:wght@400;500&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Theme Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-variant": "#333538",
+                    "on-tertiary-fixed-variant": "#004f54",
+                    "on-surface-variant": "#d4c0d7",
+                    "on-primary-fixed-variant": "#74009f",
+                    "on-primary-container": "#ffffff",
+                    "on-surface": "#e2e2e6",
+                    "on-secondary": "#283500",
+                    "tertiary": "#00dbe9",
+                    "secondary-container": "#c3f400",
+                    "secondary-fixed-dim": "#abd600",
+                    "primary-container": "#bd00ff",
+                    "on-tertiary-fixed": "#002022",
+                    "on-primary": "#520071",
+                    "inverse-primary": "#9900cf",
+                    "on-error-container": "#ffdad6",
+                    "secondary": "#ffffff",
+                    "surface-container-low": "#1a1c1f",
+                    "on-secondary-fixed": "#161e00",
+                    "on-error": "#690005",
+                    "surface-container-highest": "#333538",
+                    "surface-container-lowest": "#0c0e11",
+                    "error-container": "#93000a",
+                    "primary": "#ecb2ff",
+                    "on-primary-fixed": "#320047",
+                    "on-background": "#e2e2e6",
+                    "outline": "#9d8ba0",
+                    "on-secondary-fixed-variant": "#3c4d00",
+                    "tertiary-fixed-dim": "#00dbe9",
+                    "on-tertiary-container": "#ffffff",
+                    "inverse-surface": "#e2e2e6",
+                    "surface-container": "#1e2023",
+                    "background": "#111316",
+                    "on-tertiary": "#00363a",
+                    "tertiary-container": "#00838b",
+                    "primary-fixed": "#f8d8ff",
+                    "tertiary-fixed": "#7df4ff",
+                    "surface-tint": "#ecb2ff",
+                    "error": "#ffb4ab",
+                    "surface": "#111316",
+                    "secondary-fixed": "#c3f400",
+                    "on-secondary-container": "#556d00",
+                    "outline-variant": "#514255",
+                    "surface-bright": "#37393d",
+                    "inverse-on-surface": "#2f3034",
+                    "surface-container-high": "#282a2d",
+                    "surface-dim": "#111316",
+                    "primary-fixed-dim": "#ecb2ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "stack-md": "12px",
+                    "stack-lg": "24px",
+                    "margin-desktop": "40px",
+                    "margin-mobile": "20px",
+                    "gutter": "16px",
+                    "stack-sm": "4px",
+                    "base": "8px"
+            },
+            "fontFamily": {
+                    "body-md": ["Hanken Grotesk"],
+                    "label-caps": ["JetBrains Mono"],
+                    "display-lg-mobile": ["Archivo Narrow"],
+                    "display-lg": ["Archivo Narrow"],
+                    "headline-md": ["Archivo Narrow"],
+                    "body-sm": ["Hanken Grotesk"]
+            },
+            "fontSize": {
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "display-lg-mobile": ["36px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "display-lg": ["48px", {"lineHeight": "52px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "28px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glow-gold {
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
+        }
+        .glow-purple {
+            box-shadow: 0 0 30px rgba(189, 0, 255, 0.3);
+        }
+        .court-texture {
+            background-image: radial-gradient(circle at 2px 2px, rgba(255,255,255,0.05) 1px, transparent 0);
+            background-size: 24px 24px;
+        }
+        .card-shimmer {
+            background: linear-gradient(135deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.05) 50%, rgba(255,255,255,0) 100%);
+            background-size: 200% 200%;
+            animation: shimmer 5s infinite linear;
+        }
+        @keyframes shimmer {
+            0% { background-position: -200% -200%; }
+            100% { background-position: 200% 200%; }
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md selection:bg-primary-container selection:text-on-primary-container min-h-screen pb-32">
+<!-- TopAppBar -->
+<nav class="fixed top-0 w-full z-50 bg-surface-container-lowest border-b border-outline-variant flex justify-between items-center px-margin-mobile h-16">
+<div class="flex items-center gap-stack-md">
+<button class="material-symbols-outlined text-primary hover:bg-surface-variant p-2 rounded-full transition-colors active:scale-95 duration-150" data-icon="menu">menu</button>
+<h1 class="font-display-lg-mobile text-display-lg-mobile text-primary tracking-tighter">FutsalCoins Shop</h1>
+</div>
+<div class="flex items-center gap-stack-md bg-surface-container-high px-4 py-2 rounded-full border border-outline-variant">
+<span class="material-symbols-outlined text-secondary" data-icon="payments" data-weight="fill" style="font-variation-settings: 'FILL' 1;">payments</span>
+<span class="font-label-caps text-label-caps text-on-surface">12,450 FC</span>
+<button class="material-symbols-outlined text-primary hover:bg-surface-variant p-1 rounded-full transition-colors" data-icon="shopping_bag">shopping_bag</button>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="pt-24 px-margin-mobile max-w-5xl mx-auto court-texture">
+<!-- Hero Section -->
+<header class="mb-stack-lg text-center">
+<h2 class="font-headline-md text-headline-md text-on-surface mb-2">Equípate para la Pista</h2>
+<p class="text-on-surface-variant font-body-sm opacity-80">Consigue crditos actualizados en tiempo real para abrir packs de jugadoras y dominar la Primera C.</p>
+</header>
+<!-- Packs Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- Pack 1: Bolsa Novata -->
+<div class="bg-surface-container border border-outline-variant rounded-xl p-stack-lg flex flex-col items-center relative overflow-hidden group hover:border-primary transition-all"><div class="absolute inset-0 card-shimmer opacity-30"></div><div class="w-32 h-40 mb-stack-md relative z-10 flex items-center justify-center"><img class="w-full h-full object-contain" data-alt="A stylized 3D sports bag with Argentinian futsal motifs, rendered in a dark charcoal and slate aesthetic with neon purple highlights, floating in a stadium environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5UBiZYuDBaG8xaLbULIv3JqiKsvUGLpR8M9Vyzm8eUMBd4ipo7tq8qb43Sggjm7Q1jEDChnDycpVCzMS-jFkax5HDy2ZmR6e4WTK-LAXM_K9tw4S1F47vVNJEx8XmmA9zKdpoKGmzojTDe4pR65ltvWxYEdnRSG_uWnA32_2XzYK9ZvJsae9GLi1t_PF4CuOwhqnethnY2DKOggyz88QOueXNENhgCM_U7UtActZ8D4Vqc4sU_NNSVE9uqFEUDIL8Qnmd9Ww1cUE3"></div><h3 class="font-headline-md text-headline-md text-secondary mb-1">Bolsa Novata</h3><div class="flex items-center gap-2 mb-stack-lg"><span class="font-label-caps text-label-caps text-on-surface-variant">Valor Dinmico: 500 FC</span></div><div class="mt-auto w-full"><p class="text-center font-label-caps text-label-caps text-on-surface mb-stack-md">$1.500 ARS</p><button class="w-full bg-surface-container-highest text-on-surface flex items-center justify-center gap-2 py-3 rounded-lg border border-outline-variant hover:bg-surface-variant transition-colors active:scale-95 duration-150"><img alt="MP" class="h-4" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAOvT20nwP466XBVtkiVi6V8mWHAJcF2bCu9MPQtwhMj_3DiPyhepog5f-Ftus9T8yYQrKwv9uFJHIdmE6dAqG787uihFwaIbCKQ4wndfydzt318qvcRpF5vqtc2-IA-ze5nDXSlgow63m2WM119NYH40J4fERxAaT4EaPgCbTjIyFegfo6btm-9I70HKJVFXuxz8_l5-OLei0ieifhBmeaEq8474kx4Zd2q0mOyi63DeXQelJ7B-gQn3b3G4qPpYJdRW5ns1c1gol8"><span class="font-label-caps text-label-caps">COMPRAR</span></button></div></div>
+<!-- Pack 3: Bóveda Capitana (DESTACADA) -->
+<div class="order-first md:order-none bg-surface-container-high border-2 border-secondary-container rounded-xl p-stack-lg flex flex-col items-center relative overflow-hidden group hover:border-primary glow-purple scale-105 z-20"><div class="absolute top-0 right-0 bg-secondary-container text-on-secondary-container font-label-caps text-[10px] px-3 py-1 rounded-bl-lg font-bold">MEJOR VALOR</div><div class="absolute inset-0 card-shimmer opacity-50"></div><div class="w-40 h-48 mb-stack-md relative z-10 flex items-center justify-center"><img class="w-full h-full object-contain scale-110" data-alt="A luxurious high-tech digital vault with glowing golden and electric purple energy leaks, representing a premium futsal currency pack, surrounded by floating digital stickers, stadium lighting atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDUISsGxLpz1QjizPzZqBz-bw1hlWPibRTIAieZhAiIHI5sX0rdBPSezRLZ1kRQjui8ktfqc7RBkbWsGTbSUFlRHmEv2fqTT6kVEDCfd247TtFSEX-3KIYo2f-4mPsAvR4GIxIDab9qR0KrHO3PmLrX_YGVvS62mtrUe8qut8sfOgPFabg7z_jK7VfdLTjBskx8vK7WGQU8U3aT2NLo6zXMI-jCmwzYbF7LHY87QUd_JnKgmcVJlL2-Ib6SXCrj7QWw8Ix-VvjRV3DR"></div><h3 class="font-headline-md text-headline-md text-secondary mb-1">Bveda Capitana</h3><div class="flex flex-col items-center gap-1 mb-stack-lg"><span class="font-label-caps text-label-caps text-on-surface-variant line-through opacity-50">Base: 5000 FC</span><span class="font-display-lg-mobile text-display-lg-mobile text-secondary-container">6250 FC</span><span class="bg-secondary-container/10 text-secondary-container text-[10px] px-2 py-0.5 rounded-full font-bold">OFERTA DINMICA</span></div><div class="mt-auto w-full"><p class="text-center font-label-caps text-label-caps text-on-surface mb-stack-md">$12.000 ARS</p><button class="w-full bg-secondary-container text-on-secondary-container flex items-center justify-center gap-2 py-4 rounded-lg hover:brightness-110 transition-all active:scale-95 duration-150 shadow-lg"><img alt="MP" class="h-4 brightness-0" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAVOJ7Xz9ket_eJPdAAaNNkGQRyY5NUzi9GY-pqON8CU7g4jJMJnFhTCGKPs0bmDh-Qujdbn1RLzYMQhMTRY0H8GVWDviR3SYW4ArdA5OjL8opE748nt57coKI1UMCOXzrsJVuguNtqfpGj8JFnAKFCJir5NeexgZ448JsxtD9lT5Yzgc3vmJ56y3BRy_ycc2rOC1nf04ii-A_zPZpAkojKBSC6EtDeIH972IlpHydUiuqLVTlgmm6-26xCJ-TBwmcnZb91M6ZAXqdy"><span class="font-label-caps text-label-caps font-bold">PAGAR AHORA</span></button></div></div>
+<!-- Pack 2: Cofre Titular -->
+<div class="bg-surface-container border border-outline-variant rounded-xl p-stack-lg flex flex-col items-center relative overflow-hidden group hover:border-primary transition-all"><div class="absolute inset-0 card-shimmer opacity-30"></div><div class="w-32 h-40 mb-stack-md relative z-10 flex items-center justify-center"><img class="w-full h-full object-contain" data-alt="A metallic sports chest with mesh textures and silver plating, glowing with a soft electric cyan light, centered in a dark urban locker room environment with high contrast lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBoDXp0jDr56rJMt1B3hnoeQCkPObNtHytr3VBkoHdFZuhsx6ZpdhqHSFx_Ar5K-JVejd-WxOn30RmzqlMgtygeUG3ncaFZc0anwifH_0vhJ6ip-Pdh_fS5rqMeyRuYYTqYb9B2gca2P9eszV2Uc93MKGwWLcwCMLOjy5PdjRMFIvbvfrW79WN_sa-NoYsmBwuwwE0BcQGOBkaP-BiS4MvVKwGruzSJkBWttijuEasfjf0DXAT9uX1Dkxo_1rfKJqYv8gBmFeLgBsLV"></div><h3 class="font-headline-md text-headline-md text-secondary mb-1">Cofre Titular</h3><div class="flex flex-col items-center gap-1 mb-stack-lg"><span class="font-label-caps text-label-caps text-on-surface-variant">Valor: 2200 FC</span><span class="text-tertiary text-[10px] font-bold">BONO VARIABLE</span></div><div class="mt-auto w-full"><p class="text-center font-label-caps text-label-caps text-on-surface mb-stack-md">$5.500 ARS</p><button class="w-full bg-surface-container-highest text-on-surface flex items-center justify-center gap-2 py-3 rounded-lg border border-outline-variant hover:bg-surface-variant transition-colors active:scale-95 duration-150"><img alt="MP" class="h-4" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCfApoN-asdOY8drC6lz-C_7mUt4LebYvp2Siv9rRGlEx8RINhhSepVZ6Sq7Jtnor_7UPI9fgRrmjAN2Res6F7byKfUohy_XSRJGvqAGKNos32K8xBhRPgT9jhQcxnDk0-SpKk7wMv4XzOZn5F2mKf-ph-qcpyNGwWxEz1ajVaD-BESjB1gduhNJR1FI3EBOJN-Tk-sjl-JbPIbpwtHnbm0XLNwt1it9rZRagLdYfCBJuJSBEatY4oh1I5-BLsmoCCt6SZIvGHWH5MJ"><span class="font-label-caps text-label-caps">COMPRAR</span></button></div></div>
+</div>
+<!-- Promo Banner -->
+<section class="mt-stack-lg p-stack-lg rounded-xl bg-gradient-to-r from-primary-container/20 to-tertiary-container/20 border border-outline-variant/30 flex flex-col md:flex-row items-center justify-between gap-gutter">
+<div class="flex items-center gap-stack-md">
+<div class="p-3 bg-primary/10 rounded-full">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="auto_awesome">auto_awesome</span>
+</div>
+<div>
+<h4 class="font-headline-md text-headline-md text-primary">¿Primera vez?</h4>
+<p class="font-body-sm text-on-surface-variant">Obtén un pack de bienvenida gratis al completar tu perfil.</p>
+</div>
+</div>
+<button class="font-label-caps text-label-caps text-on-primary bg-primary px-6 py-2 rounded-full hover:brightness-110 transition-all active:scale-95">COMPLETAR PERFIL</button>
+</section>
+</main>
+<!-- BottomNavBar -->
+<footer class="fixed bottom-0 w-full z-50 bg-surface-container-low border-t border-outline-variant shadow-lg flex justify-around items-center h-20 px-2 rounded-t-xl">
+<div class="flex flex-col items-center justify-center text-on-surface-variant hover:text-secondary cursor-pointer transition-all active:scale-110 duration-200">
+<span class="material-symbols-outlined" data-icon="auto_stories">auto_stories</span>
+<span class="font-label-caps text-label-caps uppercase mt-1">Album</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant hover:text-secondary cursor-pointer transition-all active:scale-110 duration-200">
+<span class="material-symbols-outlined" data-icon="pentagon">pentagon</span>
+<span class="font-label-caps text-label-caps uppercase mt-1">Packs</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant hover:text-secondary cursor-pointer transition-all active:scale-110 duration-200">
+<span class="material-symbols-outlined" data-icon="swap_horizontal_circle">swap_horizontal_circle</span>
+<span class="font-label-caps text-label-caps uppercase mt-1">Trade</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full px-4 py-1 transition-all active:scale-110 duration-200 cursor-pointer">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+<span class="font-label-caps text-label-caps uppercase mt-1">Shop</span>
+</div>
+</footer>
+<!-- Micro-interactions Script -->
+<script>
+        // Simple logic to add "active" scale feel to buttons
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('mousedown', () => btn.classList.add('scale-95'));
+            btn.addEventListener('mouseup', () => btn.classList.remove('scale-95'));
+            btn.addEventListener('mouseleave', () => btn.classList.remove('scale-95'));
+        });
+
+        // Hover effect for "Best Value" pack
+        const bestValue = document.querySelector('.glow-purple');
+        bestValue.addEventListener('mousemove', (e) => {
+            const { left, top, width, height } = bestValue.getBoundingClientRect();
+            const x = (e.clientX - left) / width;
+            const y = (e.clientY - top) / height;
+            bestValue.style.transform = `scale(1.05) perspective(1000px) rotateY(${(x - 0.5) * 5}deg) rotateX(${(y - 0.5) * -5}deg)`;
+        });
+        bestValue.addEventListener('mouseleave', () => {
+            bestValue.style.transform = 'scale(1.05)';
+        });
+    </script>
+
+
+</body></html>
