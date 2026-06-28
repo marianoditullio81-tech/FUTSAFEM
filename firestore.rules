@@ -102,6 +102,18 @@ service cloud.firestore {
       allow delete: if false;
     }
 
+    // mensajesTribuna: muro general (clubId == "") y muros por club.
+    // Cualquier usuaria logueada lee y escribe a nombre propio; sin edición ni borrado salvo admin.
+    match /mensajesTribuna/{mensajeId} {
+      allow read: if isSignedIn();
+      allow create: if isSignedIn() &&
+        request.resource.data.autorUid == request.auth.uid &&
+        request.resource.data.texto.size() > 0 &&
+        request.resource.data.texto.size() <= 280;
+      allow update: if false;
+      allow delete: if esAdmin();
+    }
+
     // packsLog: historial de sobres abiertos, cada usuaria solo ve y crea el suyo.
     match /packsLog/{logId} {
       allow read: if isSignedIn() && resource.data.userId == request.auth.uid;

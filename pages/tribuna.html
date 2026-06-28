@@ -1,0 +1,141 @@
+<!DOCTYPE html><html class="dark" lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport">
+<title>FUTSAFEM - Tribuna</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@400;600;700&amp;family=Hanken+Grotesk:wght@400;600&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary": "#ecb2ff", "on-primary-container": "#ffffff", "on-primary": "#520071",
+                    "primary-container": "#bd00ff", "secondary": "#ffffff", "secondary-container": "#c3f400",
+                    "on-secondary-container": "#556d00", "error": "#ffb4ab", "error-container": "#93000a",
+                    "on-error-container": "#ffdad6", "surface": "#111316", "surface-container": "#1e2023",
+                    "surface-container-high": "#282a2d", "surface-container-highest": "#333538",
+                    "on-surface": "#e2e2e6", "on-surface-variant": "#d4c0d7", "outline": "#9d8ba0",
+                    "outline-variant": "#514255", "background": "#111316"
+            },
+            "borderRadius": {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+            "spacing": {"base": "8px", "margin-mobile": "20px", "stack-sm": "4px", "stack-md": "12px", "gutter": "16px", "stack-lg": "24px"},
+            "fontFamily": {"display-lg-mobile": ["Archivo Narrow"], "headline-md": ["Archivo Narrow"], "label-caps": ["JetBrains Mono"], "body-sm": ["Hanken Grotesk"], "body-md": ["Hanken Grotesk"]},
+            "fontSize": {
+                    "display-lg-mobile": ["36px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "28px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                    "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { background-color: #111316; color: #e2e2e6; -webkit-font-smoothing: antialiased; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+</style>
+</head>
+<body class="font-body-md min-h-screen pb-32">
+<header class="bg-surface sticky top-0 z-50 flex items-center gap-4 px-margin-mobile h-16 border-b border-outline-variant">
+<a href="./home.html"><span class="material-symbols-outlined text-primary text-2xl">arrow_back</span></a>
+<h1 class="font-display-lg-mobile text-display-lg-mobile text-primary tracking-tight italic uppercase">Tribuna</h1>
+</header>
+<main class="px-margin-mobile pt-stack-md max-w-md mx-auto flex flex-col gap-stack-md">
+<div class="flex gap-2" id="tabs">
+<button class="tab-btn flex-1 bg-primary text-on-primary px-4 py-2 rounded-full font-label-caps text-label-caps uppercase" data-tab="general">General</button>
+<button class="tab-btn flex-1 bg-surface-container text-on-surface-variant px-4 py-2 rounded-full font-label-caps text-label-caps uppercase" data-tab="club">Mi club</button>
+</div>
+<form class="bg-surface-container border border-outline-variant rounded-xl p-3 flex gap-2" id="form-mensaje">
+<input class="flex-grow bg-surface-container-high border border-outline-variant rounded-lg px-3 py-2 text-white font-body-md" id="texto-mensaje" maxlength="280" placeholder="Escribí algo..." required type="text">
+<button class="bg-primary-container text-on-primary-container font-label-caps text-label-caps px-4 rounded-lg uppercase" type="submit">Enviar</button>
+</form>
+<div id="lista-mensajes" class="flex flex-col gap-stack-sm"></div>
+<p class="hidden text-center py-stack-lg text-on-surface-variant font-body-sm" id="mensajes-vacio">Todavía no hay mensajes. ¡Sé la primera en escribir!</p>
+</main>
+<script type="module">
+  import { exigirSesion, obtenerPerfil } from "../js/auth-helpers.js";
+  import { obtenerMensajes, publicarMensaje } from "../js/tribuna-helpers.js";
+
+  exigirSesion(async (user) => {
+    const perfil = await obtenerPerfil(user.uid);
+    let pestañaActual = 'general';
+
+    function formatearFecha(timestamp) {
+      if (!timestamp || !timestamp.toDate) return '';
+      const fecha = timestamp.toDate();
+      return fecha.toLocaleString('es-AR', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' });
+    }
+
+    async function renderizar() {
+      const lista = document.getElementById('lista-mensajes');
+      const vacio = document.getElementById('mensajes-vacio');
+      lista.innerHTML = '';
+      vacio.classList.add('hidden');
+
+      const clubId = pestañaActual === 'club' ? perfil.clubId : '';
+      if (pestañaActual === 'club' && !clubId) {
+        vacio.textContent = 'No tenés un club asignado.';
+        vacio.classList.remove('hidden');
+        return;
+      }
+
+      const mensajes = await obtenerMensajes(clubId);
+      if (mensajes.length === 0) {
+        vacio.textContent = 'Todavía no hay mensajes. ¡Sé la primera en escribir!';
+        vacio.classList.remove('hidden');
+        return;
+      }
+
+      for (const msg of mensajes) {
+        const card = document.createElement('div');
+        card.className = 'bg-surface-container border border-outline-variant rounded-lg p-3 flex gap-3';
+        card.innerHTML = `
+          <img class="w-9 h-9 rounded-full object-cover bg-surface-container-highest flex-shrink-0" src="${msg.autorFotoUrl || ''}">
+          <div class="flex-grow">
+            <div class="flex items-center gap-2">
+              <p class="font-body-md text-white font-semibold">${msg.autorNombre || 'Anónima'}</p>
+              <span class="font-label-caps text-[10px] text-on-surface-variant">${formatearFecha(msg.creadoEn)}</span>
+            </div>
+            <p class="font-body-sm text-on-surface-variant break-words">${msg.texto}</p>
+          </div>
+        `;
+        lista.appendChild(card);
+      }
+    }
+
+    document.querySelectorAll('.tab-btn').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        pestañaActual = btn.dataset.tab;
+        document.querySelectorAll('.tab-btn').forEach((b) => {
+          b.classList.toggle('bg-primary', b === btn);
+          b.classList.toggle('text-on-primary', b === btn);
+          b.classList.toggle('bg-surface-container', b !== btn);
+          b.classList.toggle('text-on-surface-variant', b !== btn);
+        });
+        renderizar();
+      });
+    });
+
+    document.getElementById('form-mensaje').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const input = document.getElementById('texto-mensaje');
+      const texto = input.value.trim();
+      if (!texto) return;
+      await publicarMensaje({
+        autorUid: user.uid,
+        autorNombre: perfil.nombre || perfil.apodo || 'Anónima',
+        autorFotoUrl: perfil.fotoUrl || '',
+        clubId: pestañaActual === 'club' ? perfil.clubId : '',
+        texto,
+      });
+      input.value = '';
+      await renderizar();
+    });
+
+    await renderizar();
+  });
+</script>
+</body></html>
