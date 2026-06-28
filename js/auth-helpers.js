@@ -5,8 +5,6 @@ import {
   onAuthStateChanged,
   signOut,
   sendPasswordResetEmail,
-  verifyPasswordResetCode,
-  confirmPasswordReset,
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 import {
   doc,
@@ -87,16 +85,8 @@ export async function actualizarPerfil(uid, datos) {
 }
 
 export async function enviarRecuperacionContrasena(email) {
-  const url = new URL("./establecer-nueva-contrasena.html", window.location.href).toString();
-  await sendPasswordResetEmail(auth, email, { url, handleCodeInApp: true });
-}
-
-export async function verificarCodigoRecuperacion(codigo) {
-  return verifyPasswordResetCode(auth, codigo);
-}
-
-export async function confirmarNuevaContrasena(codigo, nuevaContrasena) {
-  await confirmPasswordReset(auth, codigo, nuevaContrasena);
+  const url = new URL("./login.html", window.location.href).toString();
+  await sendPasswordResetEmail(auth, email, { url });
 }
 
 export function exigirSesion(onUsuaria) {
