@@ -23,6 +23,14 @@ export async function obtenerClubes() {
   return snap.docs.map((d) => ({ id: d.id, ...d.data() }));
 }
 
+export async function obtenerPlantelClub(clubId) {
+  const q = query(collection(db, "users"), where("clubId", "==", clubId));
+  const snap = await getDocs(q);
+  return snap.docs
+    .map((d) => d.data())
+    .filter((u) => u.estadoFoto === "aprobada" && (u.rol === "jugadora" || u.rol === "ct"));
+}
+
 export async function contarStickersTotales() {
   const snap = await getCountFromServer(collection(db, "stickers"));
   return snap.data().count;

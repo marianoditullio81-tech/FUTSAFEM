@@ -91,7 +91,7 @@
 <div class="mt-4">
 <h2 class="font-display-lg-mobile text-display-lg-mobile text-on-surface" id="nombre-usuaria">—</h2>
 <div class="flex items-center justify-center gap-2 text-on-surface-variant font-label-caps mt-1">
-<span class="uppercase tracking-widest" id="club-usuaria">—</span>
+<a class="uppercase tracking-widest hover:text-primary" id="club-usuaria" href="#">—</a>
 <span class="w-1 h-1 bg-outline rounded-full" id="separador-puesto"></span>
 <span class="uppercase tracking-widest" id="puesto-usuaria"></span>
 </div>
@@ -195,7 +195,9 @@
     }
 
     const club = await obtenerClub(perfil.clubId);
-    document.getElementById('club-usuaria').textContent = club ? club.nombre : (perfil.clubId || '—');
+    const clubEl = document.getElementById('club-usuaria');
+    clubEl.textContent = club ? club.nombre : (perfil.clubId || '—');
+    if (perfil.clubId) clubEl.href = `./club.html?id=${encodeURIComponent(perfil.clubId)}`;
 
     const puestoEl = document.getElementById('puesto-usuaria');
     const separadorEl = document.getElementById('separador-puesto');
