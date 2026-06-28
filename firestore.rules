@@ -19,10 +19,12 @@ service cloud.firestore {
       allow delete: if false;
     }
 
-    // clubs, players, stickers: catálogo de lectura pública (para usuarias autenticadas).
+    // clubs, players, stickers: catálogo de lectura pública.
     // La escritura queda para el panel de admin (fase 2).
+    // clubs es legible sin sesión porque los formularios de registro
+    // necesitan listar los clubes antes de que la usuaria se autentique.
     match /clubs/{clubId} {
-      allow read: if isSignedIn();
+      allow read: if true;
       allow write: if false;
     }
 
