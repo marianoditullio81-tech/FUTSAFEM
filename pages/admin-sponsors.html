@@ -116,6 +116,14 @@ Activo (visible en la app)
           .map((p) => PANTALLA_LABEL[p] || p)
           .join(', ') || 'Sin pantallas asignadas';
 
+        const pantallasChecks = Object.entries(PANTALLA_LABEL)
+          .map(([valor, label]) => `
+            <label class="flex items-center gap-2 text-body-sm">
+              <input class="edit-pantalla" type="checkbox" value="${valor}" ${(sponsor.pantallas || []).includes(valor) ? 'checked' : ''}>
+              ${label}
+            </label>
+          `).join('');
+
         const card = document.createElement('div');
         card.className = 'bg-surface-container border border-outline-variant rounded-lg p-3 flex flex-col gap-2';
         card.innerHTML = `
@@ -126,16 +134,44 @@ Activo (visible en la app)
               <input class="check-activo" type="checkbox" ${sponsor.activo ? 'checked' : ''}>
               Activo
             </label>
+            <button class="btn-editar text-primary">
+              <span class="material-symbols-outlined">edit</span>
+            </button>
             <button class="btn-borrar text-error">
               <span class="material-symbols-outlined">delete</span>
             </button>
           </div>
-          <p class="font-body-sm text-on-surface-variant">${pantallasTexto}</p>
+          <p class="font-body-sm text-on-surface-variant texto-pantallas">${pantallasTexto}</p>
+          <div class="hidden flex-col gap-3 mt-2 pt-3 border-t border-outline-variant/40 panel-editar">
+            <input class="edit-nombre bg-surface-container-high border border-outline-variant rounded-lg px-4 py-3 text-white font-body-md" placeholder="Nombre del sponsor" type="text" value="${sponsor.nombre || ''}">
+            <input class="edit-logo bg-surface-container-high border border-outline-variant rounded-lg px-4 py-3 text-white font-body-md" placeholder="URL del logo" type="url" value="${sponsor.logoUrl || ''}">
+            <input class="edit-link bg-surface-container-high border border-outline-variant rounded-lg px-4 py-3 text-white font-body-md" placeholder="Link (opcional)" type="url" value="${sponsor.link || ''}">
+            <div class="flex flex-col gap-2">
+              <p class="font-label-caps text-label-caps text-on-surface-variant">¿En qué pantallas aparece?</p>
+              ${pantallasChecks}
+            </div>
+            <button class="btn-guardar bg-primary-container text-on-primary-container font-label-caps text-label-caps py-3 rounded-lg uppercase">Guardar cambios</button>
+          </div>
         `;
         lista.appendChild(card);
 
         card.querySelector('.check-activo').addEventListener('change', async (e) => {
           await actualizarSponsor(sponsor.id, { activo: e.target.checked });
+        });
+
+        card.querySelector('.btn-editar').addEventListener('click', () => {
+          card.querySelector('.panel-editar').classList.toggle('hidden');
+          card.querySelector('.panel-editar').classList.toggle('flex');
+        });
+
+        card.querySelector('.btn-guardar').addEventListener('click', async () => {
+          const nombre = card.querySelector('.edit-nombre').value.trim();
+          const logoUrl = card.querySelector('.edit-logo').value.trim();
+          const link = card.querySelector('.edit-link').value.trim();
+          const pantallas = Array.from(card.querySelectorAll('.edit-pantalla:checked')).map((c) => c.value);
+          if (!nombre || !logoUrl) return;
+          await actualizarSponsor(sponsor.id, { nombre, logoUrl, link, pantallas });
+          await renderizar();
         });
 
         card.querySelector('.btn-borrar').addEventListener('click', async () => {
