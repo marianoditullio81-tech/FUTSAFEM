@@ -87,7 +87,8 @@ export async function actualizarPerfil(uid, datos) {
 }
 
 export async function enviarRecuperacionContrasena(email) {
-  await sendPasswordResetEmail(auth, email);
+  const url = new URL("./establecer-nueva-contrasena.html", window.location.href).toString();
+  await sendPasswordResetEmail(auth, email, { url });
 }
 
 export async function verificarCodigoRecuperacion(codigo) {
