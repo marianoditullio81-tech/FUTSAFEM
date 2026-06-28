@@ -53,6 +53,9 @@
         .pack-surface { background: linear-gradient(135deg, #1a1c1f 0%, #333538 100%); border: 1px solid rgba(255, 255, 255, 0.1); }
         .holographic-sheen { background: linear-gradient(105deg, transparent 20%, rgba(195, 244, 0, 0.1) 40%, rgba(189, 0, 255, 0.1) 60%, transparent 80%); background-size: 200% 200%; animation: sheen 6s linear infinite; }
         @keyframes sheen { 0% { background-position: -200% -200%; } 100% { background-position: 200% 200%; } }
+        @keyframes sponsor-pop-in { 0% { opacity: 0; transform: translate(-50%, -30px) scale(0.6) rotate(-6deg); } 60% { opacity: 1; transform: translate(-50%, 4px) scale(1.08) rotate(2deg); } 100% { opacity: 1; transform: translate(-50%, 0) scale(1) rotate(0deg); } }
+        @keyframes sponsor-glow-pulse { 0%, 100% { box-shadow: 0 0 0px 0px rgba(236, 178, 255, 0.5); } 50% { box-shadow: 0 0 22px 4px rgba(236, 178, 255, 0.55); } }
+        #sponsor-badge.sponsor-animado { animation: sponsor-pop-in 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both, sponsor-glow-pulse 2.2s ease-in-out 0.6s infinite; }
     </style>
 </head>
 <body class="bg-background text-on-background overflow-hidden stadium-gradient h-screen w-full font-body-md selection:bg-primary-container selection:text-white">
@@ -145,7 +148,7 @@
       document.getElementById('sponsor-nombre').textContent = sponsor.nombre || '';
       const badge = document.getElementById('sponsor-badge');
       badge.classList.remove('hidden');
-      badge.classList.add('flex');
+      badge.classList.add('flex', 'sponsor-animado');
       if (sponsor.link) {
         badge.style.cursor = 'pointer';
         badge.addEventListener('click', () => window.open(sponsor.link, '_blank'));
