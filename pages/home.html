@@ -153,6 +153,11 @@
 </div>
 </button>
 </section>
+<section class="hidden mt-4 flex flex-col items-center gap-2" id="sponsors-strip">
+<span class="font-label-caps text-label-caps text-on-surface-variant text-[10px] tracking-widest">CON EL APOYO DE</span>
+<div class="flex items-center gap-4 flex-wrap justify-center" id="sponsors-logos"></div>
+<a class="font-label-caps text-[10px] text-primary underline" href="./sponsors.html">VER TODOS</a>
+</section>
 </main>
 <nav class="bg-surface-container fixed bottom-0 w-full z-50 flex justify-around items-center px-4 py-2 pb-safe shadow-lg rounded-t-xl border-t border-outline-variant">
 <a class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full px-4 py-1 transition-transform duration-300 active:scale-90 active-nav-glow" href="./home.html">
@@ -181,6 +186,7 @@
   import { obtenerClub, contarStickersTotales, contarColeccionUnica, esSobreDisponibleHoy, hoyComoTexto } from "../js/home-helpers.js";
   import { contarFotosPendientes } from "../js/validacion-helpers.js";
   import { contarNoLeidas, crearNotificacion, esCumpleañosHoy } from "../js/notificaciones-helpers.js";
+  import { obtenerSponsorsActivos } from "../js/sponsor-helpers.js";
 
   const NOMBRES_PUESTO = { arquera: 'Arquera', cierre: 'Cierre', ala: 'Ala', pivot: 'Pivot' };
   const NOMBRES_CARGO = { dt: 'Directora Técnica', at: 'Asistente Técnica', pf: 'Preparadora Física', ea: 'Entrenadora de Arqueras', analista: 'Analista de Video', medico: 'Cuerpo Médico' };
@@ -257,6 +263,26 @@
       estadoEl.textContent = 'VOLVÉ MAÑANA';
       btn.classList.add('disponible-no');
       btn.disabled = true;
+    }
+
+    const sponsors = await obtenerSponsorsActivos();
+    if (sponsors.length > 0) {
+      const logosEl = document.getElementById('sponsors-logos');
+      sponsors.forEach((sponsor) => {
+        const item = sponsor.link ? document.createElement('a') : document.createElement('div');
+        if (sponsor.link) {
+          item.href = sponsor.link;
+          item.target = '_blank';
+        }
+        item.className = 'flex items-center justify-center opacity-80 hover:opacity-100 transition-opacity';
+        const img = document.createElement('img');
+        img.src = sponsor.logoUrl || '';
+        img.alt = sponsor.nombre || '';
+        img.className = 'h-8 max-w-[100px] object-contain';
+        item.appendChild(img);
+        logosEl.appendChild(item);
+      });
+      document.getElementById('sponsors-strip').classList.remove('hidden');
     }
   });
 </script>

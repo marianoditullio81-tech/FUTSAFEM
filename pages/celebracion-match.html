@@ -104,14 +104,19 @@
 </div>
 </button>
 </div>
+<div class="hidden items-center gap-2 mt-stack-md" id="sponsor-badge">
+<span class="font-label-caps text-[10px] text-on-surface-variant">CON EL APOYO DE</span>
+<img class="h-4 max-w-[80px] object-contain" id="sponsor-logo" src="" alt="">
+</div>
 </main>
 <script type="module">
   import { exigirSesion } from "../js/auth-helpers.js";
   import { PLACEHOLDER_STICKER_URL } from "../js/home-helpers.js";
+  import { obtenerSponsorAlAzar } from "../js/sponsor-helpers.js";
 
   const RAREZA_LABEL = { comun: "Común", silver: "Silver", gold: "Gold", epica: "Épica" };
 
-  exigirSesion(() => {
+  exigirSesion(async () => {
     const datos = JSON.parse(sessionStorage.getItem('ultimoMatch') || 'null');
     if (!datos) {
       window.location.replace('./mercado-pases.html');
@@ -126,6 +131,15 @@
     document.getElementById('btn-volver').addEventListener('click', () => {
       window.location.href = './mercado-pases.html';
     });
+
+    const sponsor = await obtenerSponsorAlAzar();
+    if (sponsor) {
+      document.getElementById('sponsor-logo').src = sponsor.logoUrl || '';
+      document.getElementById('sponsor-logo').alt = sponsor.nombre || '';
+      const badge = document.getElementById('sponsor-badge');
+      badge.classList.remove('hidden');
+      badge.classList.add('flex');
+    }
   });
 </script>
 </body></html>

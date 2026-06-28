@@ -97,6 +97,11 @@
 </div>
 </div>
 </main>
+<div class="hidden fixed bottom-4 left-1/2 -translate-x-1/2 items-center gap-2 bg-surface-container-high px-3 py-1.5 rounded-full border border-outline-variant" id="sponsor-badge">
+<span class="font-label-caps text-[10px] text-on-surface-variant">PRESENTA</span>
+<img class="h-4 max-w-[80px] object-contain" id="sponsor-logo" src="" alt="">
+<span class="font-label-caps text-[10px] text-secondary" id="sponsor-nombre"></span>
+</div>
 <!-- Panel de pruebas, solo visible para admin: fuerza tipo/rareza sin esperar la racha -->
 <div id="panel-admin" class="hidden fixed bottom-4 left-0 w-full px-margin-mobile flex flex-wrap gap-2 justify-center">
 <button data-tipo="comun" class="btn-prueba font-label-caps text-[10px] px-3 py-2 rounded bg-surface-container-highest text-on-surface-variant uppercase">Probar Común</button>
@@ -107,6 +112,7 @@
 <script type="module">
   import { exigirSesion, obtenerPerfil } from "../js/auth-helpers.js";
   import { calcularDiaDeRacha, determinarTipoSobre, abrirSobre } from "../js/sobre-helpers.js";
+  import { obtenerSponsorAlAzar } from "../js/sponsor-helpers.js";
 
   let perfilActual = null;
   let usuariaActual = null;
@@ -130,6 +136,19 @@
     const tipoSobre = determinarTipoSobre(diaDeRacha);
     document.getElementById('sobre-tipo-badge').textContent = NOMBRES_SOBRE[tipoSobre];
     document.getElementById('sobre-cantidad-badge').textContent = `${FIGUS_POR_SOBRE[tipoSobre]} CARDS`;
+
+    const sponsor = await obtenerSponsorAlAzar();
+    if (sponsor) {
+      document.getElementById('sponsor-logo').src = sponsor.logoUrl || '';
+      document.getElementById('sponsor-nombre').textContent = sponsor.nombre || '';
+      const badge = document.getElementById('sponsor-badge');
+      badge.classList.remove('hidden');
+      badge.classList.add('flex');
+      if (sponsor.link) {
+        badge.style.cursor = 'pointer';
+        badge.addEventListener('click', () => window.open(sponsor.link, '_blank'));
+      }
+    }
 
     async function abrirYRedirigir(opciones) {
       if (abriendo) return;
