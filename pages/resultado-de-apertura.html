@@ -72,6 +72,13 @@
 <h2 class="font-display-lg text-display-lg text-secondary italic" id="creditos-texto"></h2>
 </div>
 <div class="w-full grid grid-cols-2 sm:grid-cols-3 gap-4 max-w-3xl" id="cartas-contenedor"></div>
+<div class="hidden mt-stack-lg flex-col items-center gap-1.5 bg-surface-container-high/90 px-4 py-2.5 rounded-xl border border-primary-fixed-dim/40" id="sponsor-badge">
+<span class="font-label-caps text-[9px] text-on-surface-variant tracking-widest">ESTE SOBRE LO PRESENTA</span>
+<div class="flex items-center gap-2">
+<img class="h-7 max-w-[120px] object-contain" id="sponsor-logo" src="" alt="">
+<span class="font-headline-md text-headline-md text-secondary" id="sponsor-nombre"></span>
+</div>
+</div>
 </section>
 </main>
 <div class="fixed bottom-0 w-full z-50 flex flex-col items-center gap-stack-md px-margin-mobile py-stack-lg bg-surface-container-lowest border-t border-outline-variant">
@@ -83,6 +90,7 @@
   import { exigirSesion, obtenerPerfil } from "../js/auth-helpers.js";
   import { obtenerJugadorasDeStickers } from "../js/sobre-helpers.js";
   import { PLACEHOLDER_STICKER_URL } from "../js/home-helpers.js";
+  import { obtenerSponsorAlAzar } from "../js/sponsor-helpers.js";
 
   exigirSesion(async (user) => {
     const perfil = await obtenerPerfil(user.uid);
@@ -123,6 +131,20 @@
     });
 
     sessionStorage.removeItem('ultimoSobre');
+
+    const sponsor = await obtenerSponsorAlAzar('apertura-sobre');
+    if (sponsor) {
+      document.getElementById('sponsor-logo').src = sponsor.logoUrl || '';
+      document.getElementById('sponsor-nombre').textContent = sponsor.nombre || '';
+      const badge = document.getElementById('sponsor-badge');
+      badge.classList.remove('hidden');
+      badge.classList.add('flex');
+      if (sponsor.link) {
+        badge.style.cursor = 'pointer';
+        badge.addEventListener('click', () => window.open(sponsor.link, '_blank'));
+      }
+    }
+
     document.getElementById('btn-continuar').addEventListener('click', () => {
       window.location.href = './album.html';
     });
