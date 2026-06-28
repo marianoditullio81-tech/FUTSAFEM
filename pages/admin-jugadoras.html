@@ -1,0 +1,190 @@
+<!DOCTYPE html><html class="dark" lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport">
+<title>FUTSAFEM - Admin: jugadoras</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@400;600;700&amp;family=Hanken+Grotesk:wght@400;600&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary": "#ecb2ff", "on-primary-container": "#ffffff", "on-primary": "#520071",
+                    "primary-container": "#bd00ff", "secondary": "#ffffff", "secondary-container": "#c3f400",
+                    "on-secondary-container": "#556d00", "error": "#ffb4ab", "error-container": "#93000a",
+                    "on-error-container": "#ffdad6", "surface": "#111316", "surface-container": "#1e2023",
+                    "surface-container-high": "#282a2d", "surface-container-highest": "#333538",
+                    "on-surface": "#e2e2e6", "on-surface-variant": "#d4c0d7", "outline": "#9d8ba0",
+                    "outline-variant": "#514255", "background": "#111316"
+            },
+            "borderRadius": {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+            "spacing": {"base": "8px", "margin-mobile": "20px", "stack-sm": "4px", "stack-md": "12px", "gutter": "16px", "stack-lg": "24px"},
+            "fontFamily": {"display-lg-mobile": ["Archivo Narrow"], "headline-md": ["Archivo Narrow"], "label-caps": ["JetBrains Mono"], "body-sm": ["Hanken Grotesk"], "body-md": ["Hanken Grotesk"]},
+            "fontSize": {
+                    "display-lg-mobile": ["36px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "28px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                    "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { background-color: #111316; color: #e2e2e6; -webkit-font-smoothing: antialiased; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+</style>
+</head>
+<body class="font-body-md min-h-screen pb-16">
+<header class="bg-surface sticky top-0 z-50 flex items-center gap-4 px-margin-mobile h-16 border-b border-outline-variant">
+<a href="./admin.html"><span class="material-symbols-outlined text-primary text-2xl">arrow_back</span></a>
+<h1 class="font-display-lg-mobile text-display-lg-mobile text-primary tracking-tight italic uppercase">Jugadoras</h1>
+</header>
+<main class="px-margin-mobile pt-stack-lg max-w-md mx-auto flex flex-col gap-stack-md">
+<form class="bg-surface-container border border-outline-variant rounded-xl p-4 flex flex-col gap-3" id="form-jugadora">
+<p class="font-headline-md text-headline-md text-white">Agregar jugadora / CT</p>
+<input class="bg-surface-container-high border border-outline-variant rounded-lg px-4 py-3 text-white font-body-md" id="nombre-jugadora" placeholder="Nombre completo" required type="text">
+<select class="bg-surface-container-high border border-outline-variant rounded-lg px-4 py-3 text-white font-body-md" id="club-jugadora" required></select>
+<select class="bg-surface-container-high border border-outline-variant rounded-lg px-4 py-3 text-white font-body-md" id="rol-jugadora">
+<option value="player">Jugadora</option>
+<option value="coach">Cuerpo técnico</option>
+</select>
+<input class="bg-surface-container-high border border-outline-variant rounded-lg px-4 py-3 text-white font-body-md" id="puesto-jugadora" placeholder="Puesto (ej. arquera, DT)" type="text">
+<input class="bg-surface-container-high border border-outline-variant rounded-lg px-4 py-3 text-white font-body-md" id="numero-jugadora" placeholder="Número (opcional)" type="number">
+<p class="text-error text-body-sm hidden" id="form-jugadora-error"></p>
+<button class="bg-primary-container text-on-primary-container font-label-caps text-label-caps py-3 rounded-lg uppercase" type="submit">Agregar</button>
+</form>
+<div id="lista-jugadoras" class="flex flex-col gap-stack-sm"></div>
+</main>
+<script type="module">
+  import { exigirSesion, obtenerPerfil } from "../js/auth-helpers.js";
+  import { obtenerClubes } from "../js/home-helpers.js";
+  import {
+    listarJugadoras,
+    crearJugadora,
+    actualizarJugadora,
+    borrarJugadora,
+    listarStickers,
+    crearSticker,
+    actualizarSticker,
+    borrarSticker,
+  } from "../js/admin-helpers.js";
+
+  const NOMBRES_RAREZA = { comun: 'Común', silver: 'Silver', gold: 'Gold', epica: 'Épica' };
+
+  exigirSesion(async (user) => {
+    const perfil = await obtenerPerfil(user.uid);
+    if (!perfil || perfil.rol !== 'admin') {
+      window.location.replace('./home.html');
+      return;
+    }
+
+    const clubes = await obtenerClubes();
+    clubes.sort((a, b) => a.nombre.localeCompare(b.nombre));
+    const selectClub = document.getElementById('club-jugadora');
+    selectClub.innerHTML = clubes.map((c) => `<option value="${c.id}">${c.nombre}</option>`).join('');
+
+    const lista = document.getElementById('lista-jugadoras');
+
+    async function renderizar() {
+      lista.innerHTML = '';
+      const [jugadoras, stickers] = await Promise.all([listarJugadoras(), listarStickers()]);
+      const clubesMap = new Map(clubes.map((c) => [c.id, c.nombre]));
+      const stickersPorJugadora = new Map(stickers.map((s) => [s.playerId, s]));
+
+      jugadoras.sort((a, b) => (a.nombre || '').localeCompare(b.nombre || ''));
+
+      for (const jugadora of jugadoras) {
+        const sticker = stickersPorJugadora.get(jugadora.id);
+        const card = document.createElement('div');
+        card.className = 'bg-surface-container border border-outline-variant rounded-lg p-3 flex flex-col gap-2';
+        card.innerHTML = `
+          <div class="flex items-center gap-2">
+            <input class="flex-grow bg-transparent border-none text-white font-body-md focus:ring-0" data-campo="nombre" value="${jugadora.nombre || ''}">
+            <button class="btn-borrar text-error">
+              <span class="material-symbols-outlined">delete</span>
+            </button>
+          </div>
+          <p class="font-label-caps text-label-caps text-on-surface-variant uppercase">${clubesMap.get(jugadora.clubId) || jugadora.clubId}</p>
+          <div class="grid grid-cols-2 gap-2">
+            <select class="bg-surface-container-high border border-outline-variant rounded-lg px-2 py-2 text-white text-body-sm" data-campo="rol">
+              <option value="player" ${jugadora.rol === 'player' ? 'selected' : ''}>Jugadora</option>
+              <option value="coach" ${jugadora.rol === 'coach' ? 'selected' : ''}>Cuerpo técnico</option>
+            </select>
+            <input class="bg-surface-container-high border border-outline-variant rounded-lg px-2 py-2 text-white text-body-sm" data-campo="puesto" placeholder="Puesto" value="${jugadora.puesto || ''}">
+          </div>
+          <div class="border-t border-outline-variant pt-2 flex flex-col gap-2">
+            <p class="font-label-caps text-label-caps text-on-surface-variant uppercase">Figurita</p>
+            <select class="bg-surface-container-high border border-outline-variant rounded-lg px-2 py-2 text-white text-body-sm" data-sticker="rareza">
+              <option value="comun" ${sticker?.rareza === 'comun' ? 'selected' : ''}>Común</option>
+              <option value="silver" ${sticker?.rareza === 'silver' ? 'selected' : ''}>Silver</option>
+              <option value="gold" ${sticker?.rareza === 'gold' ? 'selected' : ''}>Gold</option>
+              <option value="epica" ${sticker?.rareza === 'epica' ? 'selected' : ''}>Épica</option>
+            </select>
+            <input class="bg-surface-container-high border border-outline-variant rounded-lg px-2 py-2 text-white text-body-sm" data-sticker="imagenUrl" placeholder="URL de imagen" value="${sticker?.imagenUrl || ''}">
+            <input class="bg-surface-container-high border border-outline-variant rounded-lg px-2 py-2 text-white text-body-sm" data-sticker="temporada" placeholder="Temporada (ej. 2026)" value="${sticker?.temporada || ''}">
+            <button class="btn-guardar-sticker bg-primary-container text-on-primary-container font-label-caps text-label-caps py-2 rounded-lg uppercase">${sticker ? 'Actualizar figurita' : 'Crear figurita'}</button>
+          </div>
+        `;
+        lista.appendChild(card);
+
+        card.querySelectorAll('input[data-campo], select[data-campo]').forEach((campo) => {
+          campo.addEventListener('change', async () => {
+            await actualizarJugadora(jugadora.id, { [campo.dataset.campo]: campo.value });
+          });
+        });
+
+        card.querySelector('.btn-borrar').addEventListener('click', async () => {
+          if (!confirm(`¿Borrar a ${jugadora.nombre}? Esto no borra su figurita si ya existe.`)) return;
+          await borrarJugadora(jugadora.id);
+          card.remove();
+        });
+
+        card.querySelector('.btn-guardar-sticker').addEventListener('click', async () => {
+          const datos = {
+            playerId: jugadora.id,
+            rareza: card.querySelector('[data-sticker="rareza"]').value,
+            imagenUrl: card.querySelector('[data-sticker="imagenUrl"]').value.trim(),
+            temporada: card.querySelector('[data-sticker="temporada"]').value.trim(),
+          };
+          if (sticker) {
+            await actualizarSticker(sticker.id, datos);
+          } else {
+            await crearSticker(datos);
+          }
+          await renderizar();
+        });
+      }
+    }
+
+    document.getElementById('form-jugadora').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const errorEl = document.getElementById('form-jugadora-error');
+      errorEl.classList.add('hidden');
+      const nombreInput = document.getElementById('nombre-jugadora');
+      const numeroInput = document.getElementById('numero-jugadora');
+      try {
+        await crearJugadora({
+          nombre: nombreInput.value.trim(),
+          clubId: selectClub.value,
+          rol: document.getElementById('rol-jugadora').value,
+          puesto: document.getElementById('puesto-jugadora').value.trim(),
+          numero: numeroInput.value ? Number(numeroInput.value) : null,
+        });
+        nombreInput.value = '';
+        numeroInput.value = '';
+        document.getElementById('puesto-jugadora').value = '';
+        await renderizar();
+      } catch (err) {
+        errorEl.textContent = 'No pudimos agregar la jugadora.';
+        errorEl.classList.remove('hidden');
+      }
+    });
+
+    await renderizar();
+  });
+</script>
+</body></html>

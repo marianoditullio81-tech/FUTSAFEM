@@ -75,11 +75,27 @@
 </div>
 <span class="material-symbols-outlined text-on-surface-variant">chevron_right</span>
 </a>
+<a class="bg-surface-container border border-outline-variant rounded-xl p-4 flex items-center gap-4 active:scale-[0.98] transition-all" href="./admin-jugadoras.html">
+<span class="material-symbols-outlined text-primary text-3xl">sports_soccer</span>
+<div class="flex-grow">
+<p class="font-headline-md text-headline-md text-white">Jugadoras y figuritas</p>
+<p class="font-body-sm text-on-surface-variant" id="contador-jugadoras">—</p>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant">chevron_right</span>
+</a>
+<a class="bg-surface-container border border-outline-variant rounded-xl p-4 flex items-center gap-4 active:scale-[0.98] transition-all" href="./admin-sobres.html">
+<span class="material-symbols-outlined text-primary text-3xl">styler</span>
+<div class="flex-grow">
+<p class="font-headline-md text-headline-md text-white">Sobres y rarezas</p>
+<p class="font-body-sm text-on-surface-variant">Probabilidades por sobre</p>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant">chevron_right</span>
+</a>
 </main>
 <script type="module">
   import { exigirSesion, obtenerPerfil } from "../js/auth-helpers.js";
   import { obtenerClubes } from "../js/home-helpers.js";
-  import { listarUsuarias, contarPorEstadoFoto } from "../js/admin-helpers.js";
+  import { listarUsuarias, contarPorEstadoFoto, listarJugadoras } from "../js/admin-helpers.js";
 
   exigirSesion(async (user) => {
     const perfil = await obtenerPerfil(user.uid);
@@ -88,17 +104,19 @@
       return;
     }
 
-    const [enRevision, rechazadas, usuarias, clubes] = await Promise.all([
+    const [enRevision, rechazadas, usuarias, clubes, jugadoras] = await Promise.all([
       contarPorEstadoFoto('en_revision'),
       contarPorEstadoFoto('rechazada_revision'),
       listarUsuarias(),
       obtenerClubes(),
+      listarJugadoras(),
     ]);
 
     document.getElementById('contador-revision').textContent = `${enRevision} pendiente${enRevision === 1 ? '' : 's'}`;
     document.getElementById('contador-rechazadas').textContent = `${rechazadas} pendiente${rechazadas === 1 ? '' : 's'}`;
     document.getElementById('contador-usuarias').textContent = `${usuarias.length} cuentas`;
     document.getElementById('contador-clubes').textContent = `${clubes.length} clubes`;
+    document.getElementById('contador-jugadoras').textContent = `${jugadoras.length} fichas`;
   });
 </script>
 </body></html>

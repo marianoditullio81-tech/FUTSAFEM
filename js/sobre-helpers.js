@@ -20,11 +20,16 @@ const CICLO = {
   7: "gold",
 };
 
-const TABLAS = {
+const TABLAS_DEFAULT = {
   comun: { comun: 0.85, silver: 0.13, gold: 0.02 },
   silver: { comun: 0.70, silver: 0.25, gold: 0.05 },
   gold: { comun: 0.60, silver: 0.30, gold: 0.10 },
 };
+
+async function obtenerTablas() {
+  const snap = await getDoc(doc(db, "config", "sobres"));
+  return snap.exists() ? snap.data() : TABLAS_DEFAULT;
+}
 
 const FIGUS_POR_SOBRE = { comun: 3, silver: 4, gold: 5 };
 const GARANTIA_POR_SOBRE = { comun: null, silver: "silver", gold: "gold" };
@@ -80,7 +85,8 @@ export async function abrirSobre(uid, perfil) {
   const diaDeRacha = calcularDiaDeRacha(perfil);
   const tipoSobre = determinarTipoSobre(diaDeRacha);
   const cantidadFigus = FIGUS_POR_SOBRE[tipoSobre];
-  const tabla = TABLAS[tipoSobre];
+  const tablas = await obtenerTablas();
+  const tabla = tablas[tipoSobre] || TABLAS_DEFAULT[tipoSobre];
   const garantia = GARANTIA_POR_SOBRE[tipoSobre];
 
   const porRareza = await obtenerStickersPorRareza();

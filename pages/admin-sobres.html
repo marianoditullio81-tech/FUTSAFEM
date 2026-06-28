@@ -1,0 +1,127 @@
+<!DOCTYPE html><html class="dark" lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport">
+<title>FUTSAFEM - Admin: sobres</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@400;600;700&amp;family=Hanken+Grotesk:wght@400;600&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary": "#ecb2ff", "on-primary-container": "#ffffff", "on-primary": "#520071",
+                    "primary-container": "#bd00ff", "secondary": "#ffffff", "secondary-container": "#c3f400",
+                    "on-secondary-container": "#556d00", "error": "#ffb4ab", "error-container": "#93000a",
+                    "on-error-container": "#ffdad6", "surface": "#111316", "surface-container": "#1e2023",
+                    "surface-container-high": "#282a2d", "surface-container-highest": "#333538",
+                    "on-surface": "#e2e2e6", "on-surface-variant": "#d4c0d7", "outline": "#9d8ba0",
+                    "outline-variant": "#514255", "background": "#111316"
+            },
+            "borderRadius": {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+            "spacing": {"base": "8px", "margin-mobile": "20px", "stack-sm": "4px", "stack-md": "12px", "gutter": "16px", "stack-lg": "24px"},
+            "fontFamily": {"display-lg-mobile": ["Archivo Narrow"], "headline-md": ["Archivo Narrow"], "label-caps": ["JetBrains Mono"], "body-sm": ["Hanken Grotesk"], "body-md": ["Hanken Grotesk"]},
+            "fontSize": {
+                    "display-lg-mobile": ["36px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "28px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                    "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { background-color: #111316; color: #e2e2e6; -webkit-font-smoothing: antialiased; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+</style>
+</head>
+<body class="font-body-md min-h-screen pb-16">
+<header class="bg-surface sticky top-0 z-50 flex items-center gap-4 px-margin-mobile h-16 border-b border-outline-variant">
+<a href="./admin.html"><span class="material-symbols-outlined text-primary text-2xl">arrow_back</span></a>
+<h1 class="font-display-lg-mobile text-display-lg-mobile text-primary tracking-tight italic uppercase">Sobres y rarezas</h1>
+</header>
+<main class="px-margin-mobile pt-stack-lg max-w-md mx-auto flex flex-col gap-stack-lg">
+<p class="font-body-sm text-on-surface-variant">Probabilidad de cada rareza al abrir un sobre. Cada fila debe sumar 100%.</p>
+<form class="flex flex-col gap-stack-lg" id="form-sobres">
+<section class="bg-surface-container border border-outline-variant rounded-xl p-4 flex flex-col gap-3" data-sobre="comun">
+<p class="font-headline-md text-headline-md text-white uppercase">Sobre Común</p>
+<label class="flex items-center justify-between gap-2 font-body-sm">Común (%)<input class="w-20 bg-surface-container-high border border-outline-variant rounded-lg px-3 py-2 text-white text-right" data-rareza="comun" max="100" min="0" required step="0.1" type="number"></label>
+<label class="flex items-center justify-between gap-2 font-body-sm">Silver (%)<input class="w-20 bg-surface-container-high border border-outline-variant rounded-lg px-3 py-2 text-white text-right" data-rareza="silver" max="100" min="0" required step="0.1" type="number"></label>
+<label class="flex items-center justify-between gap-2 font-body-sm">Gold (%)<input class="w-20 bg-surface-container-high border border-outline-variant rounded-lg px-3 py-2 text-white text-right" data-rareza="gold" max="100" min="0" required step="0.1" type="number"></label>
+</section>
+<section class="bg-surface-container border border-outline-variant rounded-xl p-4 flex flex-col gap-3" data-sobre="silver">
+<p class="font-headline-md text-headline-md text-white uppercase">Sobre Silver</p>
+<p class="font-body-sm text-on-surface-variant -mt-2">Incluye 1 Silver garantizada; el resto sigue esta tabla.</p>
+<label class="flex items-center justify-between gap-2 font-body-sm">Común (%)<input class="w-20 bg-surface-container-high border border-outline-variant rounded-lg px-3 py-2 text-white text-right" data-rareza="comun" max="100" min="0" required step="0.1" type="number"></label>
+<label class="flex items-center justify-between gap-2 font-body-sm">Silver (%)<input class="w-20 bg-surface-container-high border border-outline-variant rounded-lg px-3 py-2 text-white text-right" data-rareza="silver" max="100" min="0" required step="0.1" type="number"></label>
+<label class="flex items-center justify-between gap-2 font-body-sm">Gold (%)<input class="w-20 bg-surface-container-high border border-outline-variant rounded-lg px-3 py-2 text-white text-right" data-rareza="gold" max="100" min="0" required step="0.1" type="number"></label>
+</section>
+<section class="bg-surface-container border border-outline-variant rounded-xl p-4 flex flex-col gap-3" data-sobre="gold">
+<p class="font-headline-md text-headline-md text-white uppercase">Sobre Gold</p>
+<p class="font-body-sm text-on-surface-variant -mt-2">Incluye 1 Gold garantizada; el resto sigue esta tabla.</p>
+<label class="flex items-center justify-between gap-2 font-body-sm">Común (%)<input class="w-20 bg-surface-container-high border border-outline-variant rounded-lg px-3 py-2 text-white text-right" data-rareza="comun" max="100" min="0" required step="0.1" type="number"></label>
+<label class="flex items-center justify-between gap-2 font-body-sm">Silver (%)<input class="w-20 bg-surface-container-high border border-outline-variant rounded-lg px-3 py-2 text-white text-right" data-rareza="silver" max="100" min="0" required step="0.1" type="number"></label>
+<label class="flex items-center justify-between gap-2 font-body-sm">Gold (%)<input class="w-20 bg-surface-container-high border border-outline-variant rounded-lg px-3 py-2 text-white text-right" data-rareza="gold" max="100" min="0" required step="0.1" type="number"></label>
+</section>
+<p class="text-error text-body-sm hidden" id="form-error"></p>
+<p class="text-secondary-container text-body-sm hidden" id="form-ok">Guardado.</p>
+<button class="bg-primary-container text-on-primary-container font-label-caps text-label-caps py-3 rounded-lg uppercase" type="submit">Guardar</button>
+</form>
+</main>
+<script type="module">
+  import { exigirSesion, obtenerPerfil } from "../js/auth-helpers.js";
+  import { obtenerConfigSobres, actualizarConfigSobres } from "../js/admin-helpers.js";
+
+  exigirSesion(async (user) => {
+    const perfil = await obtenerPerfil(user.uid);
+    if (!perfil || perfil.rol !== 'admin') {
+      window.location.replace('./home.html');
+      return;
+    }
+
+    const probabilidades = await obtenerConfigSobres();
+    document.querySelectorAll('section[data-sobre]').forEach((section) => {
+      const tipo = section.dataset.sobre;
+      section.querySelectorAll('input[data-rareza]').forEach((input) => {
+        const valor = (probabilidades[tipo] && probabilidades[tipo][input.dataset.rareza]) || 0;
+        input.value = (valor * 100).toFixed(1);
+      });
+    });
+
+    document.getElementById('form-sobres').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const errorEl = document.getElementById('form-error');
+      const okEl = document.getElementById('form-ok');
+      errorEl.classList.add('hidden');
+      okEl.classList.add('hidden');
+
+      const nuevasProbabilidades = {};
+      let huboError = false;
+      document.querySelectorAll('section[data-sobre]').forEach((section) => {
+        const tipo = section.dataset.sobre;
+        const tabla = {};
+        let suma = 0;
+        section.querySelectorAll('input[data-rareza]').forEach((input) => {
+          const valor = parseFloat(input.value) || 0;
+          tabla[input.dataset.rareza] = valor / 100;
+          suma += valor;
+        });
+        if (Math.abs(suma - 100) > 0.5) huboError = true;
+        nuevasProbabilidades[tipo] = tabla;
+      });
+
+      if (huboError) {
+        errorEl.textContent = 'Cada sobre debe sumar 100%.';
+        errorEl.classList.remove('hidden');
+        return;
+      }
+
+      await actualizarConfigSobres(nuevasProbabilidades);
+      okEl.classList.remove('hidden');
+    });
+  });
+</script>
+</body></html>

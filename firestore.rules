@@ -65,12 +65,12 @@ service cloud.firestore {
 
     match /players/{playerId} {
       allow read: if isSignedIn();
-      allow write: if false;
+      allow write: if esAdmin();
     }
 
     match /stickers/{stickerId} {
       allow read: if isSignedIn();
-      allow write: if false;
+      allow write: if esAdmin();
     }
 
     // userCollection: cada usuaria gestiona solo sus propias figuritas.

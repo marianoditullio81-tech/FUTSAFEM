@@ -6,9 +6,11 @@ import {
   where,
   getCountFromServer,
   doc,
+  getDoc,
   setDoc,
   updateDoc,
   deleteDoc,
+  addDoc,
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 import { crearNotificacion } from "./notificaciones-helpers.js";
 
@@ -58,4 +60,55 @@ export async function actualizarClub(id, datos) {
 
 export async function borrarClub(id) {
   await deleteDoc(doc(db, "clubs", id));
+}
+
+export async function listarJugadoras() {
+  const snap = await getDocs(collection(db, "players"));
+  return snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+}
+
+export async function crearJugadora(datos) {
+  const ref = await addDoc(collection(db, "players"), datos);
+  return ref.id;
+}
+
+export async function actualizarJugadora(id, datos) {
+  await updateDoc(doc(db, "players", id), datos);
+}
+
+export async function borrarJugadora(id) {
+  await deleteDoc(doc(db, "players", id));
+}
+
+export async function listarStickers() {
+  const snap = await getDocs(collection(db, "stickers"));
+  return snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+}
+
+export async function crearSticker(datos) {
+  const ref = await addDoc(collection(db, "stickers"), datos);
+  return ref.id;
+}
+
+export async function actualizarSticker(id, datos) {
+  await updateDoc(doc(db, "stickers", id), datos);
+}
+
+export async function borrarSticker(id) {
+  await deleteDoc(doc(db, "stickers", id));
+}
+
+const PROBABILIDADES_DEFAULT = {
+  comun: { comun: 0.85, silver: 0.13, gold: 0.02 },
+  silver: { comun: 0.70, silver: 0.25, gold: 0.05 },
+  gold: { comun: 0.60, silver: 0.30, gold: 0.10 },
+};
+
+export async function obtenerConfigSobres() {
+  const snap = await getDoc(doc(db, "config", "sobres"));
+  return snap.exists() ? snap.data() : PROBABILIDADES_DEFAULT;
+}
+
+export async function actualizarConfigSobres(probabilidades) {
+  await setDoc(doc(db, "config", "sobres"), probabilidades);
 }
