@@ -132,7 +132,7 @@
       window.location.href = './mercado-pases.html';
     });
 
-    const sponsor = await obtenerSponsorAlAzar();
+    const sponsor = await obtenerSponsorAlAzar('celebracion-match');
     if (sponsor) {
       document.getElementById('sponsor-logo').src = sponsor.logoUrl || '';
       document.getElementById('sponsor-logo').alt = sponsor.nombre || '';

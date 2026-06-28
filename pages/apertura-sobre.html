@@ -137,7 +137,7 @@
     document.getElementById('sobre-tipo-badge').textContent = NOMBRES_SOBRE[tipoSobre];
     document.getElementById('sobre-cantidad-badge').textContent = `${FIGUS_POR_SOBRE[tipoSobre]} CARDS`;
 
-    const sponsor = await obtenerSponsorAlAzar();
+    const sponsor = await obtenerSponsorAlAzar('apertura-sobre');
     if (sponsor) {
       document.getElementById('sponsor-logo').src = sponsor.logoUrl || '';
       document.getElementById('sponsor-nombre').textContent = sponsor.nombre || '';

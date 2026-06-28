@@ -1,0 +1,166 @@
+<!DOCTYPE html><html class="dark" lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport">
+<title>FUTSAFEM - Admin: sponsors</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@400;600;700&amp;family=Hanken+Grotesk:wght@400;600&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary": "#ecb2ff", "on-primary-container": "#ffffff", "on-primary": "#520071",
+                    "primary-container": "#bd00ff", "secondary": "#ffffff", "secondary-container": "#c3f400",
+                    "on-secondary-container": "#556d00", "error": "#ffb4ab", "error-container": "#93000a",
+                    "on-error-container": "#ffdad6", "surface": "#111316", "surface-container": "#1e2023",
+                    "surface-container-high": "#282a2d", "surface-container-highest": "#333538",
+                    "on-surface": "#e2e2e6", "on-surface-variant": "#d4c0d7", "outline": "#9d8ba0",
+                    "outline-variant": "#514255", "background": "#111316"
+            },
+            "borderRadius": {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+            "spacing": {"base": "8px", "margin-mobile": "20px", "stack-sm": "4px", "stack-md": "12px", "gutter": "16px", "stack-lg": "24px"},
+            "fontFamily": {"display-lg-mobile": ["Archivo Narrow"], "headline-md": ["Archivo Narrow"], "label-caps": ["JetBrains Mono"], "body-sm": ["Hanken Grotesk"], "body-md": ["Hanken Grotesk"]},
+            "fontSize": {
+                    "display-lg-mobile": ["36px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "28px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                    "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { background-color: #111316; color: #e2e2e6; -webkit-font-smoothing: antialiased; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+</style>
+</head>
+<body class="font-body-md min-h-screen pb-16">
+<header class="bg-surface sticky top-0 z-50 flex items-center gap-4 px-margin-mobile h-16 border-b border-outline-variant">
+<a href="./admin.html"><span class="material-symbols-outlined text-primary text-2xl">arrow_back</span></a>
+<h1 class="font-display-lg-mobile text-display-lg-mobile text-primary tracking-tight italic uppercase">Sponsors</h1>
+</header>
+<main class="px-margin-mobile pt-stack-lg max-w-md mx-auto flex flex-col gap-stack-md">
+<form class="bg-surface-container border border-outline-variant rounded-xl p-4 flex flex-col gap-3" id="form-sponsor">
+<p class="font-headline-md text-headline-md text-white">Agregar sponsor</p>
+<input class="bg-surface-container-high border border-outline-variant rounded-lg px-4 py-3 text-white font-body-md" id="sponsor-nombre" placeholder="Nombre del sponsor" required type="text">
+<input class="bg-surface-container-high border border-outline-variant rounded-lg px-4 py-3 text-white font-body-md" id="sponsor-logo" placeholder="URL del logo (PNG/SVG con fondo transparente)" required type="url">
+<input class="bg-surface-container-high border border-outline-variant rounded-lg px-4 py-3 text-white font-body-md" id="sponsor-link" placeholder="Link (opcional, https://...)" type="url">
+<div>
+<p class="font-label-caps text-label-caps text-on-surface-variant mb-2">¿En qué pantallas aparece?</p>
+<div class="flex flex-col gap-2">
+<label class="flex items-center gap-2 text-body-sm">
+<input class="check-pantalla" type="checkbox" value="apertura-sobre">
+Apertura de sobre (badge "presenta", se muestra 1 al azar por visita)
+</label>
+<label class="flex items-center gap-2 text-body-sm">
+<input class="check-pantalla" type="checkbox" value="home">
+Home (tira de logos, se muestran todos los asignados juntos)
+</label>
+<label class="flex items-center gap-2 text-body-sm">
+<input class="check-pantalla" type="checkbox" value="celebracion-match">
+Celebración de match (badge, se muestra 1 al azar por visita)
+</label>
+</div>
+</div>
+<label class="flex items-center gap-2 text-body-sm">
+<input checked="" id="sponsor-activo" type="checkbox">
+Activo (visible en la app)
+</label>
+<p class="text-error text-body-sm hidden" id="form-sponsor-error"></p>
+<button class="bg-primary-container text-on-primary-container font-label-caps text-label-caps py-3 rounded-lg uppercase" type="submit">Agregar</button>
+</form>
+<p class="font-body-sm text-on-surface-variant">
+        En las pantallas que muestran un solo sponsor (apertura de sobre y celebración de match), si hay varios activos asignados, se elige uno distinto al azar en cada visita: con el tiempo todos van "pasando" por igual. En Home no hay límite: se muestran lado a lado todos los que tengan esa pantalla marcada.
+    </p>
+<div id="lista-sponsors" class="flex flex-col gap-stack-sm"></div>
+</main>
+<script type="module">
+  import { exigirSesion, obtenerPerfil } from "../js/auth-helpers.js";
+  import { listarSponsors, crearSponsor, actualizarSponsor, borrarSponsor } from "../js/admin-helpers.js";
+
+  const PANTALLA_LABEL = {
+    'apertura-sobre': 'Apertura de sobre',
+    'home': 'Home',
+    'celebracion-match': 'Celebración de match',
+  };
+
+  exigirSesion(async (user) => {
+    const perfil = await obtenerPerfil(user.uid);
+    if (!perfil || perfil.rol !== 'admin') {
+      window.location.replace('./home.html');
+      return;
+    }
+
+    const lista = document.getElementById('lista-sponsors');
+
+    async function renderizar() {
+      lista.innerHTML = '';
+      const sponsors = await listarSponsors();
+      sponsors.sort((a, b) => (a.nombre || '').localeCompare(b.nombre || ''));
+      for (const sponsor of sponsors) {
+        const pantallasTexto = (sponsor.pantallas || [])
+          .map((p) => PANTALLA_LABEL[p] || p)
+          .join(', ') || 'Sin pantallas asignadas';
+
+        const card = document.createElement('div');
+        card.className = 'bg-surface-container border border-outline-variant rounded-lg p-3 flex flex-col gap-2';
+        card.innerHTML = `
+          <div class="flex items-center gap-3">
+            <img class="h-8 max-w-[60px] object-contain bg-surface-container-high rounded" src="${sponsor.logoUrl || ''}" alt="${sponsor.nombre || ''}">
+            <p class="flex-grow font-body-md text-white">${sponsor.nombre || ''}</p>
+            <label class="flex items-center gap-1 text-body-sm">
+              <input class="check-activo" type="checkbox" ${sponsor.activo ? 'checked' : ''}>
+              Activo
+            </label>
+            <button class="btn-borrar text-error">
+              <span class="material-symbols-outlined">delete</span>
+            </button>
+          </div>
+          <p class="font-body-sm text-on-surface-variant">${pantallasTexto}</p>
+        `;
+        lista.appendChild(card);
+
+        card.querySelector('.check-activo').addEventListener('change', async (e) => {
+          await actualizarSponsor(sponsor.id, { activo: e.target.checked });
+        });
+
+        card.querySelector('.btn-borrar').addEventListener('click', async () => {
+          if (!confirm(`¿Borrar a ${sponsor.nombre}?`)) return;
+          await borrarSponsor(sponsor.id);
+          card.remove();
+        });
+      }
+    }
+
+    document.getElementById('form-sponsor').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const errorEl = document.getElementById('form-sponsor-error');
+      errorEl.classList.add('hidden');
+
+      const nombre = document.getElementById('sponsor-nombre').value.trim();
+      const logoUrl = document.getElementById('sponsor-logo').value.trim();
+      const link = document.getElementById('sponsor-link').value.trim();
+      const activo = document.getElementById('sponsor-activo').checked;
+      const pantallas = Array.from(document.querySelectorAll('.check-pantalla:checked')).map((c) => c.value);
+
+      if (!nombre || !logoUrl) return;
+
+      try {
+        await crearSponsor({ nombre, logoUrl, link, activo, pantallas });
+        document.getElementById('form-sponsor').reset();
+        document.getElementById('sponsor-activo').checked = true;
+        await renderizar();
+      } catch (err) {
+        errorEl.textContent = 'No pudimos agregar el sponsor.';
+        errorEl.classList.remove('hidden');
+      }
+    });
+
+    await renderizar();
+  });
+</script>
+</body></html>

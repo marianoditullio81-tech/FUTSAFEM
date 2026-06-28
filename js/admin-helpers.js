@@ -98,6 +98,24 @@ export async function borrarSticker(id) {
   await deleteDoc(doc(db, "stickers", id));
 }
 
+export async function listarSponsors() {
+  const snap = await getDocs(collection(db, "sponsors"));
+  return snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+}
+
+export async function crearSponsor(datos) {
+  const ref = await addDoc(collection(db, "sponsors"), datos);
+  return ref.id;
+}
+
+export async function actualizarSponsor(id, datos) {
+  await updateDoc(doc(db, "sponsors", id), datos);
+}
+
+export async function borrarSponsor(id) {
+  await deleteDoc(doc(db, "sponsors", id));
+}
+
 const PROBABILIDADES_DEFAULT = {
   comun: { comun: 0.85, silver: 0.13, gold: 0.02 },
   silver: { comun: 0.70, silver: 0.25, gold: 0.05 },

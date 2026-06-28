@@ -186,7 +186,7 @@
   import { obtenerClub, contarStickersTotales, contarColeccionUnica, esSobreDisponibleHoy, hoyComoTexto } from "../js/home-helpers.js";
   import { contarFotosPendientes } from "../js/validacion-helpers.js";
   import { contarNoLeidas, crearNotificacion, esCumpleañosHoy } from "../js/notificaciones-helpers.js";
-  import { obtenerSponsorsActivos } from "../js/sponsor-helpers.js";
+  import { obtenerSponsorsPorPantalla } from "../js/sponsor-helpers.js";
 
   const NOMBRES_PUESTO = { arquera: 'Arquera', cierre: 'Cierre', ala: 'Ala', pivot: 'Pivot' };
   const NOMBRES_CARGO = { dt: 'Directora Técnica', at: 'Asistente Técnica', pf: 'Preparadora Física', ea: 'Entrenadora de Arqueras', analista: 'Analista de Video', medico: 'Cuerpo Médico' };
@@ -265,7 +265,7 @@
       btn.disabled = true;
     }
 
-    const sponsors = await obtenerSponsorsActivos();
+    const sponsors = await obtenerSponsorsPorPantalla('home');
     if (sponsors.length > 0) {
       const logosEl = document.getElementById('sponsors-logos');
       sponsors.forEach((sponsor) => {
