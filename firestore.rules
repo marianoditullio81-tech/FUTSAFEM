@@ -25,9 +25,7 @@ service cloud.firestore {
     // necesitan listar los clubes antes de que la usuaria se autentique.
     match /clubs/{clubId} {
       allow read: if true;
-      // TEMPORAL: permitir escritura para la carga inicial con seed-clubs.html.
-      // Volver a "if false" despues de cargar los clubes.
-      allow write: if isSignedIn();
+      allow write: if false;
     }
 
     match /players/{playerId} {
