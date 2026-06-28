@@ -96,7 +96,7 @@
           <img class="w-9 h-9 rounded-full object-cover bg-surface-container-highest flex-shrink-0" src="${msg.autorFotoUrl || ''}">
           <div class="flex-grow">
             <div class="flex items-center gap-2">
-              <p class="font-body-md text-white font-semibold">${msg.autorNombre || 'Anónima'}</p>
+              <a class="font-body-md text-white font-semibold hover:text-primary" href="./perfil-publico.html?uid=${encodeURIComponent(msg.autorUid)}">${msg.autorNombre || 'Anónima'}</a>
               <span class="font-label-caps text-[10px] text-on-surface-variant">${formatearFecha(msg.creadoEn)}</span>
             </div>
             <p class="font-body-sm text-on-surface-variant break-words">${msg.texto}</p>

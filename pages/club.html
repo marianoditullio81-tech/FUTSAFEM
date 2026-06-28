@@ -101,8 +101,9 @@
     }
 
     for (const persona of plantel) {
-      const card = document.createElement('div');
-      card.className = 'bg-surface-container border border-outline-variant rounded-lg p-3 flex items-center gap-3';
+      const card = document.createElement('a');
+      card.href = `./perfil-publico.html?uid=${encodeURIComponent(persona.uid)}`;
+      card.className = 'bg-surface-container border border-outline-variant rounded-lg p-3 flex items-center gap-3 active:scale-[0.98] transition-all';
       card.innerHTML = `
         <img class="w-12 h-12 rounded-full object-cover bg-surface-container-highest" src="${persona.fotoUrl}">
         <div class="flex-grow">
