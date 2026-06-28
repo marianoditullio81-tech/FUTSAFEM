@@ -82,6 +82,7 @@
 <script type="module">
   import { exigirSesion, obtenerPerfil } from "../js/auth-helpers.js";
   import { obtenerJugadorasDeStickers } from "../js/sobre-helpers.js";
+  import { PLACEHOLDER_STICKER_URL } from "../js/home-helpers.js";
 
   exigirSesion(async (user) => {
     const perfil = await obtenerPerfil(user.uid);
@@ -110,7 +111,7 @@
       card.style.animationDelay = `${index * 0.15}s`;
       card.innerHTML = `
         <div class="h-2/3 relative bg-surface-container-high">
-          <img class="w-full h-full object-cover" src="${sticker.imagenUrl || ''}" alt="${nombre}">
+          <img class="w-full h-full object-cover" src="${sticker.imagenUrl || PLACEHOLDER_STICKER_URL}" alt="${nombre}">
           <span class="absolute top-2 right-2 font-label-caps text-label-caps bg-surface/80 px-2 py-1 rounded">${puesto}</span>
         </div>
         <div class="p-base flex-grow flex flex-col justify-between">

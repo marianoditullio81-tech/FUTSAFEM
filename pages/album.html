@@ -113,6 +113,7 @@
 <script type="module">
   import { exigirSesion, obtenerPerfil } from "../js/auth-helpers.js";
   import { obtenerAlbumDeUsuaria } from "../js/album-helpers.js";
+  import { PLACEHOLDER_STICKER_URL } from "../js/home-helpers.js";
 
   let clubes = [];
   let filtroActual = 'todas';
@@ -168,7 +169,7 @@
           const puesto = item.jugadora ? (item.jugadora.puesto || '').toUpperCase() : '';
           const repetidaBadge = item.cantidad > 1 ? `<span class="absolute top-2 right-2 z-20 bg-secondary-container text-on-secondary-container text-[10px] font-label-caps px-1.5 py-0.5 rounded">x${item.cantidad}</span>` : '';
           card.innerHTML = `
-            <img class="w-full h-full object-cover" src="${item.sticker.imagenUrl || ''}" alt="${nombreJugadora}">
+            <img class="w-full h-full object-cover" src="${item.sticker.imagenUrl || PLACEHOLDER_STICKER_URL}" alt="${nombreJugadora}">
             ${repetidaBadge}
             <div class="absolute top-2 left-2 z-20">
               <span class="bg-black/60 backdrop-blur-md text-[10px] font-label-caps px-1.5 py-0.5 rounded border border-white/20 text-white">${puesto}</span>

@@ -107,6 +107,7 @@
 </main>
 <script type="module">
   import { exigirSesion } from "../js/auth-helpers.js";
+  import { PLACEHOLDER_STICKER_URL } from "../js/home-helpers.js";
 
   const RAREZA_LABEL = { comun: "Común", silver: "Silver", gold: "Gold", epica: "Épica" };
 
@@ -116,7 +117,7 @@
       window.location.replace('./mercado-pases.html');
       return;
     }
-    document.getElementById('card-imagen').src = datos.imagenUrl || '';
+    document.getElementById('card-imagen').src = datos.imagenUrl || PLACEHOLDER_STICKER_URL;
     document.getElementById('card-nombre').textContent = datos.nombre;
     document.getElementById('card-rareza').textContent = RAREZA_LABEL[datos.rareza] || datos.rareza;
     document.getElementById('mensaje-resultado').textContent = `Conseguiste a ${datos.nombre} para tu álbum.`;

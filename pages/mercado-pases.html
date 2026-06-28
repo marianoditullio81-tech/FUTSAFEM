@@ -127,6 +127,7 @@
 </nav>
 <script type="module">
   import { exigirSesion, obtenerPerfil } from "../js/auth-helpers.js";
+  import { PLACEHOLDER_STICKER_URL } from "../js/home-helpers.js";
   import {
     obtenerColaIntercambios,
     obtenerJugadorasDeStickers,
@@ -161,7 +162,7 @@
     const jugadora = jugadorasMap.get(sticker?.playerId);
 
     document.getElementById('card-rareza').textContent = RAREZA_LABEL[sticker?.rareza] || sticker?.rareza || '';
-    document.getElementById('card-imagen').src = sticker?.imagenUrl || '';
+    document.getElementById('card-imagen').src = sticker?.imagenUrl || PLACEHOLDER_STICKER_URL;
     document.getElementById('card-nombre').textContent = jugadora ? jugadora.nombre : 'Desconocida';
     document.getElementById('card-puesto').textContent = jugadora ? (jugadora.puesto || '').toUpperCase() : '';
 
@@ -210,7 +211,7 @@
       sessionStorage.setItem('ultimoMatch', JSON.stringify({
         nombre: jugadora ? jugadora.nombre : 'Desconocida',
         rareza: sticker?.rareza || 'comun',
-        imagenUrl: sticker?.imagenUrl || '',
+        imagenUrl: sticker?.imagenUrl || PLACEHOLDER_STICKER_URL,
       }));
       window.location.href = './celebracion-match.html';
       return;
