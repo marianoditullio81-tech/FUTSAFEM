@@ -142,6 +142,7 @@
 
         window.location.href = './resultado-de-apertura.html';
       } catch (e) {
+        console.error('Error al abrir sobre:', e);
         document.getElementById('prompt-texto').textContent = 'ERROR, REINTENTÁ';
         abriendo = false;
         document.getElementById('pack').classList.remove('abriendo');
