@@ -247,7 +247,7 @@
       badge.classList.remove('hidden');
     }
 
-    const disponible = esSobreDisponibleHoy(perfil);
+    const disponible = perfil.rol === 'admin' || esSobreDisponibleHoy(perfil);
     const btn = document.getElementById('btn-abrir-sobre');
     const estadoEl = document.getElementById('sobre-estado');
     if (disponible) {

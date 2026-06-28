@@ -68,7 +68,7 @@ function sortearRareza(tabla) {
 
 async function obtenerStickersPorRareza() {
   const snap = await getDocs(collection(db, "stickers"));
-  const porRareza = { comun: [], silver: [], gold: [] };
+  const porRareza = { comun: [], silver: [], gold: [], epica: [] };
   snap.forEach((d) => {
     const sticker = { id: d.id, ...d.data() };
     if (porRareza[sticker.rareza]) porRareza[sticker.rareza].push(sticker);
@@ -81,13 +81,19 @@ function elegirAlAzar(lista) {
   return lista[Math.floor(Math.random() * lista.length)];
 }
 
-export async function abrirSobre(uid, perfil) {
+export async function abrirSobre(uid, perfil, opciones = {}) {
+  // tipoForzado: solo usado por el panel de admin para probar sobres/rarezas
+  // sin esperar la racha ni el límite diario. No otorga futsacoins ni cuenta
+  // como apertura real (no toca rachaActual/ultimaAperturaFecha).
+  const tipoForzado = opciones.tipoForzado || null;
+  const esPrueba = Boolean(tipoForzado);
+
   const diaDeRacha = calcularDiaDeRacha(perfil);
-  const tipoSobre = determinarTipoSobre(diaDeRacha);
+  const tipoSobre = tipoForzado === "epica" ? "gold" : tipoForzado || determinarTipoSobre(diaDeRacha);
   const cantidadFigus = FIGUS_POR_SOBRE[tipoSobre];
   const tablas = await obtenerTablas();
   const tabla = tablas[tipoSobre] || TABLAS_DEFAULT[tipoSobre];
-  const garantia = GARANTIA_POR_SOBRE[tipoSobre];
+  const garantia = tipoForzado === "epica" ? "epica" : GARANTIA_POR_SOBRE[tipoSobre];
 
   const porRareza = await obtenerStickersPorRareza();
 
@@ -120,14 +126,17 @@ export async function abrirSobre(uid, perfil) {
     diaDeRacha,
     stickerIds: stickersObtenidos.map((s) => s.id),
     fecha: new Date().toISOString(),
+    prueba: esPrueba,
   });
 
-  const otorgaCreditos = tipoSobre === "gold" ? 50 : 0;
-  await updateDoc(doc(db, "users", uid), {
-    rachaActual: diaDeRacha,
-    ultimaAperturaFecha: hoyComoTexto(),
-    ...(otorgaCreditos ? { futsacoins: increment(otorgaCreditos) } : {}),
-  });
+  const otorgaCreditos = !esPrueba && tipoSobre === "gold" ? 50 : 0;
+  if (!esPrueba) {
+    await updateDoc(doc(db, "users", uid), {
+      rachaActual: diaDeRacha,
+      ultimaAperturaFecha: hoyComoTexto(),
+      ...(otorgaCreditos ? { futsacoins: increment(otorgaCreditos) } : {}),
+    });
+  }
 
   return { tipoSobre, stickersObtenidos, creditosGanados: otorgaCreditos };
 }

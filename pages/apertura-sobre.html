@@ -97,6 +97,13 @@
 </div>
 </div>
 </main>
+<!-- Panel de pruebas, solo visible para admin: fuerza tipo/rareza sin esperar la racha -->
+<div id="panel-admin" class="hidden fixed bottom-4 left-0 w-full px-margin-mobile flex flex-wrap gap-2 justify-center">
+<button data-tipo="comun" class="btn-prueba font-label-caps text-[10px] px-3 py-2 rounded bg-surface-container-highest text-on-surface-variant uppercase">Probar Común</button>
+<button data-tipo="silver" class="btn-prueba font-label-caps text-[10px] px-3 py-2 rounded bg-surface-container-highest text-on-surface-variant uppercase">Probar Silver</button>
+<button data-tipo="gold" class="btn-prueba font-label-caps text-[10px] px-3 py-2 rounded bg-surface-container-highest text-on-surface-variant uppercase">Probar Gold</button>
+<button data-tipo="epica" class="btn-prueba font-label-caps text-[10px] px-3 py-2 rounded bg-primary-container text-white uppercase">Probar Épica</button>
+</div>
 <script type="module">
   import { exigirSesion, obtenerPerfil } from "../js/auth-helpers.js";
   import { calcularDiaDeRacha, determinarTipoSobre, abrirSobre } from "../js/sobre-helpers.js";
@@ -124,13 +131,13 @@
     document.getElementById('sobre-tipo-badge').textContent = NOMBRES_SOBRE[tipoSobre];
     document.getElementById('sobre-cantidad-badge').textContent = `${FIGUS_POR_SOBRE[tipoSobre]} CARDS`;
 
-    document.getElementById('pack').addEventListener('click', async () => {
+    async function abrirYRedirigir(opciones) {
       if (abriendo) return;
       abriendo = true;
       document.getElementById('pack').classList.add('abriendo');
       document.getElementById('prompt-texto').textContent = 'ABRIENDO...';
       try {
-        const resultado = await abrirSobre(usuariaActual.uid, perfilActual);
+        const resultado = await abrirSobre(usuariaActual.uid, perfilActual, opciones);
         sessionStorage.setItem('ultimoSobre', JSON.stringify(resultado));
 
         const epica = resultado.stickersObtenidos.find((s) => s.rareza === 'epica');
@@ -161,7 +168,16 @@
         abriendo = false;
         document.getElementById('pack').classList.remove('abriendo');
       }
-    });
+    }
+
+    document.getElementById('pack').addEventListener('click', () => abrirYRedirigir({}));
+
+    if (perfil.rol === 'admin') {
+      document.getElementById('panel-admin').classList.remove('hidden');
+      document.querySelectorAll('.btn-prueba').forEach((btn) => {
+        btn.addEventListener('click', () => abrirYRedirigir({ tipoForzado: btn.dataset.tipo }));
+      });
+    }
   });
 </script>
 </body></html>
