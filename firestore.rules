@@ -69,9 +69,10 @@ service cloud.firestore {
     }
 
     // sponsors: logos/links de marcas auspiciantes (sin pago real, Etapa
-    // 3-A). Lectura abierta a usuarias logueadas, escritura solo admin.
+    // 3-A). Lectura pública (se muestran también en la pantalla de
+    // bienvenida, antes del login), escritura solo admin.
     match /sponsors/{sponsorId} {
-      allow read: if isSignedIn();
+      allow read: if true;
       allow write: if esAdmin();
     }
 

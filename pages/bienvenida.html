@@ -155,6 +155,10 @@
         INICIAR SESIÓN
       </button>
 </section>
+<section class="hidden px-margin-mobile py-stack-md flex flex-col items-center gap-2" id="sponsors-strip">
+<span class="font-label-caps text-label-caps text-on-surface-variant text-[10px] tracking-widest">CON EL APOYO DE</span>
+<div class="flex items-center gap-4 flex-wrap justify-center" id="sponsors-logos"></div>
+</section>
 </main>
 <script>
     let perfilSeleccionado = null;
@@ -201,4 +205,27 @@
       window.location.href = './login.html';
     });
   </script>
+<script type="module">
+  import { obtenerSponsorsPorPantalla } from "../js/sponsor-helpers.js";
+
+  obtenerSponsorsPorPantalla('bienvenida').then((sponsors) => {
+    if (sponsors.length === 0) return;
+    const logosEl = document.getElementById('sponsors-logos');
+    sponsors.forEach((sponsor) => {
+      const item = sponsor.link ? document.createElement('a') : document.createElement('div');
+      if (sponsor.link) {
+        item.href = sponsor.link;
+        item.target = '_blank';
+      }
+      item.className = 'flex items-center justify-center opacity-80 hover:opacity-100 transition-opacity';
+      const img = document.createElement('img');
+      img.src = sponsor.logoUrl || '';
+      img.alt = sponsor.nombre || '';
+      img.className = 'h-8 max-w-[100px] object-contain';
+      item.appendChild(img);
+      logosEl.appendChild(item);
+    });
+    document.getElementById('sponsors-strip').classList.remove('hidden');
+  });
+</script>
 </body></html>

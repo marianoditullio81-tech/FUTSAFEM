@@ -95,6 +95,10 @@
             Todavía no hay figuritas cargadas en el sistema. ¡Volvé pronto!
         </p>
 <div class="space-y-10" id="album-contenido"></div>
+<section class="hidden mt-stack-lg flex flex-col items-center gap-2" id="sponsors-strip">
+<span class="font-label-caps text-label-caps text-on-surface-variant text-[10px] tracking-widest">CON EL APOYO DE</span>
+<div class="flex items-center gap-4 flex-wrap justify-center" id="sponsors-logos"></div>
+</section>
 </main>
 <nav class="bg-surface-container fixed bottom-0 w-full z-50 flex justify-around items-center px-4 py-2 pb-safe rounded-t-xl shadow-lg border-t border-outline-variant">
 <a class="flex flex-col items-center justify-center text-on-surface-variant p-2 transition-transform duration-300 active:scale-90 hover:text-primary" href="./home.html">
@@ -122,6 +126,7 @@
   import { exigirSesion, obtenerPerfil } from "../js/auth-helpers.js";
   import { obtenerAlbumDeUsuaria } from "../js/album-helpers.js";
   import { PLACEHOLDER_STICKER_URL } from "../js/home-helpers.js";
+  import { obtenerSponsorsPorPantalla } from "../js/sponsor-helpers.js";
 
   let clubes = [];
   let filtroActual = 'todas';
@@ -233,6 +238,26 @@
     document.getElementById('futsacoins-badge').textContent = `${perfil.futsacoins || 0} 🪙`;
     clubes = await obtenerAlbumDeUsuaria(user.uid);
     renderAlbum();
+
+    const sponsors = await obtenerSponsorsPorPantalla('album');
+    if (sponsors.length > 0) {
+      const logosEl = document.getElementById('sponsors-logos');
+      sponsors.forEach((sponsor) => {
+        const item = sponsor.link ? document.createElement('a') : document.createElement('div');
+        if (sponsor.link) {
+          item.href = sponsor.link;
+          item.target = '_blank';
+        }
+        item.className = 'flex items-center justify-center opacity-80 hover:opacity-100 transition-opacity';
+        const img = document.createElement('img');
+        img.src = sponsor.logoUrl || '';
+        img.alt = sponsor.nombre || '';
+        img.className = 'h-8 max-w-[100px] object-contain';
+        item.appendChild(img);
+        logosEl.appendChild(item);
+      });
+      document.getElementById('sponsors-strip').classList.remove('hidden');
+    }
   });
 </script>
 </body></html>

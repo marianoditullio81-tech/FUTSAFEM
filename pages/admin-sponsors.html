@@ -64,6 +64,14 @@ Home (tira de logos, se muestran todos los asignados juntos)
 <input class="check-pantalla" type="checkbox" value="celebracion-match">
 Celebración de match (badge, se muestra 1 al azar por visita)
 </label>
+<label class="flex items-center gap-2 text-body-sm">
+<input class="check-pantalla" type="checkbox" value="album">
+Álbum (tira de logos, se muestran todos los asignados juntos)
+</label>
+<label class="flex items-center gap-2 text-body-sm">
+<input class="check-pantalla" type="checkbox" value="bienvenida">
+Pantalla de bienvenida (splash, antes de iniciar sesión)
+</label>
 </div>
 </div>
 <label class="flex items-center gap-2 text-body-sm">
@@ -86,6 +94,8 @@ Activo (visible en la app)
     'apertura-sobre': 'Apertura de sobre',
     'home': 'Home',
     'celebracion-match': 'Celebración de match',
+    'album': 'Álbum',
+    'bienvenida': 'Bienvenida (splash)',
   };
 
   exigirSesion(async (user) => {
