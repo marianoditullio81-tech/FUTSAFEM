@@ -97,6 +97,14 @@
                     Certifico que soy el padre, madre o tutor/a legal de la menor mencionada y que los datos proporcionados son verídicos.
                 </label>
 </div>
+<div class="flex gap-3 px-2">
+<div class="mt-1">
+<input class="rounded bg-surface-container-highest border-outline text-primary focus:ring-primary" id="saludo-publico-check" type="checkbox"/>
+</div>
+<label class="text-body-sm text-on-surface-variant" for="saludo-publico-check">
+                    Autorizo que, el día de su cumpleaños, FUTSAFEM avise a las demás usuarias (sin mostrar la fecha de nacimiento ni la edad).
+                </label>
+</div>
 <p class="text-error text-body-sm hidden" id="form-error"></p>
 </div>
 </main>
@@ -132,7 +140,8 @@
       return;
     }
     try {
-      await actualizarPerfil(usuariaActual.uid, { estadoConsentimiento: 'aprobado' });
+      const permiteSaludoPublico = document.getElementById('saludo-publico-check').checked;
+      await actualizarPerfil(usuariaActual.uid, { estadoConsentimiento: 'aprobado', permiteSaludoPublico });
       window.location.href = './home.html';
     } catch (err) {
       errorEl.textContent = 'No pudimos registrar el consentimiento: ' + err.message;

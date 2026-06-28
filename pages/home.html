@@ -185,7 +185,8 @@
   import { exigirSesion, obtenerPerfil, actualizarPerfil } from "../js/auth-helpers.js";
   import { obtenerClub, contarStickersTotales, contarColeccionUnica, esSobreDisponibleHoy, hoyComoTexto } from "../js/home-helpers.js";
   import { contarFotosPendientes } from "../js/validacion-helpers.js";
-  import { contarNoLeidas, crearNotificacion, esCumpleañosHoy } from "../js/notificaciones-helpers.js";
+  import { contarNoLeidas, esCumpleañosHoy, procesarCumpleañosDeHoy } from "../js/notificaciones-helpers.js";
+  import { increment } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
   import { obtenerSponsorsPorPantalla } from "../js/sponsor-helpers.js";
 
   const NOMBRES_PUESTO = { arquera: 'Arquera', cierre: 'Cierre', ala: 'Ala', pivot: 'Pivot' };
@@ -241,9 +242,11 @@
       document.getElementById('banner-validacion').classList.remove('hidden');
     }
 
-    if (esCumpleañosHoy(perfil.fechaNacimiento) && perfil.ultimoAvisoCumple !== hoyComoTexto()) {
-      await crearNotificacion(user.uid, "cumpleanos", "¡Feliz cumpleaños! Todo el equipo FUTSAFEM te saluda 🎉");
-      await actualizarPerfil(user.uid, { ultimoAvisoCumple: hoyComoTexto() });
+    await procesarCumpleañosDeHoy();
+
+    if (esCumpleañosHoy(perfil.fechaNacimiento) && perfil.ultimoRegaloCumple !== hoyComoTexto()) {
+      await actualizarPerfil(user.uid, { futsacoins: increment(50), ultimoRegaloCumple: hoyComoTexto() });
+      document.getElementById('futsacoins-badge').textContent = `${(perfil.futsacoins || 0) + 50} 🪙`;
     }
 
     const noLeidas = await contarNoLeidas(user.uid);

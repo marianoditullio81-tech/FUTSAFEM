@@ -140,5 +140,18 @@ service cloud.firestore {
       allow update: if false;
       allow delete: if false;
     }
+
+    // avisosCumple: marca de "ya se generó el saludo de cumpleaños de esta
+    // usuaria hoy" (id determinístico cumple_{userId}_{fecha}). Cualquier
+    // usuaria logueada puede crear la marca al detectar el cumpleaños; si dos
+    // usuarias abren la app a la vez, la segunda escritura recae sobre un
+    // documento que ya existe (se trata como "update") y queda bloqueada,
+    // evitando duplicar el aviso.
+    match /avisosCumple/{marcaId} {
+      allow read: if isSignedIn();
+      allow create: if isSignedIn();
+      allow update: if false;
+      allow delete: if false;
+    }
   }
 }
