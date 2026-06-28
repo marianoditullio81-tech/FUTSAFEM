@@ -66,6 +66,13 @@
 </div>
 </header>
 <main class="relative h-full flex flex-col items-center justify-center px-margin-mobile">
+<div class="hidden absolute top-20 left-1/2 -translate-x-1/2 flex-col items-center gap-1.5 bg-surface-container-high/90 backdrop-blur px-4 py-2.5 rounded-xl border border-primary-fixed-dim/40 z-20" id="sponsor-badge">
+<span class="font-label-caps text-[9px] text-on-surface-variant tracking-widest">ESTE SOBRE LO PRESENTA</span>
+<div class="flex items-center gap-2">
+<img class="h-7 max-w-[120px] object-contain" id="sponsor-logo" src="" alt="">
+<span class="font-headline-md text-headline-md text-secondary" id="sponsor-nombre"></span>
+</div>
+</div>
 <div class="relative w-full max-w-[320px] aspect-[2/3] floating-pack cursor-pointer group" id="pack">
 <div class="absolute -inset-8 bg-primary-container/20 blur-[60px] rounded-full group-hover:bg-primary-container/30 transition-all duration-500"></div>
 <div class="pack-surface relative w-full h-full rounded-xl overflow-hidden flex flex-col items-center justify-between p-stack-lg border-2 border-outline-variant group-hover:border-primary-fixed-dim transition-all duration-300">
@@ -97,11 +104,6 @@
 </div>
 </div>
 </main>
-<div class="hidden fixed bottom-4 left-1/2 -translate-x-1/2 items-center gap-2 bg-surface-container-high px-3 py-1.5 rounded-full border border-outline-variant" id="sponsor-badge">
-<span class="font-label-caps text-[10px] text-on-surface-variant">PRESENTA</span>
-<img class="h-4 max-w-[80px] object-contain" id="sponsor-logo" src="" alt="">
-<span class="font-label-caps text-[10px] text-secondary" id="sponsor-nombre"></span>
-</div>
 <!-- Panel de pruebas, solo visible para admin: fuerza tipo/rareza sin esperar la racha -->
 <div id="panel-admin" class="hidden fixed bottom-4 left-0 w-full px-margin-mobile flex flex-wrap gap-2 justify-center">
 <button data-tipo="comun" class="btn-prueba font-label-caps text-[10px] px-3 py-2 rounded bg-surface-container-highest text-on-surface-variant uppercase">Probar Común</button>
