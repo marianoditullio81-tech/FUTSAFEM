@@ -126,6 +126,16 @@
 <span class="material-symbols-outlined text-on-surface-variant">chevron_right</span>
 </a>
 </section>
+<section class="hidden" id="banner-admin">
+<a class="flex items-center gap-3 bg-error-container border border-outline-variant rounded-xl p-4 active:scale-[0.98] transition-all" href="./admin-fotos-rechazadas.html">
+<span class="material-symbols-outlined text-on-error-container text-3xl">shield_person</span>
+<div class="flex-grow">
+<p class="font-headline-md text-headline-md text-on-error-container">Panel admin</p>
+<p class="font-body-sm text-on-error-container/80">Confirmar fotos rechazadas</p>
+</div>
+<span class="material-symbols-outlined text-on-error-container">chevron_right</span>
+</a>
+</section>
 <section class="mt-4">
 <button class="pack-glow relative w-full h-48 bg-primary-container rounded-2xl border-2 border-primary overflow-hidden flex flex-col items-center justify-center transition-all active:scale-95" id="btn-abrir-sobre">
 <div class="relative z-10 flex flex-col items-center">
@@ -201,6 +211,10 @@
       contarColeccionUnica(user.uid),
     ]);
     document.getElementById('coleccion-progreso').textContent = `${coleccion}/${totalStickers} figuritas`;
+
+    if (perfil.rol === 'admin') {
+      document.getElementById('banner-admin').classList.remove('hidden');
+    }
 
     const pendientes = await contarFotosPendientes(user.uid);
     if (pendientes > 0) {
