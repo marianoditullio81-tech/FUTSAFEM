@@ -140,6 +140,20 @@
           return;
         }
 
+        const oro = resultado.stickersObtenidos.find((s) => s.rareza === 'gold');
+        if (oro) {
+          sessionStorage.setItem('revealOro', JSON.stringify({ sticker: oro }));
+          window.location.href = './reveal-oro.html';
+          return;
+        }
+
+        const plata = resultado.stickersObtenidos.find((s) => s.rareza === 'silver');
+        if (plata) {
+          sessionStorage.setItem('revealPlata', JSON.stringify({ sticker: plata }));
+          window.location.href = './reveal-plata.html';
+          return;
+        }
+
         window.location.href = './resultado-de-apertura.html';
       } catch (e) {
         console.error('Error al abrir sobre:', e);

@@ -1,0 +1,283 @@
+<!DOCTYPE HTML>
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FUTSAFEM - Reveal Plata</title>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:ital,wght@0,400..700;1,400..700&family=Hanken+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@500&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary-container": "#111316",
+                    "surface-container-low": "#1a1c1f",
+                    "on-primary-fixed-variant": "#3c4d00",
+                    "tertiary-container": "#00838b",
+                    "primary": "#c0c0c0",
+                    "on-secondary-fixed-variant": "#3c4d00",
+                    "surface-bright": "#37393d",
+                    "primary-fixed-dim": "#c0c0c0",
+                    "on-error-container": "#ffdad6",
+                    "outline": "#9d8ba0",
+                    "on-tertiary": "#00363a",
+                    "secondary-fixed-dim": "#abd600",
+                    "on-background": "#e2e2e6",
+                    "outline-variant": "#514255",
+                    "primary-fixed": "#f2f2f2",
+                    "primary-container": "#c0c0c0",
+                    "secondary-container": "#c3f400",
+                    "secondary": "#ffffff",
+                    "on-tertiary-container": "#ffffff",
+                    "surface-variant": "#333538",
+                    "surface-container-high": "#282a2d",
+                    "error-container": "#93000a",
+                    "error": "#ffb4ab",
+                    "tertiary-fixed-dim": "#00dbe9",
+                    "inverse-surface": "#e2e2e6",
+                    "tertiary": "#00dbe9",
+                    "surface-container": "#1e2023",
+                    "surface-tint": "#c0c0c0",
+                    "secondary-fixed": "#c3f400",
+                    "on-tertiary-fixed-variant": "#004f54",
+                    "on-secondary-fixed": "#161e00",
+                    "inverse-primary": "#9900cf",
+                    "on-surface": "#e2e2e6",
+                    "on-secondary-container": "#556d00",
+                    "on-surface-variant": "#d4c0d7",
+                    "on-tertiary-fixed": "#002022",
+                    "surface-container-lowest": "#0c0e11",
+                    "on-primary-fixed": "#111316",
+                    "on-error": "#690005",
+                    "background": "#111316",
+                    "on-secondary": "#283500",
+                    "tertiary-fixed": "#7df4ff",
+                    "on-primary": "#111316",
+                    "inverse-on-surface": "#2f3034",
+                    "surface-dim": "#111316",
+                    "surface": "#111316",
+                    "surface-container-highest": "#333538"
+            },
+            "borderRadius": {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+            "spacing": {"margin-mobile": "20px", "base": "8px", "stack-sm": "4px", "stack-md": "12px", "stack-lg": "24px", "margin-desktop": "40px", "gutter": "16px"},
+            "fontFamily": {"display-lg": ["Archivo Narrow"], "headline-md": ["Archivo Narrow"], "body-sm": ["Hanken Grotesk"], "body-md": ["Hanken Grotesk"], "label-caps": ["JetBrains Mono"], "display-lg-mobile": ["Archivo Narrow"]},
+            "fontSize": {
+                    "display-lg": ["48px", {"lineHeight": "52px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "28px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "display-lg-mobile": ["36px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; display: inline-block; line-height: 1; vertical-align: middle; }
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(1deg); }
+        }
+        @keyframes silver-pulse {
+            0%, 100% { box-shadow: 0 0 15px rgba(192, 192, 192, 0.4), inset 0 0 10px rgba(192, 192, 192, 0.2); }
+            50% { box-shadow: 0 0 35px rgba(192, 192, 192, 0.8), inset 0 0 20px rgba(192, 192, 192, 0.4); }
+        }
+        @keyframes text-glow {
+            0%, 100% { text-shadow: 0 0 8px #c0c0c0; }
+            50% { text-shadow: 0 0 20px #ffffff; }
+        }
+        .animate-float { animation: float 6s ease-in-out infinite; }
+        .animate-silver { animation: silver-pulse 3s ease-in-out infinite; }
+        .animate-text-glow { animation: text-glow 2s ease-in-out infinite; }
+
+        .silver-card-border {
+            border: 3px solid #c0c0c0;
+            position: relative;
+        }
+        .silver-card-border::after {
+            content: '';
+            position: absolute;
+            inset: -8px;
+            border: 1px solid #c0c0c0;
+            opacity: 0.5;
+            pointer-events: none;
+        }
+        .chrome-text {
+            background: linear-gradient(to bottom, #ffffff 0%, #c0c0c0 50%, #808080 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col overflow-hidden selection:bg-primary-container selection:text-white">
+<!-- Silver Rarity Shader Background -->
+<div class="fixed inset-0 z-0">
+<div class="absolute inset-0 w-full h-full opacity-60">
+<canvas id="shader-canvas-plata" style="display:block;width:100%;height:100%"></canvas>
+</div>
+<div class="absolute inset-0 bg-gradient-to-b from-transparent via-background/20 to-background"></div>
+</div>
+<!-- Header / Top Bar -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-margin-mobile md:px-margin-desktop h-16 bg-transparent">
+<div class="font-headline-md text-headline-md font-bold text-primary italic tracking-tighter">
+        FUTSAFEM
+    </div>
+<div class="flex items-center gap-stack-md">
+<button id="btn-cerrar" class="material-symbols-outlined text-on-surface-variant cursor-pointer active:scale-95 transition-transform">close</button>
+</div>
+</header>
+<!-- Main Content -->
+<main class="relative z-10 flex-1 flex flex-col items-center justify-center pt-16 pb-24 px-margin-mobile">
+<div class="text-center mb-stack-lg">
+<h1 class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg italic uppercase animate-text-glow chrome-text tracking-widest leading-none">¡PLATA ENCONTRADA!</h1>
+<p class="font-label-caps text-label-caps text-primary mt-stack-sm tracking-[0.2em] uppercase">
+            FutsaFem • Edición Especial
+        </p>
+</div>
+<!-- The Silver Collectible Card -->
+<div class="relative group cursor-pointer animate-float perspective-1000">
+<div class="silver-card-border w-[280px] h-[420px] md:w-[320px] md:h-[480px] rounded-lg overflow-hidden bg-surface-container-low flex flex-col shadow-2xl transition-transform duration-500 hover:scale-105 shadow-[0_0_15px_rgba(192,192,192,0.5)]">
+<div class="absolute top-0 w-full p-4 flex justify-between items-start z-20">
+<div class="bg-primary-container text-on-primary-container font-label-caps text-[10px] px-2 py-0.5 skew-x-[-12deg] flex items-center font-bold">PLATA</div>
+</div>
+<!-- Player Image -->
+<div class="flex-1 relative overflow-hidden">
+<!-- TODO: reemplazar por foto real de la jugadora en Firebase Storage cuando esté disponible -->
+<img id="card-img" class="w-full h-full object-cover object-top scale-110 group-hover:scale-125 transition-transform duration-1000" src="" alt=""/>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-90"></div>
+</div>
+<!-- Player Info Footer -->
+<div class="absolute bottom-0 w-full p-6 text-center z-20">
+<h2 id="card-nombre" class="font-headline-md text-headline-md italic uppercase text-white tracking-tight drop-shadow-md mb-stack-sm">
+                </h2>
+<div class="h-[1px] w-12 bg-primary mx-auto mb-stack-sm"></div>
+<p id="card-puesto" class="font-label-caps text-[10px] text-primary tracking-widest"></p>
+</div>
+<div class="absolute bottom-2 right-2 opacity-30">
+<span class="material-symbols-outlined text-primary text-4xl">grid_4x4</span>
+</div>
+</div>
+<div class="absolute inset-0 pointer-events-none bg-gradient-to-tr from-white/0 via-white/20 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 ease-in-out"></div>
+</div>
+<div class="mt-stack-lg flex flex-col items-center gap-stack-md w-full max-w-xs">
+<button id="btn-colectar" class="w-full h-14 bg-primary-container text-on-primary-container font-headline-md text-headline-md uppercase italic tracking-tighter flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(192,192,192,0.6)] active:scale-95 transition-all hover:brightness-110">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">stars</span>
+            COLECTAR FIGURITA
+        </button>
+</div>
+</main>
+<script type="module">
+  import { exigirSesion } from "../js/auth-helpers.js";
+  import { obtenerJugadorasDeStickers } from "../js/sobre-helpers.js";
+  import { PLACEHOLDER_STICKER_URL } from "../js/home-helpers.js";
+
+  exigirSesion(async () => {
+    const datos = JSON.parse(sessionStorage.getItem('revealPlata') || 'null');
+    if (!datos || !datos.sticker) {
+      window.location.replace('./resultado-de-apertura.html');
+      return;
+    }
+
+    const jugadoras = await obtenerJugadorasDeStickers([datos.sticker]);
+    const jugadora = jugadoras.get(datos.sticker.playerId);
+    const nombre = jugadora ? jugadora.nombre : 'Desconocida';
+    const puesto = jugadora ? (jugadora.puesto || '').toUpperCase() : '';
+
+    document.getElementById('card-img').src = datos.sticker.imagenUrl || PLACEHOLDER_STICKER_URL;
+    document.getElementById('card-img').alt = nombre;
+    document.getElementById('card-nombre').textContent = nombre;
+    document.getElementById('card-puesto').textContent = puesto || 'PROFESSIONAL WOMEN\'S FUTSAL';
+
+    function continuar() {
+      sessionStorage.removeItem('revealPlata');
+      window.location.href = './resultado-de-apertura.html';
+    }
+    document.getElementById('btn-cerrar').addEventListener('click', continuar);
+    document.getElementById('btn-colectar').addEventListener('click', continuar);
+  });
+</script>
+<!-- Silver Shader Implementation -->
+<script>
+(function() {
+  const canvas = document.getElementById('shader-canvas-plata');
+  function syncSize() {
+    const w = canvas.clientWidth  || 1280;
+    const h = canvas.clientHeight || 720;
+    if (canvas.width !== w || canvas.height !== h) {
+      canvas.width  = w;
+      canvas.height = h;
+    }
+  }
+  if (typeof ResizeObserver !== 'undefined') {
+    new ResizeObserver(syncSize).observe(canvas);
+  }
+  syncSize();
+  const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+  if (!gl) return;
+  const vs = `attribute vec2 a_position;
+varying vec2 v_texCoord;
+void main() {
+  v_texCoord = a_position * 0.5 + 0.5;
+  gl_Position = vec4(a_position, 0.0, 1.0);
+}`;
+  const fs = `precision highp float;
+uniform float u_time;
+uniform vec2 u_resolution;
+varying vec2 v_texCoord;
+void main() {
+    vec2 uv = v_texCoord;
+    vec2 center = vec2(0.5, 0.5);
+    float dist = distance(uv, center);
+    vec3 colorSilver = vec3(0.75, 0.75, 0.8);
+    vec3 colorChrome = vec3(0.95, 0.95, 1.0);
+    vec3 colorDark = vec3(0.1, 0.1, 0.12);
+    float metal = sin(dist * 20.0 - u_time * 4.0);
+    float pattern = sin(uv.x * 15.0 + u_time) * cos(uv.y * 15.0 + u_time);
+    vec3 finalColor = mix(colorDark, colorSilver, (1.0 - dist));
+    float highlight = pow(max(0.0, 0.5 + 0.5 * sin(dist * 10.0 + pattern - u_time * 5.0)), 10.0);
+    finalColor += colorChrome * highlight * 0.6;
+    float glow = smoothstep(0.5, 0.2, dist);
+    finalColor += colorSilver * glow * 0.2;
+    gl_FragColor = vec4(finalColor, 1.0);
+}`;
+  function cs(type, src) {
+    const s = gl.createShader(type);
+    gl.shaderSource(s, src);
+    gl.compileShader(s);
+    return s;
+  }
+  const prog = gl.createProgram();
+  gl.attachShader(prog, cs(gl.VERTEX_SHADER, vs));
+  gl.attachShader(prog, cs(gl.FRAGMENT_SHADER, fs));
+  gl.linkProgram(prog);
+  gl.useProgram(prog);
+  const buf = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
+  const pos = gl.getAttribLocation(prog, 'a_position');
+  gl.enableVertexAttribArray(pos);
+  gl.vertexAttribPointer(pos, 2, gl.FLOAT, false, 0, 0);
+  const uTime = gl.getUniformLocation(prog, 'u_time');
+  function render(t) {
+    if (typeof ResizeObserver === 'undefined') syncSize();
+    gl.viewport(0, 0, canvas.width, canvas.height);
+    if (uTime) gl.uniform1f(uTime, t * 0.001);
+    gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+    requestAnimationFrame(render);
+  }
+  render(0);
+})();
+</script>
+<!-- Tilt micro-interaction -->
+<script>
+document.addEventListener('mousemove', (e) => {
+    const card = document.querySelector('.animate-float');
+    if (!card) return;
+    const xAxis = (window.innerWidth / 2 - e.pageX) / 25;
+    const yAxis = (window.innerHeight / 2 - e.pageY) / 25;
+    card.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+});
+</script>
+</body></html>
