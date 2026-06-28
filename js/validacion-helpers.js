@@ -6,6 +6,7 @@ import {
   getDocs,
   doc,
   getDoc,
+  updateDoc,
   runTransaction,
   serverTimestamp,
   getCountFromServer,
@@ -56,15 +57,31 @@ export async function votarFoto(targetUid, voterUid, voto) {
     const votosRechazar = (datos.votosFotoRechazar || 0) + (voto === "rechazar" ? 1 : 0);
 
     let estadoFoto = "en_revision";
-    let fotoUrl = datos.fotoUrl;
     if (votosAprobar >= UMBRAL_VOTOS) {
       estadoFoto = "aprobada";
     } else if (votosRechazar >= UMBRAL_VOTOS) {
-      estadoFoto = "rechazada";
-      fotoUrl = "";
+      // No se borra la foto todavía: queda visible para que la administradora
+      // confirme el rechazo desde el panel de admin.
+      estadoFoto = "rechazada_revision";
     }
 
     tx.set(voteRef, { targetUid, voterUid, voto, creadoEn: serverTimestamp() });
-    tx.update(userRef, { votosFotoAprobar: votosAprobar, votosFotoRechazar: votosRechazar, estadoFoto, fotoUrl });
+    tx.update(userRef, { votosFotoAprobar: votosAprobar, votosFotoRechazar: votosRechazar, estadoFoto });
+  });
+}
+
+export async function obtenerFotosRechazadasPendientes() {
+  const q = query(collection(db, "users"), where("estadoFoto", "==", "rechazada_revision"));
+  const snap = await getDocs(q);
+  return snap.docs.map((d) => d.data());
+}
+
+export async function confirmarRechazoFoto(targetUid) {
+  const userRef = doc(db, "users", targetUid);
+  await updateDoc(userRef, {
+    estadoFoto: "sin_foto",
+    fotoUrl: "",
+    votosFotoAprobar: 0,
+    votosFotoRechazar: 0,
   });
 }

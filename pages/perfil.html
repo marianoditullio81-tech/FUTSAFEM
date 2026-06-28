@@ -159,7 +159,7 @@
   const NOMBRES_PUESTO = { arquera: 'Arquera', cierre: 'Cierre', ala: 'Ala', pivot: 'Pivot' };
   const NOMBRES_CARGO = { dt: 'Directora Técnica', at: 'Asistente Técnica', pf: 'Preparadora Física', ea: 'Entrenadora de Arqueras', analista: 'Analista de Video', medico: 'Cuerpo Médico' };
   const NOMBRES_ROL = { jugadora: 'Jugadora', ct: 'Cuerpo Técnico', hincha: 'Hincha', admin: 'Administradora' };
-  const NOMBRES_ESTADO_FOTO = { sin_foto: 'Sin foto', en_revision: 'En revisión', aprobada: 'Aprobada', rechazada: 'Rechazada' };
+  const NOMBRES_ESTADO_FOTO = { sin_foto: 'Sin foto', en_revision: 'En revisión', aprobada: 'Aprobada', rechazada_revision: 'Rechazada (revisión final)' };
 
   exigirSesion(async (user) => {
     const perfil = await obtenerPerfil(user.uid);

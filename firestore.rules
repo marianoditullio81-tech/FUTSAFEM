@@ -11,15 +11,29 @@ service cloud.firestore {
       return isSignedIn() && request.auth.uid == userId;
     }
 
+    function esAdmin() {
+      return isSignedIn() &&
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.rol == 'admin';
+    }
+
     // users: cada usuaria lee y escribe solo su propio documento.
     match /users/{userId} {
       allow read: if isSignedIn();
       allow create: if isOwner(userId);
-      // El voto social de fotos necesita actualizar el contador y el estado
-      // de la foto de OTRA usuaria: se permite si esos son los únicos campos
-      // que cambian (la transacción de voto en validacion-helpers.js).
+      // El voto social de fotos: cualquier usuaria puede mover una foto de
+      // "en_revision" a "aprobada"/"rechazada_revision" sin tocar fotoUrl.
+      // Solo la admin puede confirmar un rechazo y recién ahí se borra la foto.
       allow update: if isOwner(userId) ||
         (isSignedIn() &&
+         resource.data.estadoFoto == 'en_revision' &&
+         request.resource.data.estadoFoto in ['en_revision', 'aprobada', 'rechazada_revision'] &&
+         request.resource.data.fotoUrl == resource.data.fotoUrl &&
+         request.resource.data.diff(resource.data).affectedKeys()
+           .hasOnly(['votosFotoAprobar', 'votosFotoRechazar', 'estadoFoto'])) ||
+        (esAdmin() &&
+         resource.data.estadoFoto == 'rechazada_revision' &&
+         request.resource.data.estadoFoto == 'sin_foto' &&
+         request.resource.data.fotoUrl == '' &&
          request.resource.data.diff(resource.data).affectedKeys()
            .hasOnly(['votosFotoAprobar', 'votosFotoRechazar', 'estadoFoto', 'fotoUrl']));
       allow delete: if false;
