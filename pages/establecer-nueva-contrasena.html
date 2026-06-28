@@ -2,7 +2,7 @@
 <html class="dark" lang="es"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>FUTSAFEM - Iniciar Sesión</title>
+<title>FUTSAFEM - Nueva contraseña</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:ital,wght@0,400..700;1,400..700&amp;family=JetBrains+Mono:wght@100..800&amp;family=Hanken+Grotesk:wght@100..900&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
@@ -58,53 +58,61 @@
 <header class="flex flex-col items-center mb-stack-lg">
 <div class="w-20 h-20 mb-stack-md relative">
 <div class="relative flex items-center justify-center w-full h-full bg-surface-container-highest rounded-xl border-2 border-primary">
-<span class="material-symbols-outlined text-primary text-[48px]" style="font-variation-settings: 'FILL' 1;">sports_soccer</span>
+<span class="material-symbols-outlined text-primary text-[48px]">password</span>
 </div>
 </div>
-<h1 class="font-display-lg-mobile text-display-lg-mobile italic font-black text-primary tracking-tighter uppercase">FUTSAFEM</h1>
-<p class="font-label-caps text-label-caps text-on-surface-variant opacity-70 mt-1 uppercase tracking-widest">Colección Digital Primera C</p>
+<h1 class="font-display-lg-mobile text-display-lg-mobile italic font-black text-primary tracking-tighter uppercase">NUEVA CONTRASEÑA</h1>
+<p class="font-body-sm text-on-surface-variant text-center mt-2" id="subtitulo">Verificando el link...</p>
 </header>
-<form class="space-y-stack-md" id="login-form">
+<form class="space-y-stack-md hidden" id="nueva-form">
 <div class="space-y-2">
-<label class="font-label-caps text-label-caps text-on-surface ml-1" for="email">CORREO ELECTRÓNICO</label>
+<label class="font-label-caps text-label-caps text-on-surface ml-1" for="password">NUEVA CONTRASEÑA</label>
 <div class="relative input-focus-effect bg-surface-container-highest rounded-lg border border-outline-variant transition-all duration-200">
-<input class="block w-full px-3 py-3 bg-transparent border-none text-on-surface placeholder:text-outline focus:ring-0 font-body-md" id="email" name="email" placeholder="usuario@ejemplo.com" required type="email"/>
+<input class="block w-full px-3 py-3 bg-transparent border-none text-on-surface placeholder:text-outline focus:ring-0 font-body-md" id="password" minlength="6" placeholder="Mínimo 6 caracteres" required type="password"/>
 </div>
 </div>
-<div class="space-y-2">
-<label class="font-label-caps text-label-caps text-on-surface" for="password">CONTRASEÑA</label>
-<div class="relative input-focus-effect bg-surface-container-highest rounded-lg border border-outline-variant transition-all duration-200">
-<input class="block w-full px-3 py-3 bg-transparent border-none text-on-surface placeholder:text-outline focus:ring-0 font-body-md" id="password" name="password" placeholder="••••••••" required type="password"/>
-</div>
-</div>
-<p class="font-body-sm text-error hidden" id="login-error"></p>
-<button class="glow-button w-full py-4 px-6 bg-primary-container text-on-primary-container font-headline-md text-headline-md font-bold rounded-lg uppercase tracking-wide mt-stack-md" type="submit">INGRESAR</button>
-<a class="block text-center font-body-sm text-on-surface-variant hover:text-primary transition-colors mt-2" href="./recuperacion-de-cuenta-inicio.html">¿Olvidaste tu contraseña?</a>
+<p class="font-body-sm text-error hidden" id="form-error"></p>
+<button class="glow-button w-full py-4 px-6 bg-primary-container text-on-primary-container font-headline-md text-headline-md font-bold rounded-lg uppercase tracking-wide mt-stack-md" id="btn-submit" type="submit">GUARDAR CONTRASEÑA</button>
 </form>
-<footer class="mt-stack-lg pt-stack-md border-t border-outline-variant/30 text-center">
-<p class="font-body-md text-body-md text-on-surface-variant mb-2">¿No tienes una cuenta todavía?</p>
-<a class="inline-flex items-center gap-2 font-headline-md text-headline-md text-secondary hover:text-primary transition-colors font-bold uppercase italic" href="./bienvenida.html">
-<span>Registrarme</span>
-<span class="material-symbols-outlined text-[18px]">trending_flat</span>
-</a>
-</footer>
+<a class="hidden glow-button block w-full text-center py-4 px-6 bg-primary-container text-on-primary-container font-headline-md text-headline-md font-bold rounded-lg uppercase tracking-wide mt-stack-md" id="btn-pedir-otro" href="./recuperacion-de-cuenta-inicio.html">PEDIR UN NUEVO LINK</a>
 </main>
 <script type="module">
-  import { iniciarSesion, obtenerPerfil, redirigirSegunConsentimiento } from "../js/auth-helpers.js";
+  import { verificarCodigoRecuperacion, confirmarNuevaContrasena } from "../js/auth-helpers.js";
 
-  document.getElementById('login-form').addEventListener('submit', async (e) => {
+  const params = new URLSearchParams(window.location.search);
+  const codigo = params.get('oobCode');
+  const subtituloEl = document.getElementById('subtitulo');
+  const formEl = document.getElementById('nueva-form');
+  const btnPedirOtro = document.getElementById('btn-pedir-otro');
+
+  if (!codigo) {
+    subtituloEl.textContent = 'El link no es válido. Pedí uno nuevo desde "Olvidaste tu contraseña".';
+    btnPedirOtro.classList.remove('hidden');
+  } else {
+    verificarCodigoRecuperacion(codigo).then(() => {
+      subtituloEl.textContent = 'Ingresá tu nueva contraseña.';
+      formEl.classList.remove('hidden');
+    }).catch(() => {
+      subtituloEl.textContent = 'Este link venció o ya fue usado. Pedí uno nuevo.';
+      btnPedirOtro.classList.remove('hidden');
+    });
+  }
+
+  formEl.addEventListener('submit', async (e) => {
     e.preventDefault();
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
-    const errorEl = document.getElementById('login-error');
+    const errorEl = document.getElementById('form-error');
     errorEl.classList.add('hidden');
+    const btn = document.getElementById('btn-submit');
+    btn.disabled = true;
+    btn.textContent = 'GUARDANDO...';
     try {
-      const uid = await iniciarSesion(email, password);
-      const perfil = await obtenerPerfil(uid);
-      redirigirSegunConsentimiento(perfil);
+      await confirmarNuevaContrasena(codigo, document.getElementById('password').value);
+      window.location.href = './login.html';
     } catch (err) {
-      errorEl.textContent = 'No pudimos iniciar sesión. Revisá tu correo y contraseña.';
+      errorEl.textContent = 'No pudimos guardar la nueva contraseña. Intentá de nuevo.';
       errorEl.classList.remove('hidden');
+      btn.disabled = false;
+      btn.textContent = 'GUARDAR CONTRASEÑA';
     }
   });
 </script>

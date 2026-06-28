@@ -4,6 +4,9 @@ import {
   signInWithEmailAndPassword,
   onAuthStateChanged,
   signOut,
+  sendPasswordResetEmail,
+  verifyPasswordResetCode,
+  confirmPasswordReset,
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 import {
   doc,
@@ -81,6 +84,18 @@ export async function obtenerPerfil(uid) {
 
 export async function actualizarPerfil(uid, datos) {
   await updateDoc(doc(db, "users", uid), datos);
+}
+
+export async function enviarRecuperacionContrasena(email) {
+  await sendPasswordResetEmail(auth, email);
+}
+
+export async function verificarCodigoRecuperacion(codigo) {
+  return verifyPasswordResetCode(auth, codigo);
+}
+
+export async function confirmarNuevaContrasena(codigo, nuevaContrasena) {
+  await confirmPasswordReset(auth, codigo, nuevaContrasena);
 }
 
 export function exigirSesion(onUsuaria) {

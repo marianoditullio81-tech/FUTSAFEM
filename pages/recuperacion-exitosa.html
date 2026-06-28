@@ -2,7 +2,7 @@
 <html class="dark" lang="es"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>FUTSAFEM - Iniciar Sesión</title>
+<title>FUTSAFEM - Correo enviado</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:ital,wght@0,400..700;1,400..700&amp;family=JetBrains+Mono:wght@100..800&amp;family=Hanken+Grotesk:wght@100..900&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
@@ -50,62 +50,17 @@
         .glow-button { box-shadow: 0 0 20px rgba(189, 0, 255, 0.4); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
         .glow-button:hover { box-shadow: 0 0 35px rgba(189, 0, 255, 0.6); transform: scale(1.02); }
         .glow-button:active { transform: scale(0.98); }
-        .input-focus-effect:focus-within { border-color: #ecb2ff; box-shadow: 0 0 0 1px #ecb2ff; }
     </style>
 </head>
 <body class="font-body-md text-body-md flex min-h-screen items-center justify-center p-margin-mobile">
-<main class="relative z-10 w-full max-w-[420px] bg-surface-container-low p-stack-lg rounded-xl border border-outline-variant shadow-2xl">
-<header class="flex flex-col items-center mb-stack-lg">
-<div class="w-20 h-20 mb-stack-md relative">
-<div class="relative flex items-center justify-center w-full h-full bg-surface-container-highest rounded-xl border-2 border-primary">
-<span class="material-symbols-outlined text-primary text-[48px]" style="font-variation-settings: 'FILL' 1;">sports_soccer</span>
+<main class="relative z-10 w-full max-w-[420px] bg-surface-container-low p-stack-lg rounded-xl border border-outline-variant shadow-2xl text-center">
+<div class="w-20 h-20 mb-stack-md relative mx-auto">
+<div class="relative flex items-center justify-center w-full h-full bg-surface-container-highest rounded-xl border-2 border-secondary">
+<span class="material-symbols-outlined text-secondary text-[48px]">mark_email_read</span>
 </div>
 </div>
-<h1 class="font-display-lg-mobile text-display-lg-mobile italic font-black text-primary tracking-tighter uppercase">FUTSAFEM</h1>
-<p class="font-label-caps text-label-caps text-on-surface-variant opacity-70 mt-1 uppercase tracking-widest">Colección Digital Primera C</p>
-</header>
-<form class="space-y-stack-md" id="login-form">
-<div class="space-y-2">
-<label class="font-label-caps text-label-caps text-on-surface ml-1" for="email">CORREO ELECTRÓNICO</label>
-<div class="relative input-focus-effect bg-surface-container-highest rounded-lg border border-outline-variant transition-all duration-200">
-<input class="block w-full px-3 py-3 bg-transparent border-none text-on-surface placeholder:text-outline focus:ring-0 font-body-md" id="email" name="email" placeholder="usuario@ejemplo.com" required type="email"/>
-</div>
-</div>
-<div class="space-y-2">
-<label class="font-label-caps text-label-caps text-on-surface" for="password">CONTRASEÑA</label>
-<div class="relative input-focus-effect bg-surface-container-highest rounded-lg border border-outline-variant transition-all duration-200">
-<input class="block w-full px-3 py-3 bg-transparent border-none text-on-surface placeholder:text-outline focus:ring-0 font-body-md" id="password" name="password" placeholder="••••••••" required type="password"/>
-</div>
-</div>
-<p class="font-body-sm text-error hidden" id="login-error"></p>
-<button class="glow-button w-full py-4 px-6 bg-primary-container text-on-primary-container font-headline-md text-headline-md font-bold rounded-lg uppercase tracking-wide mt-stack-md" type="submit">INGRESAR</button>
-<a class="block text-center font-body-sm text-on-surface-variant hover:text-primary transition-colors mt-2" href="./recuperacion-de-cuenta-inicio.html">¿Olvidaste tu contraseña?</a>
-</form>
-<footer class="mt-stack-lg pt-stack-md border-t border-outline-variant/30 text-center">
-<p class="font-body-md text-body-md text-on-surface-variant mb-2">¿No tienes una cuenta todavía?</p>
-<a class="inline-flex items-center gap-2 font-headline-md text-headline-md text-secondary hover:text-primary transition-colors font-bold uppercase italic" href="./bienvenida.html">
-<span>Registrarme</span>
-<span class="material-symbols-outlined text-[18px]">trending_flat</span>
-</a>
-</footer>
+<h1 class="font-display-lg-mobile text-display-lg-mobile italic font-black text-primary tracking-tighter uppercase">REVISÁ TU CORREO</h1>
+<p class="font-body-md text-on-surface-variant mt-stack-md">Te enviamos un link para crear una nueva contraseña. Si no lo ves, revisá también la carpeta de spam.</p>
+<a class="glow-button block w-full py-4 px-6 bg-primary-container text-on-primary-container font-headline-md text-headline-md font-bold rounded-lg uppercase tracking-wide mt-stack-lg" href="./login.html">VOLVER A INGRESAR</a>
 </main>
-<script type="module">
-  import { iniciarSesion, obtenerPerfil, redirigirSegunConsentimiento } from "../js/auth-helpers.js";
-
-  document.getElementById('login-form').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
-    const errorEl = document.getElementById('login-error');
-    errorEl.classList.add('hidden');
-    try {
-      const uid = await iniciarSesion(email, password);
-      const perfil = await obtenerPerfil(uid);
-      redirigirSegunConsentimiento(perfil);
-    } catch (err) {
-      errorEl.textContent = 'No pudimos iniciar sesión. Revisá tu correo y contraseña.';
-      errorEl.classList.remove('hidden');
-    }
-  });
-</script>
 </body></html>
