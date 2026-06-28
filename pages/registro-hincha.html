@@ -79,24 +79,7 @@
 <div class="flex items-center justify-between">
 <label class="font-label-caps text-label-caps text-primary uppercase font-bold tracking-wider">Club de tus Amores</label>
 </div>
-<div class="grid grid-cols-2 sm:grid-cols-3 gap-stack-sm" id="clubSelector">
-<div class="club-option cursor-pointer group flex flex-col items-center justify-center p-stack-md border border-outline-variant bg-surface-container rounded-lg hover:border-primary transition-all duration-300" data-club="fenix">
-<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary">shield</span>
-<span class="font-label-caps text-[10px] text-center text-on-surface-variant uppercase">Fénix</span>
-</div>
-<div class="club-option cursor-pointer group flex flex-col items-center justify-center p-stack-md border border-outline-variant bg-surface-container rounded-lg hover:border-primary transition-all duration-300" data-club="television">
-<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary">military_tech</span>
-<span class="font-label-caps text-[10px] text-center text-on-surface-variant uppercase">Televisión</span>
-</div>
-<div class="club-option cursor-pointer group flex flex-col items-center justify-center p-stack-md border border-outline-variant bg-surface-container rounded-lg hover:border-primary transition-all duration-300" data-club="moron">
-<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary">star</span>
-<span class="font-label-caps text-[10px] text-center text-on-surface-variant uppercase">Morón</span>
-</div>
-<div class="club-option cursor-pointer group flex flex-col items-center justify-center p-stack-md border border-outline-variant bg-surface-container rounded-lg hover:border-primary transition-all duration-300" data-club="lamadrid">
-<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary">workspace_premium</span>
-<span class="font-label-caps text-[10px] text-center text-on-surface-variant uppercase">Lamadrid</span>
-</div>
-</div>
+<div class="grid grid-cols-2 sm:grid-cols-3 gap-stack-sm" id="clubSelector"></div>
 <input id="selectedClubInput" name="selected_club" required type="hidden">
 </div>
 <button class="w-full bg-primary-container text-on-primary-container font-headline-md py-stack-lg rounded-lg uppercase italic tracking-wider flex items-center justify-center gap-3 active:scale-[0.98] transition-all" id="btn-submit" type="submit">
@@ -112,12 +95,24 @@
 </main>
 <script type="module">
   import { registrarUsuaria } from "../js/auth-helpers.js";
+  import { obtenerClubes } from "../js/home-helpers.js";
 
-  document.querySelectorAll('.club-option').forEach((opt) => {
-    opt.addEventListener('click', () => {
-      document.querySelectorAll('.club-option').forEach((o) => o.classList.remove('club-card-selected'));
-      opt.classList.add('club-card-selected');
-      document.getElementById('selectedClubInput').value = opt.dataset.club;
+  obtenerClubes().then((clubes) => {
+    const selector = document.getElementById('clubSelector');
+    clubes.forEach((club) => {
+      const card = document.createElement('div');
+      card.className = 'club-option cursor-pointer group flex flex-col items-center justify-center p-stack-md border border-outline-variant bg-surface-container rounded-lg hover:border-primary transition-all duration-300';
+      card.dataset.club = club.id;
+      card.innerHTML = `
+        <span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary">shield</span>
+        <span class="font-label-caps text-[10px] text-center text-on-surface-variant uppercase">${club.nombre}</span>
+      `;
+      card.addEventListener('click', () => {
+        document.querySelectorAll('.club-option').forEach((o) => o.classList.remove('club-card-selected'));
+        card.classList.add('club-card-selected');
+        document.getElementById('selectedClubInput').value = club.id;
+      });
+      selector.appendChild(card);
     });
   });
 

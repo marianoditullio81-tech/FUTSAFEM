@@ -2,6 +2,7 @@ import { db } from "./firebase-init.js";
 import {
   doc,
   getDoc,
+  getDocs,
   collection,
   query,
   where,
@@ -12,6 +13,11 @@ export async function obtenerClub(clubId) {
   if (!clubId) return null;
   const snap = await getDoc(doc(db, "clubs", clubId));
   return snap.exists() ? snap.data() : null;
+}
+
+export async function obtenerClubes() {
+  const snap = await getDocs(collection(db, "clubs"));
+  return snap.docs.map((d) => ({ id: d.id, ...d.data() }));
 }
 
 export async function contarStickersTotales() {

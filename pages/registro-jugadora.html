@@ -78,10 +78,6 @@
 <label class="block font-label-caps text-[10px] text-on-surface-variant mb-1 ml-1">CLUB ACTUAL</label>
 <select class="w-full bg-surface-container-low border border-outline-variant rounded-lg p-stack-md text-on-surface font-body-md input-focus transition-all appearance-none" id="club" required>
 <option value="">Seleccionar Club</option>
-<option value="fenix">Club Atlético Fénix</option>
-<option value="television">Social Atlético Televisión</option>
-<option value="moron">Deportivo Morón</option>
-<option value="lamadrid">General Lamadrid</option>
 </select>
 </div>
 <div class="group">
@@ -161,6 +157,17 @@
 </main>
 <script type="module">
   import { registrarUsuaria } from "../js/auth-helpers.js";
+  import { obtenerClubes } from "../js/home-helpers.js";
+
+  obtenerClubes().then((clubes) => {
+    const select = document.getElementById('club');
+    clubes.forEach((club) => {
+      const option = document.createElement('option');
+      option.value = club.id;
+      option.textContent = club.nombre;
+      select.appendChild(option);
+    });
+  });
 
   let puestoSeleccionado = "";
   document.querySelectorAll('.puesto-btn').forEach((btn) => {

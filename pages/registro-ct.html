@@ -75,12 +75,6 @@
 <label class="font-label-caps text-label-caps text-on-surface-variant" for="club">Club Perteneciente</label>
 <select class="mt-2 w-full bg-surface-container-low border border-outline-variant rounded-lg px-4 py-3 text-on-surface" id="club" required>
 <option value="">Seleccionar Club</option>
-<option value="ferro">Ferro Carril Oeste</option>
-<option value="sanlorenzo">San Lorenzo</option>
-<option value="racing">Racing Club</option>
-<option value="boca">Boca Juniors</option>
-<option value="independiente">Independiente</option>
-<option value="huracan">Huracán</option>
 </select>
 </div>
 <div class="relative group">
@@ -130,6 +124,17 @@
 </main>
 <script type="module">
   import { registrarUsuaria } from "../js/auth-helpers.js";
+  import { obtenerClubes } from "../js/home-helpers.js";
+
+  obtenerClubes().then((clubes) => {
+    const select = document.getElementById('club');
+    clubes.forEach((club) => {
+      const option = document.createElement('option');
+      option.value = club.id;
+      option.textContent = club.nombre;
+      select.appendChild(option);
+    });
+  });
 
   document.getElementById('foto').addEventListener('change', (e) => {
     const file = e.target.files[0];
