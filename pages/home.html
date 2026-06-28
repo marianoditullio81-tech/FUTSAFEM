@@ -75,8 +75,14 @@
 <span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">sports_soccer</span>
 <h1 class="font-display-lg-mobile text-display-lg-mobile text-primary tracking-tight">FUTSAFEM</h1>
 </div>
+<div class="flex items-center gap-3">
+<a class="relative" href="./notificaciones.html">
+<span class="material-symbols-outlined text-2xl">notifications</span>
+<span class="hidden absolute -top-1 -right-1 bg-error text-on-error-container text-[10px] font-label-caps rounded-full min-w-[16px] h-4 flex items-center justify-center px-1" id="badge-notificaciones">0</span>
+</a>
 <div class="flex items-center bg-surface-container-high px-3 py-1 rounded-full border border-outline-variant">
 <span class="font-label-caps text-label-caps text-on-surface" id="futsacoins-badge">0 🪙</span>
+</div>
 </div>
 </header>
 <main class="relative z-10 pt-20 pb-32 px-margin-mobile max-w-md mx-auto flex flex-col gap-stack-lg">
@@ -171,9 +177,10 @@
 </a>
 </nav>
 <script type="module">
-  import { exigirSesion, obtenerPerfil } from "../js/auth-helpers.js";
-  import { obtenerClub, contarStickersTotales, contarColeccionUnica, esSobreDisponibleHoy } from "../js/home-helpers.js";
+  import { exigirSesion, obtenerPerfil, actualizarPerfil } from "../js/auth-helpers.js";
+  import { obtenerClub, contarStickersTotales, contarColeccionUnica, esSobreDisponibleHoy, hoyComoTexto } from "../js/home-helpers.js";
   import { contarFotosPendientes } from "../js/validacion-helpers.js";
+  import { contarNoLeidas, crearNotificacion, esCumpleañosHoy } from "../js/notificaciones-helpers.js";
 
   const NOMBRES_PUESTO = { arquera: 'Arquera', cierre: 'Cierre', ala: 'Ala', pivot: 'Pivot' };
   const NOMBRES_CARGO = { dt: 'Directora Técnica', at: 'Asistente Técnica', pf: 'Preparadora Física', ea: 'Entrenadora de Arqueras', analista: 'Analista de Video', medico: 'Cuerpo Médico' };
@@ -226,6 +233,18 @@
     if (pendientes > 0) {
       document.getElementById('texto-banner-validacion').textContent = `${pendientes} foto${pendientes === 1 ? '' : 's'} esperando tu voto`;
       document.getElementById('banner-validacion').classList.remove('hidden');
+    }
+
+    if (esCumpleañosHoy(perfil.fechaNacimiento) && perfil.ultimoAvisoCumple !== hoyComoTexto()) {
+      await crearNotificacion(user.uid, "cumpleanos", "¡Feliz cumpleaños! Todo el equipo FUTSAFEM te saluda 🎉");
+      await actualizarPerfil(user.uid, { ultimoAvisoCumple: hoyComoTexto() });
+    }
+
+    const noLeidas = await contarNoLeidas(user.uid);
+    if (noLeidas > 0) {
+      const badge = document.getElementById('badge-notificaciones');
+      badge.textContent = noLeidas > 9 ? '9+' : String(noLeidas);
+      badge.classList.remove('hidden');
     }
 
     const disponible = esSobreDisponibleHoy(perfil);

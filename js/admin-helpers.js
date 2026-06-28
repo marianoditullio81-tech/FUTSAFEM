@@ -10,6 +10,7 @@ import {
   updateDoc,
   deleteDoc,
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { crearNotificacion } from "./notificaciones-helpers.js";
 
 export async function listarUsuarias() {
   const snap = await getDocs(collection(db, "users"));
@@ -22,6 +23,7 @@ export async function cambiarDisponibilidadCuenta(uid, deshabilitada) {
 
 export async function aprobarFotoAdmin(uid) {
   await updateDoc(doc(db, "users", uid), { estadoFoto: "aprobada" });
+  await crearNotificacion(uid, "foto_aprobada", "¡Tu foto fue aprobada! Ya tenés tu figurita activa.");
 }
 
 export async function rechazarFotoAdmin(uid) {
@@ -31,6 +33,7 @@ export async function rechazarFotoAdmin(uid) {
     votosFotoAprobar: 0,
     votosFotoRechazar: 0,
   });
+  await crearNotificacion(uid, "foto_rechazada", "Tu foto fue rechazada. Podés subir una nueva desde tu perfil.");
 }
 
 export async function obtenerFotosEnRevision() {

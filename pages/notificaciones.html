@@ -1,0 +1,109 @@
+<!DOCTYPE html><html class="dark" lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport">
+<title>FUTSAFEM - Notificaciones</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@400;600;700&amp;family=Hanken+Grotesk:wght@400;600&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary": "#ecb2ff", "on-primary-container": "#ffffff", "on-primary": "#520071",
+                    "primary-container": "#bd00ff", "secondary": "#ffffff", "secondary-container": "#c3f400",
+                    "on-secondary-container": "#556d00", "error": "#ffb4ab", "error-container": "#93000a",
+                    "on-error-container": "#ffdad6", "surface": "#111316", "surface-container": "#1e2023",
+                    "surface-container-high": "#282a2d", "surface-container-highest": "#333538",
+                    "on-surface": "#e2e2e6", "on-surface-variant": "#d4c0d7", "outline": "#9d8ba0",
+                    "outline-variant": "#514255", "background": "#111316"
+            },
+            "borderRadius": {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+            "spacing": {"base": "8px", "margin-mobile": "20px", "stack-sm": "4px", "stack-md": "12px", "gutter": "16px", "stack-lg": "24px"},
+            "fontFamily": {"display-lg-mobile": ["Archivo Narrow"], "headline-md": ["Archivo Narrow"], "label-caps": ["JetBrains Mono"], "body-sm": ["Hanken Grotesk"], "body-md": ["Hanken Grotesk"]},
+            "fontSize": {
+                    "display-lg-mobile": ["36px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "28px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                    "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { background-color: #111316; color: #e2e2e6; -webkit-font-smoothing: antialiased; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+</style>
+</head>
+<body class="font-body-md min-h-screen pb-16">
+<header class="bg-surface sticky top-0 z-50 flex items-center gap-4 px-margin-mobile h-16 border-b border-outline-variant">
+<a href="./home.html"><span class="material-symbols-outlined text-primary text-2xl">arrow_back</span></a>
+<h1 class="font-display-lg-mobile text-display-lg-mobile text-primary tracking-tight italic uppercase flex-grow">Notificaciones</h1>
+<button class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary uppercase" id="btn-marcar-todas">Marcar leídas</button>
+</header>
+<main class="px-margin-mobile pt-stack-lg max-w-md mx-auto flex flex-col gap-stack-sm">
+<div id="lista-notificaciones" class="flex flex-col gap-stack-sm"></div>
+<p class="hidden text-center py-stack-lg text-on-surface-variant font-body-sm" id="estado-vacio">No tenés notificaciones todavía.</p>
+</main>
+<script type="module">
+  import { exigirSesion } from "../js/auth-helpers.js";
+  import { obtenerNotificaciones, marcarLeida, marcarTodasLeidas } from "../js/notificaciones-helpers.js";
+
+  const ICONOS = {
+    foto_aprobada: 'check_circle',
+    foto_rechazada: 'cancel',
+    foto_en_revision_final: 'hourglass_top',
+    match: 'swap_calls',
+    cumpleanos: 'cake',
+  };
+
+  exigirSesion(async (user) => {
+    const lista = document.getElementById('lista-notificaciones');
+    const vacio = document.getElementById('estado-vacio');
+
+    function formatearFecha(timestamp) {
+      if (!timestamp || !timestamp.toDate) return '';
+      return timestamp.toDate().toLocaleString('es-AR', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' });
+    }
+
+    async function renderizar() {
+      lista.innerHTML = '';
+      const notificaciones = await obtenerNotificaciones(user.uid);
+      if (notificaciones.length === 0) {
+        vacio.classList.remove('hidden');
+        return;
+      }
+      vacio.classList.add('hidden');
+
+      for (const notif of notificaciones) {
+        const card = document.createElement('div');
+        card.className = `bg-surface-container border border-outline-variant rounded-lg p-3 flex items-center gap-3 ${notif.leida ? 'opacity-60' : ''}`;
+        card.innerHTML = `
+          <span class="material-symbols-outlined text-primary">${ICONOS[notif.tipo] || 'notifications'}</span>
+          <div class="flex-grow">
+            <p class="font-body-md text-white">${notif.texto}</p>
+            <p class="font-label-caps text-[10px] text-on-surface-variant">${formatearFecha(notif.creadoEn)}</p>
+          </div>
+        `;
+        if (!notif.leida) {
+          card.addEventListener('click', async () => {
+            await marcarLeida(notif.id);
+            card.classList.add('opacity-60');
+          });
+        }
+        lista.appendChild(card);
+      }
+    }
+
+    document.getElementById('btn-marcar-todas').addEventListener('click', async () => {
+      await marcarTodasLeidas(user.uid);
+      await renderizar();
+    });
+
+    await renderizar();
+  });
+</script>
+</body></html>

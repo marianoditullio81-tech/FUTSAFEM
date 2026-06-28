@@ -11,6 +11,7 @@ import {
   where,
   increment,
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { crearNotificacion } from "./notificaciones-helpers.js";
 
 const LIMITE_SWIPES_DIARIO = 30;
 const LIMITE_MATCHES_DIARIO = 5;
@@ -168,6 +169,8 @@ export async function responderPropuesta(uid, item, decision) {
   }
   await updateDoc(tradeRef, { estado: "match" });
   await completarTradePropia(uid, { ...item.trade, estado: "match" });
+  const otroUid = item.trade.userA === uid ? item.trade.userB : item.trade.userA;
+  await crearNotificacion(otroUid, "match", "¡Tuviste un match en el mercado de pases! Revisá tu intercambio.");
   return { match: true };
 }
 

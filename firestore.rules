@@ -114,6 +114,17 @@ service cloud.firestore {
       allow delete: if esAdmin();
     }
 
+    // notificaciones: cada usuaria solo ve y marca como leídas las suyas.
+    // La creación la hace cualquier usuaria logueada (acciones cliente: voto de
+    // foto, match, admin) a nombre de la destinataria, sin Cloud Functions.
+    match /notificaciones/{notifId} {
+      allow read: if isSignedIn() && resource.data.userId == request.auth.uid;
+      allow create: if isSignedIn();
+      allow update: if isSignedIn() && resource.data.userId == request.auth.uid &&
+        request.resource.data.diff(resource.data).affectedKeys().hasOnly(['leida']);
+      allow delete: if false;
+    }
+
     // packsLog: historial de sobres abiertos, cada usuaria solo ve y crea el suyo.
     match /packsLog/{logId} {
       allow read: if isSignedIn() && resource.data.userId == request.auth.uid;

@@ -11,6 +11,7 @@ import {
   serverTimestamp,
   getCountFromServer,
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { crearNotificacion } from "./notificaciones-helpers.js";
 
 export const UMBRAL_VOTOS = 3;
 
@@ -36,6 +37,7 @@ export async function yaVoteEstaFoto(targetUid, voterUid) {
 export async function votarFoto(targetUid, voterUid, voto) {
   const voteRef = doc(db, "votosFoto", `${targetUid}_${voterUid}`);
   const userRef = doc(db, "users", targetUid);
+  let estadoResultante = "en_revision";
 
   await runTransaction(db, async (tx) => {
     const voteSnap = await tx.get(voteRef);
@@ -67,7 +69,14 @@ export async function votarFoto(targetUid, voterUid, voto) {
 
     tx.set(voteRef, { targetUid, voterUid, voto, creadoEn: serverTimestamp() });
     tx.update(userRef, { votosFotoAprobar: votosAprobar, votosFotoRechazar: votosRechazar, estadoFoto });
+    estadoResultante = estadoFoto;
   });
+
+  if (estadoResultante === "aprobada") {
+    await crearNotificacion(targetUid, "foto_aprobada", "¡La comunidad aprobó tu foto! Ya tenés tu figurita activa.");
+  } else if (estadoResultante === "rechazada_revision") {
+    await crearNotificacion(targetUid, "foto_en_revision_final", "Tu foto recibió varios rechazos y está esperando la confirmación de la administración.");
+  }
 }
 
 export async function obtenerFotosRechazadasPendientes() {
@@ -84,4 +93,5 @@ export async function confirmarRechazoFoto(targetUid) {
     votosFotoAprobar: 0,
     votosFotoRechazar: 0,
   });
+  await crearNotificacion(targetUid, "foto_rechazada", "Tu foto fue rechazada. Podés subir una nueva desde tu perfil.");
 }
