@@ -132,6 +132,14 @@
       try {
         const resultado = await abrirSobre(usuariaActual.uid, perfilActual);
         sessionStorage.setItem('ultimoSobre', JSON.stringify(resultado));
+
+        const epica = resultado.stickersObtenidos.find((s) => s.rareza === 'epica');
+        if (epica) {
+          sessionStorage.setItem('revealEpica', JSON.stringify({ sticker: epica }));
+          window.location.href = './reveal-epica.html';
+          return;
+        }
+
         window.location.href = './resultado-de-apertura.html';
       } catch (e) {
         document.getElementById('prompt-texto').textContent = 'ERROR, REINTENTÁ';
