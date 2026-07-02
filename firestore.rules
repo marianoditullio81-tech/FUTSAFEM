@@ -153,5 +153,38 @@ service cloud.firestore {
       allow update: if false;
       allow delete: if false;
     }
+
+    // codigosReferido: maps a 6-char code to the user's uid + nombre.
+    // Any signed-in user can read (needed to resolve a referrer at registration).
+    // Only the owner can create their own entry (via registrarUsuaria which runs as the new user).
+    match /codigosReferido/{codigo} {
+      allow read: if isSignedIn();
+      allow create: if isSignedIn();
+      allow update: if false;
+      allow delete: if false;
+    }
+
+    // referidos: one doc per (invitadora, invitada) pair. Deterministic ID prevents duplicates.
+    // The invitada updates only the emailVerificado flag (after email is confirmed on home load).
+    match /referidos/{refId} {
+      allow read: if isSignedIn() &&
+        (resource.data.invitadoraId == request.auth.uid || resource.data.invitadaId == request.auth.uid);
+      allow create: if isSignedIn();
+      allow update: if isSignedIn() &&
+        resource.data.invitadaId == request.auth.uid &&
+        request.resource.data.diff(resource.data).affectedKeys().hasOnly(['emailVerificado']);
+      allow delete: if false;
+    }
+
+    // premiosPendientes: async reward queue. Any signed-in user can create (to credit another user).
+    // Only the recipient can mark acreditado=true (self-collection pattern).
+    match /premiosPendientes/{premioId} {
+      allow read: if isSignedIn() && resource.data.userId == request.auth.uid;
+      allow create: if isSignedIn();
+      allow update: if isSignedIn() &&
+        resource.data.userId == request.auth.uid &&
+        request.resource.data.diff(resource.data).affectedKeys().hasOnly(['acreditado']);
+      allow delete: if false;
+    }
   }
 }

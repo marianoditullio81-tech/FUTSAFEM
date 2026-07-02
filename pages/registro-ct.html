@@ -126,6 +126,9 @@
   import { registrarUsuaria } from "../js/auth-helpers.js";
   import { obtenerClubes } from "../js/home-helpers.js";
 
+  const codigoReferente = new URLSearchParams(location.search).get('ref') || sessionStorage.getItem('ref') || '';
+  if (codigoReferente) sessionStorage.setItem('ref', codigoReferente);
+
   obtenerClubes().then((clubes) => {
     const select = document.getElementById('club');
     clubes.forEach((club) => {
@@ -161,7 +164,9 @@
           puesto: document.getElementById('cargo').value,
         },
         fotoFile,
+        codigoReferente,
       });
+      sessionStorage.removeItem('ref');
       window.location.href = './registro-fecha-nacimiento.html';
     } catch (err) {
       errorEl.textContent = 'No pudimos completar el registro: ' + err.message;

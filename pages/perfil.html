@@ -123,6 +123,31 @@
 </div>
 </div>
 </div>
+<div class="bg-surface-container rounded-xl p-6 border border-outline-variant" id="bloque-referidos">
+<h3 class="font-headline-md text-headline-md text-primary mb-4 italic uppercase">Invitar amiga</h3>
+<p class="text-body-sm text-on-surface-variant mb-4">Compartí tu código y ganás <span class="text-secondary-fixed font-bold">30 🪙</span> por cada amiga que se una y verifique su mail. ¡Si completás 5 te llevas <span class="text-secondary-fixed font-bold">200 🪙</span> extra!</p>
+<div class="flex items-center gap-3 bg-surface-container-lowest border border-outline-variant rounded-xl px-4 py-3 mb-4">
+<span class="font-label-caps text-label-caps text-on-surface-variant">TU CÓDIGO</span>
+<span class="font-display-lg-mobile text-[22px] text-primary font-black tracking-widest flex-grow text-center" id="codigo-referido">——</span>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors" id="btn-copiar-codigo" title="Copiar código">content_copy</button>
+</div>
+<div class="flex gap-3">
+<button class="flex-1 flex items-center justify-center gap-2 bg-secondary-container text-on-secondary font-label-caps text-label-caps py-3 rounded-full active:scale-95 transition-all" id="btn-compartir-whatsapp">
+<span class="material-symbols-outlined text-[18px]">share</span>
+Compartir por WhatsApp
+</button>
+</div>
+<div class="mt-4 flex gap-4 text-center">
+<div class="flex-1 bg-surface-container-lowest rounded-lg p-3 border border-outline-variant">
+<p class="font-headline-md text-headline-md text-white" id="referidos-count">0</p>
+<p class="font-label-caps text-label-caps text-on-surface-variant">AMIGAS VERIFICADAS</p>
+</div>
+<div class="flex-1 bg-surface-container-lowest rounded-lg p-3 border border-outline-variant">
+<p class="font-headline-md text-headline-md text-secondary-fixed" id="referidos-coins">0 🪙</p>
+<p class="font-label-caps text-label-caps text-on-surface-variant">GANADOS POR REFERIDOS</p>
+</div>
+</div>
+</div>
 <div class="bg-surface-container rounded-xl p-1 border border-outline-variant overflow-hidden">
 <button class="w-full flex items-center justify-between p-4 hover:bg-surface-variant transition-colors group" id="btn-cerrar-sesion">
 <div class="flex items-center gap-3">
@@ -159,6 +184,7 @@
 <script type="module">
   import { exigirSesion, obtenerPerfil, cerrarSesion } from "../js/auth-helpers.js";
   import { obtenerClub, contarStickersTotales, contarColeccionUnica } from "../js/home-helpers.js";
+  import { contarReferidosVerificados, COINS_POR_INVITADA, BONUS_INTEGRANTE_EQUIPO } from "../js/referido-helpers.js";
 
   const NOMBRES_PUESTO = { arquera: 'Arquera', cierre: 'Cierre', ala: 'Ala', pivot: 'Pivot' };
   const NOMBRES_CARGO = { dt: 'Directora Técnica', at: 'Asistente Técnica', pf: 'Preparadora Física', ea: 'Entrenadora de Arqueras', analista: 'Analista de Video', medico: 'Cuerpo Médico' };
@@ -215,6 +241,34 @@
       contarColeccionUnica(user.uid),
     ]);
     document.getElementById('coleccion-progreso').textContent = `${coleccion} / ${totalStickers}`;
+
+    // Referidos section
+    if (perfil.codigoReferido) {
+      document.getElementById('codigo-referido').textContent = perfil.codigoReferido;
+
+      const verCount = await contarReferidosVerificados(user.uid);
+      document.getElementById('referidos-count').textContent = verCount;
+
+      let coinsReferidos = verCount * COINS_POR_INVITADA;
+      if (perfil.bonusEquipoAcreditado) coinsReferidos += 200 + (verCount >= 5 ? BONUS_INTEGRANTE_EQUIPO * 0 : 0);
+      document.getElementById('referidos-coins').textContent = `${coinsReferidos} 🪙`;
+
+      const baseUrl = `${location.origin}${location.pathname.replace('perfil.html', '')}`;
+      const linkInvitacion = `${baseUrl}bienvenida.html?ref=${perfil.codigoReferido}`;
+
+      document.getElementById('btn-copiar-codigo').addEventListener('click', async () => {
+        try {
+          await navigator.clipboard.writeText(linkInvitacion);
+          document.getElementById('btn-copiar-codigo').textContent = 'check';
+          setTimeout(() => { document.getElementById('btn-copiar-codigo').textContent = 'content_copy'; }, 2000);
+        } catch (_) {}
+      });
+
+      document.getElementById('btn-compartir-whatsapp').addEventListener('click', () => {
+        const texto = encodeURIComponent(`¡Unite a FUTSAFEM! El álbum digital del fútsal femenino 🏆\nUsá mi código *${perfil.codigoReferido}* al registrarte y las dos ganamos FutsaCoins 🪙\n${linkInvitacion}`);
+        window.open(`https://wa.me/?text=${texto}`, '_blank');
+      });
+    }
 
     document.getElementById('btn-cerrar-sesion').addEventListener('click', async () => {
       await cerrarSesion();

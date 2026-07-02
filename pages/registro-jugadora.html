@@ -205,6 +205,9 @@
   import { registrarUsuaria, calcularEdad } from "../js/auth-helpers.js";
   import { obtenerClubes } from "../js/home-helpers.js";
 
+  const codigoReferente = new URLSearchParams(location.search).get('ref') || sessionStorage.getItem('ref') || '';
+  if (codigoReferente) sessionStorage.setItem('ref', codigoReferente);
+
   const CATEGORIAS = {
     afa:     ['1ra', '3ra', '4ta', '5ta', '6ta'],
     futsala: ['1ra', 'Reserva', 'Única', '4ta', '5ta', '6ta', '7ma'],
@@ -333,7 +336,9 @@
           edad,
         },
         fotoFile,
+        codigoReferente,
       });
+      sessionStorage.removeItem('ref');
       if (edad < 18) {
         window.location.href = './registro-validacion-edad.html';
       } else {

@@ -5,6 +5,7 @@ import {
   onAuthStateChanged,
   signOut,
   sendPasswordResetEmail,
+  sendEmailVerification,
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 import {
   doc,
@@ -17,6 +18,7 @@ import {
   uploadBytes,
   getDownloadURL,
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
+import { inicializarReferidos } from "./referido-helpers.js";
 
 export function calcularEdad(fechaNacimiento) {
   const nacimiento = new Date(fechaNacimiento);
@@ -29,7 +31,7 @@ export function calcularEdad(fechaNacimiento) {
   return edad;
 }
 
-export async function registrarUsuaria({ email, password, perfil, fotoFile }) {
+export async function registrarUsuaria({ email, password, perfil, fotoFile, codigoReferente }) {
   const credencial = await createUserWithEmailAndPassword(auth, email, password);
   const uid = credencial.user.uid;
 
@@ -63,10 +65,18 @@ export async function registrarUsuaria({ email, password, perfil, fotoFile }) {
     futsacoins: 0,
     rachaActual: 0,
     ultimaAperturaFecha: "",
+    codigoReferido: "",
+    bonusEquipoAcreditado: false,
     creadoEn: new Date().toISOString(),
   };
 
   await setDoc(doc(db, "users", uid), userDoc);
+
+  const codigo = await inicializarReferidos(uid, perfil.nombre || "", codigoReferente || "");
+  await updateDoc(doc(db, "users", uid), { codigoReferido: codigo });
+
+  await sendEmailVerification(credencial.user);
+
   return uid;
 }
 

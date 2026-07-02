@@ -183,6 +183,7 @@
 </nav>
 <script type="module">
   import { exigirSesion, obtenerPerfil, actualizarPerfil } from "../js/auth-helpers.js";
+  import { procesarReferidosDeUsuaria } from "../js/referido-helpers.js";
   import { obtenerClub, contarStickersTotales, contarColeccionUnica, esSobreDisponibleHoy, hoyComoTexto } from "../js/home-helpers.js";
   import { contarFotosPendientes } from "../js/validacion-helpers.js";
   import { contarNoLeidas, esCumpleañosHoy, procesarCumpleañosDeHoy } from "../js/notificaciones-helpers.js";
@@ -193,6 +194,8 @@
   const NOMBRES_CARGO = { dt: 'Directora Técnica', at: 'Asistente Técnica', pf: 'Preparadora Física', ea: 'Entrenadora de Arqueras', analista: 'Analista de Video', medico: 'Cuerpo Médico' };
 
   exigirSesion(async (user) => {
+    await user.reload();
+    procesarReferidosDeUsuaria(user).catch(() => {});
     const perfil = await obtenerPerfil(user.uid);
     if (!perfil) return;
 
