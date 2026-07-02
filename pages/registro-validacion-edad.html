@@ -101,22 +101,25 @@
 </div>
 </main>
 <script type="module">
-  import { exigirSesion, obtenerPerfil, actualizarPerfil, calcularEdad } from "../js/auth-helpers.js";
+  import { exigirSesion, obtenerPerfil, actualizarPerfil } from "../js/auth-helpers.js";
 
   let usuariaActual = null;
-  let perfilActual = null;
-  let esMenor = false;
 
   exigirSesion(async (user) => {
     usuariaActual = user;
-    perfilActual = await obtenerPerfil(user.uid);
-    if (!perfilActual || !perfilActual.fechaNacimiento) {
-      window.location.replace('./registro-fecha-nacimiento.html');
+    const perfil = await obtenerPerfil(user.uid);
+    // Si llegó acá es porque es menor; si por alguna razón no tiene fecha
+    // de nacimiento en el perfil, la mandamos al registro.
+    if (!perfil || !perfil.fechaNacimiento) {
+      window.location.replace('./registro-jugadora.html');
       return;
     }
-    const edad = calcularEdad(perfilActual.fechaNacimiento);
-    esMenor = edad < 18;
-    if (esMenor) document.getElementById('guardianSection').classList.remove('hidden');
+    // Si ya es adulta (no debería pasar), redirigir directo a home.
+    if ((perfil.edad ?? 18) >= 18) {
+      window.location.replace('./home.html');
+      return;
+    }
+    document.getElementById('guardianSection').classList.remove('hidden');
   });
 
   document.getElementById('validacion-form').addEventListener('submit', async (e) => {
@@ -124,10 +127,8 @@
     const errorEl = document.getElementById('form-error');
     errorEl.classList.add('hidden');
 
-    const edad = calcularEdad(perfilActual.fechaNacimiento);
     const tutorContacto = document.getElementById('tutorContacto').value.trim();
-
-    if (esMenor && !tutorContacto) {
+    if (!tutorContacto) {
       errorEl.textContent = 'Ingresá el contacto de tu tutor legal.';
       errorEl.classList.remove('hidden');
       return;
@@ -138,15 +139,10 @@
     btn.textContent = 'PROCESANDO...';
 
     try {
-      if (esMenor) {
-        await actualizarPerfil(usuariaActual.uid, { edad, estadoConsentimiento: 'pendiente', tutorContacto });
-        window.location.href = './autorizacion-tutor.html';
-      } else {
-        await actualizarPerfil(usuariaActual.uid, { edad, estadoConsentimiento: 'no_requerido' });
-        window.location.href = './home.html';
-      }
+      await actualizarPerfil(usuariaActual.uid, { estadoConsentimiento: 'pendiente', tutorContacto });
+      window.location.href = './autorizacion-tutor.html';
     } catch (err) {
-      errorEl.textContent = 'No pudimos validar tu edad: ' + err.message;
+      errorEl.textContent = 'No pudimos guardar el contacto del tutor: ' + err.message;
       errorEl.classList.remove('hidden');
       btn.disabled = false;
       btn.textContent = 'CONTINUAR';
