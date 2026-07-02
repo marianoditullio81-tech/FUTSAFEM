@@ -47,6 +47,7 @@
         .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
         .court-texture { background-image: radial-gradient(circle at 2px 2px, rgba(255,255,255,0.05) 1px, transparent 0); background-size: 24px 24px; }
     </style>
+<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
 </head>
 <body class="bg-background text-on-surface font-body-md selection:bg-primary-container selection:text-white">
 <header class="w-full top-0 sticky bg-surface border-b border-outline-variant z-50 flex justify-between items-center px-margin-mobile h-16">
@@ -126,18 +127,23 @@
 <div class="bg-surface-container rounded-xl p-6 border border-outline-variant" id="bloque-referidos">
 <h3 class="font-headline-md text-headline-md text-primary mb-4 italic uppercase">Invitar amiga</h3>
 <p class="text-body-sm text-on-surface-variant mb-4">Compartí tu código y ganás <span class="text-secondary-fixed font-bold">30 🪙</span> por cada amiga que se una y verifique su mail. ¡Si completás 5 te llevas <span class="text-secondary-fixed font-bold">200 🪙</span> extra!</p>
-<div class="flex items-center gap-3 bg-surface-container-lowest border border-outline-variant rounded-xl px-4 py-3 mb-4">
-<span class="font-label-caps text-label-caps text-on-surface-variant">TU CÓDIGO</span>
+<div class="flex gap-4 items-center mb-4">
+<div class="flex-grow space-y-3">
+<div class="flex items-center gap-3 bg-surface-container-lowest border border-outline-variant rounded-xl px-4 py-3">
+<span class="font-label-caps text-label-caps text-on-surface-variant shrink-0">CÓDIGO</span>
 <span class="font-display-lg-mobile text-[22px] text-primary font-black tracking-widest flex-grow text-center" id="codigo-referido">——</span>
-<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors" id="btn-copiar-codigo" title="Copiar código">content_copy</button>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors shrink-0" id="btn-copiar-codigo" title="Copiar link">content_copy</button>
 </div>
-<div class="flex gap-3">
-<button class="flex-1 flex items-center justify-center gap-2 bg-secondary-container text-on-secondary font-label-caps text-label-caps py-3 rounded-full active:scale-95 transition-all" id="btn-compartir-whatsapp">
+<button class="w-full flex items-center justify-center gap-2 bg-secondary-container text-on-secondary font-label-caps text-label-caps py-3 rounded-full active:scale-95 transition-all" id="btn-compartir-whatsapp">
 <span class="material-symbols-outlined text-[18px]">share</span>
 Compartir por WhatsApp
 </button>
 </div>
-<div class="mt-4 flex gap-4 text-center">
+<div class="shrink-0 bg-white rounded-xl p-2" id="qr-wrapper">
+<canvas id="qr-canvas"></canvas>
+</div>
+</div>
+<div class="mt-2 flex gap-4 text-center">
 <div class="flex-1 bg-surface-container-lowest rounded-lg p-3 border border-outline-variant">
 <p class="font-headline-md text-headline-md text-white" id="referidos-count">0</p>
 <p class="font-label-caps text-label-caps text-on-surface-variant">AMIGAS VERIFICADAS</p>
@@ -244,17 +250,25 @@ Compartir por WhatsApp
 
     // Referidos section
     if (perfil.codigoReferido) {
+      const nombre = perfil.nombre || perfil.apodo || 'Una amiga';
       document.getElementById('codigo-referido').textContent = perfil.codigoReferido;
 
       const verCount = await contarReferidosVerificados(user.uid);
       document.getElementById('referidos-count').textContent = verCount;
 
       let coinsReferidos = verCount * COINS_POR_INVITADA;
-      if (perfil.bonusEquipoAcreditado) coinsReferidos += 200 + (verCount >= 5 ? BONUS_INTEGRANTE_EQUIPO * 0 : 0);
+      if (perfil.bonusEquipoAcreditado) coinsReferidos += 200;
       document.getElementById('referidos-coins').textContent = `${coinsReferidos} 🪙`;
 
       const baseUrl = `${location.origin}${location.pathname.replace('perfil.html', '')}`;
       const linkInvitacion = `${baseUrl}bienvenida.html?ref=${perfil.codigoReferido}`;
+
+      // Generar QR
+      QRCode.toCanvas(document.getElementById('qr-canvas'), linkInvitacion, {
+        width: 120, margin: 1, color: { dark: '#111316', light: '#ffffff' },
+      });
+
+      const mensajeWA = `¡Hola! Soy *${nombre}* y te invito a unirte a *FUTSAFEM* 🏆\nEl álbum digital del fútsal femenino argentino.\nUsá mi código *${perfil.codigoReferido}* al registrarte y las dos ganamos FutsaCoins 🪙\n👇 Entrá por acá:\n${linkInvitacion}`;
 
       document.getElementById('btn-copiar-codigo').addEventListener('click', async () => {
         try {
@@ -265,8 +279,7 @@ Compartir por WhatsApp
       });
 
       document.getElementById('btn-compartir-whatsapp').addEventListener('click', () => {
-        const texto = encodeURIComponent(`¡Unite a FUTSAFEM! El álbum digital del fútsal femenino 🏆\nUsá mi código *${perfil.codigoReferido}* al registrarte y las dos ganamos FutsaCoins 🪙\n${linkInvitacion}`);
-        window.open(`https://wa.me/?text=${texto}`, '_blank');
+        window.open(`https://wa.me/?text=${encodeURIComponent(mensajeWA)}`, '_blank');
       });
     }
 
