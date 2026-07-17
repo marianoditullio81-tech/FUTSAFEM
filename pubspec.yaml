@@ -1,0 +1,54 @@
+name: futsafem
+description: "FUTSAFEM - App de colección para Futsal Femenino en Argentina"
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.12.2
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # Firebase
+  firebase_core: ^4.12.1
+  firebase_auth: ^6.5.6
+  cloud_firestore: ^6.7.1
+  firebase_storage: ^13.4.5
+  cloud_functions: ^6.3.5
+  firebase_messaging: ^16.4.3
+  firebase_analytics: ^12.4.5
+  firebase_crashlytics: ^5.2.6
+
+  # State management
+  flutter_riverpod: ^3.3.2
+
+  # Navegación
+  go_router: ^17.3.0
+
+  # Modelos inmutables / serialización
+  freezed_annotation: ^3.1.0
+  json_annotation: ^4.9.0
+
+  cupertino_icons: ^1.0.8
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+  # Codegen
+  build_runner: ^2.15.1
+  freezed: 3.2.5
+  json_serializable: ^6.13.0
+
+  # riverpod_annotation + riverpod_generator quedan afuera por ahora:
+  # riverpod_generator estable (4.0.4, exigido por riverpod 3.3.2) requiere
+  # analyzer ^12, y ningún freezed estable soporta esa versión de analyzer
+  # todavía (solo hay dev prereleases). Se agregan en Fase 1 cuando
+  # escribamos providers reales, revisando el estado del ecosistema en ese
+  # momento.
+
+flutter:
+  uses-material-design: true
